@@ -1,0 +1,14 @@
+platform :ios, '9.0'
+
+target 'SoySauce' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+
+
+  target 'SoySauceTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

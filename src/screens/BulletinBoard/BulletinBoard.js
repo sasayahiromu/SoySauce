@@ -1,14 +1,52 @@
 import React, { Component } from 'react';
-import { View, StyleSheet,  TextInput, ScrollView, Text } from 'react-native'
+import { View, StyleSheet, TextInput, ScrollView, Text } from 'react-native'
 import MessageBubble from "../../components/MessageBubble/MessageBubble";
 import InputBar from "../../components/InputBar/InputBar";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import MultiSwitch from '../../components/MultiSwitch/MultiSwitch'
+import BubbleList from '../../components/BubbleList/BubbleList'
 
 class BulletinBoardScreen extends Component {
 
   state = {
-    inputBarText: ''
+    inputBarText: '',
+    messages: [
+      {
+        key: 'a',
+        direction: 'left',
+        text:'hello',
+        sender: 'sasaya',
+        type:1
+      },
+      {
+        key: 'b',
+        direction:'left',
+        text:'helloooooooooo',
+        sender: 'sasaya',
+        type:1
+      },
+      {
+        key: 'c',
+        direction:'right',
+        text:'hello',
+        sender: 'sasaya',
+        type:1
+      },
+      {
+        key: 'd',
+        direction:'left',
+        text:'hello00000ppppppppppppppppppppppppppppppppppppppppppppppppppppppppp',
+        sender: 'sasaya',
+        type:1
+      },
+      {
+        key: 'e',
+        direction:'left',
+        text:'helloooooooo',
+        sender: 'sasaya',
+        type:1
+      }
+    ]
   }
 
 
@@ -17,15 +55,11 @@ class BulletinBoardScreen extends Component {
       inputBarText: text
     });
   }
-
   render() {
     return (
       <View style={styles.outer}>
         <ScrollView>
-        <MessageBubble direction='left' text='hello'/>
-        <MessageBubble direction='left' text='hello'/>
-        <MessageBubble direction='right' text='hello'/>
-        <MessageBubble direction='left' text='helloooooooooooooooooooooooooooooooooooooo'/>
+          <BubbleList messages={this.state.messages}/>
         </ScrollView>
         <View style={styles.multiSwitchContainer}>
           <MultiSwitch ref={ref => (this.multiSwitch = ref)} />

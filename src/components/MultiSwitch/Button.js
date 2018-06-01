@@ -12,7 +12,7 @@ const getIcon = (type) => {
             str = '送信'
             break;
         case 'In Progress':
-            str = '借したい'
+            str = '貸したい'
             break;
         case 'Complete':
             str = '借りたい'

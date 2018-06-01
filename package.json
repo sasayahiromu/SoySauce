@@ -20,6 +20,9 @@
   "dependencies": {
     "react": "16.3.1",
     "react-native": "~0.55.2",
+    "react-native-autogrow-input": "^0.2.1",
+    "react-native-balloon": "0.0.2",
+    "react-native-keyboard-spacer": "^0.4.1",
     "react-native-navigation": "^1.1.464"
   }
 }

@@ -18,6 +18,8 @@
     "preset": "react-native"
   },
   "dependencies": {
+    "create-react-class": "^15.6.3",
+    "native-base": "^2.4.5",
     "react": "16.3.1",
     "react-native": "~0.55.2",
     "react-native-autogrow-input": "^0.2.1",

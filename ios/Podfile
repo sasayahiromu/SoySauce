@@ -6,6 +6,8 @@ target 'SoySauce' do
 
 
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'SoySauceTests' do
     inherit! :search_paths
     # Pods for testing

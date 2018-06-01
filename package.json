@@ -24,7 +24,10 @@
     "react-native": "~0.55.2",
     "react-native-autogrow-input": "^0.2.1",
     "react-native-balloon": "0.0.2",
+    "react-native-firebase": "^4.2.0",
     "react-native-keyboard-spacer": "^0.4.1",
-    "react-native-navigation": "^1.1.464"
+    "react-native-navigation": "^1.1.464",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0"
   }
 }

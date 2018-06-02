@@ -1,3 +1,7 @@
+import {
+  SET_MESSAGES
+} from "../actions/actionTypes";
+
 const initialState = {
   messages: []
 };

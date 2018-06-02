@@ -1,8 +1,12 @@
 import {Navigation} from 'react-native-navigation'
+import {Provider} from 'react-redux'
 import BulletinBoardScreen from './src/screens/BulletinBoard/BulletinBoard'
 
+import configureStore from './src/store/configureStore'
 
-Navigation.registerComponent("soySauce.BulletinBoardScreen", () => BulletinBoardScreen);
+const store = configureStore();
+
+Navigation.registerComponent("soySauce.BulletinBoardScreen", () => BulletinBoardScreen, store, Provider);
 
 Navigation.startSingleScreenApp({
   screen:{

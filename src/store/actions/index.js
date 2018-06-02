@@ -1,1 +1,1 @@
-export { addMessage, deleteMessage, getMessage, messageAdded, MessageDeleted } from "./messages";
+export { addMessage, deleteMessage, getMessages, messageAdded, MessageDeleted } from "./messages";

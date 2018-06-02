@@ -6,6 +6,11 @@ import KeyboardSpacer from 'react-native-keyboard-spacer';
 import MultiSwitch from '../../components/MultiSwitch/MultiSwitch'
 import BubbleList from '../../components/BubbleList/BubbleList'
 
+import { connect } from 'react-redux';
+
+import { addMessage, getMessages } from '../../store/actions/index';
+
+
 class BulletinBoardScreen extends Component {
 
   state = {
@@ -13,40 +18,47 @@ class BulletinBoardScreen extends Component {
     messages: [
       {
         key: 'a',
-        direction: 'left',
-        text:'hello',
+        text: 'hello',
         sender: 'sasaya',
-        type:1
+        type: 1
       },
       {
         key: 'b',
-        direction:'left',
-        text:'helloooooooooo',
+        text: 'helloooooooooo',
         sender: 'sasaya',
-        type:1
+        type: 1
       },
       {
         key: 'c',
-        direction:'right',
-        text:'hello',
+        text: 'hello',
         sender: 'sasaya',
-        type:1
+        type: 1
       },
       {
         key: 'd',
-        direction:'left',
-        text:'hello00000ppppppppppppppppppppppppppppppppppppppppppppppppppppppppp',
+        text: 'hello00000ppppppppppppppppppppppppppppppppppppppppppppppppppppppppp',
         sender: 'sasaya',
-        type:1
+        type: 1
       },
       {
         key: 'e',
-        direction:'left',
-        text:'helloooooooo',
+        text: 'helloooooooo',
         sender: 'sasaya',
-        type:1
+        type: 1
       }
     ]
+  }
+
+  componentWillMount() {
+    console.log('event')
+    this.props.onLoadMessages();
+  }
+
+  addMessageHandler = () => {
+    const text = this.state.inputBarText
+    const sender = 'sasaya' ///変更する
+    const type = this.multiSwitch.state.selectedPosition
+    this.props.onAddMessage(text, sender, type);
   }
 
 
@@ -55,16 +67,18 @@ class BulletinBoardScreen extends Component {
       inputBarText: text
     });
   }
+
+
   render() {
     return (
       <View style={styles.outer}>
         <ScrollView>
-          <BubbleList messages={this.state.messages}/>
+          <BubbleList messages={this.props.messages} />
         </ScrollView>
         <View style={styles.multiSwitchContainer}>
           <MultiSwitch ref={ref => (this.multiSwitch = ref)} />
         </View>
-        <InputBar onSendPressed={() => { console.log(this.multiSwitch.state.selectedPosition) }}
+        <InputBar onSendPressed={() => { this.addMessageHandler() }}
           onSizeChange={() => { }}
           onChangeText={(text) => { this._onChangeInputBarText(text) }}
           text={this.state.inputBarText}
@@ -97,5 +111,17 @@ const styles = StyleSheet.create({
 })
 
 
+const mapDispatchToProps = dispatch => {
+  return {
+    onLoadMessages: () => dispatch(getMessages()),
+    onAddMessage: (text, sender, type) => dispatch(addMessage(text, sender, type))
+  };
+};
 
-export default BulletinBoardScreen;
+const mapStateToProps = state => {
+  return {
+    messages: state.messages.messages
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BulletinBoardScreen);

@@ -10,7 +10,7 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   TouchableWithoutFeedback,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import { connect } from "react-redux";
 
@@ -23,12 +23,13 @@ import validate from "../../utility/validation";
 // import { tryAuth } from "../../store/actions/index";
 // import startMainTabs from "../../screens/MainTabs/startMainTabs";
 // import firebase from 'react-native-firebase';
+import ModalDropdown from 'react-native-modal-dropdown';
 
 class AuthScreen extends Component {
 
   state = {
     viewMode: Dimensions.get("window").height > 500 ? "portrait" : "landscape",
-    authMode: "login",
+    authMode: "signup",
     controls: {
       email: {
         value: "",
@@ -46,15 +47,30 @@ class AuthScreen extends Component {
         },
         touched: false
       },
-      confirmPassword: {
+      nickname: {
         value: "",
         valid: false,
         validationRules: {
-          equalTo: "password"
+          notEmpty: true
         },
-        touched: false,
-      }
-    }
+        touched: false
+      },
+      apartmentName: {
+        value: "",
+        valid: false,
+        validationRules: {
+          notEmpty: true
+        },
+      },
+      roomNumber: {
+        value: "",
+        valid: false,
+        validationRules: {
+          notEmpty: true
+        },
+        touched: false
+      },
+    },
   };
 
 
@@ -127,17 +143,17 @@ class AuthScreen extends Component {
       return {
         controls: {
           ...prevState.controls,
-          confirmPassword: {
-            ...prevState.controls.confirmPassword,
-            valid:
-              key === "password"
-                ? validate(
-                  prevState.controls.confirmPassword.value,
-                  prevState.controls.confirmPassword.validationRules,
-                  connectedValue
-                )
-                : prevState.controls.confirmPassword.valid
-          },
+          // confirmPassword: {
+          //   ...prevState.controls.confirmPassword,
+          //   valid:
+          //     key === "password"
+          //       ? validate(
+          //         prevState.controls.confirmPassword.value,
+          //         prevState.controls.confirmPassword.validationRules,
+          //         connectedValue
+          //       )
+          //       : prevState.controls.confirmPassword.valid
+          // },
           [key]: {
             ...prevState.controls[key],
             value: value,
@@ -163,17 +179,23 @@ class AuthScreen extends Component {
     // else if(this.state.user) return null;
 
     let headingText = null;
-    let confirmPasswordControl = null;
+    // let confirmPasswordControl = null;
+    let inputUserInfo = null;
     let submitButton = (
       <ButtonWithBackground
         color="#29aaf4"
         onPress={this.authHandler}
         disabled={
-          !this.state.controls.confirmPassword.valid && this.state.authMode === "signup" ||
+          ((
+            !this.state.controls.apartmentName.valid ||
+            !this.state.controls.roomNumber.valid ||
+            !this.state.controls.nickname.valid
+          )
+            && this.state.authMode === "signup"
+          ) ||
           !this.state.controls.email.valid ||
           !this.state.controls.password.valid
-        }
-      >
+        }>
         Submit
     </ButtonWithBackground>
     );
@@ -186,23 +208,61 @@ class AuthScreen extends Component {
       );
     }
     if (this.state.authMode === "signup") {
-      confirmPasswordControl = (
-        <View
-          style={
-            this.state.viewMode === "portrait"
-              ? styles.portraitPasswordWrapper
-              : styles.landscapePasswordWrapper
-          }
-        >
+      // confirmPasswordControl = (
+      //   <View
+      //     style={
+      //       this.state.viewMode === "portrait"
+      //         ? styles.portraitPasswordWrapper
+      //         : styles.landscapePasswordWrapper
+      //     }
+      //   >
+      //     <DefaultInput
+      //       placeholder="Confirm Password"
+      //       style={styles.input}
+      //       value={this.state.controls.confirmPassword.value}
+      //       onChangeText={val => this.updateInputState("confirmPassword", val)}
+      //       valid={this.state.controls.confirmPassword.valid}
+      //       touched={this.state.controls.confirmPassword.touched}
+      //       secureTextEntry
+      //     />
+      //   </View>
+      // );
+      inputUserInfo = (
+        <View>
           <DefaultInput
-            placeholder="Confirm Password"
+            placeholder="ニックネーム(公開)"
             style={styles.input}
-            value={this.state.controls.confirmPassword.value}
-            onChangeText={val => this.updateInputState("confirmPassword", val)}
-            valid={this.state.controls.confirmPassword.valid}
-            touched={this.state.controls.confirmPassword.touched}
-            secureTextEntry
+            value={this.state.controls.nickname.value}
+            onChangeText={val => this.updateInputState("nickname", val)}
+            valid={this.state.controls.nickname.valid}
+            touched={this.state.controls.nickname.touched}
           />
+
+          <View style={{
+            width: "100%",
+            borderWidth: 1,
+            borderColor: '#eee',
+            padding: 5,
+            marginTop: 8,
+            marginBottom: 8,
+            backgroundColor: 'white'
+          }}>
+            <ModalDropdown options={['サンスプリングストーン', 'マーライオン', '石原マンション', 'サンスプリングストーン', 'マーライオン', '石原マンション']}
+              defaultValue='マンション名を選択してください'
+              keyboardShouldPersistTaps='always' 
+              onSelect={(idx, value) =>  this.updateInputState("apartmentName", idx)}
+              />
+          </View>
+          <DefaultInput
+            placeholder="部屋番号(非公開)"
+            style={styles.input}
+            value={this.state.controls.roomNumber.value}
+            onChangeText={val => this.updateInputState("roomNumber", val)}
+            valid={this.state.controls.roomNumber.valid}
+            touched={this.state.controls.roomNumber.touched}
+            keyboardType="numeric"
+          />
+
         </View>
       );
     }
@@ -222,7 +282,7 @@ class AuthScreen extends Component {
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.inputContainer}>
               <DefaultInput
-                placeholder="Your E-Mail Address"
+                placeholder="メールアドレス"
                 style={styles.input}
                 value={this.state.controls.email.value}
                 onChangeText={val => this.updateInputState("email", val)}
@@ -249,7 +309,7 @@ class AuthScreen extends Component {
                   }
                 >
                   <DefaultInput
-                    placeholder="Password"
+                    placeholder="パスワード(6文字以上)"
                     style={styles.input}
                     value={this.state.controls.password.value}
                     onChangeText={val => this.updateInputState("password", val)}
@@ -258,8 +318,10 @@ class AuthScreen extends Component {
                     secureTextEntry
                   />
                 </View>
-                {confirmPasswordControl}
+                {/* {confirmPasswordControl} */}
+                {inputUserInfo}
               </View>
+
             </View>
           </TouchableWithoutFeedback>
           {submitButton}

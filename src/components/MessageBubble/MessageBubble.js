@@ -29,7 +29,6 @@ class MessageBubble extends Component {
     var bubbleStyles = this.props.direction === 'left' ? [styles.messageBubble, styles.messageBubbleLeft] : [styles.messageBubble, styles.messageBubbleRight];
 
     var bubbleTextStyle = this.props.direction === 'left' ? styles.messageBubbleTextLeft : styles.messageBubbleTextRight;
-    console.log(this.props.sender);
     return (
       <View style={{ justifyContent: 'space-between', flexDirection: 'row' , marginTop: 10}}>
         <View style={{flex: 1}}>

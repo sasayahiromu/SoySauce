@@ -13,7 +13,7 @@ Navigation.registerComponent("soySauce.AuthSwipeScreen", () => AuthSwipeScreen, 
 
 Navigation.startSingleScreenApp({
   screen:{
-    screen: "soySauce.AuthSwipeScreen",
-    title: "login"
+    screen: "soySauce.BulletinBoardScreen",
+    title: "掲示板"
   }
 });

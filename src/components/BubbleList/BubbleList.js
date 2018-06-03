@@ -8,7 +8,6 @@ const bubbleList = props => {
       style={styles.listContainer}
       data={props.messages}
       renderItem={(info) => {
-        console.log(info)
        return (
         <MessageBubble
           text={info.item.text}

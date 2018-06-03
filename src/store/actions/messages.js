@@ -4,6 +4,7 @@ import firebase from 'react-native-firebase';
 
 export const addMessage = (text, sender, type) => {
   return dispatch => {
+    dispatch(tempAddMessage(text, sender, type))
     const messageData = {
       text: text,
       sender: sender,
@@ -22,7 +23,24 @@ export const addMessage = (text, sender, type) => {
   }
 }
 
+//addを即時反映させるため
+export const tempAddMessage = (text, sender, type) => {
+  return (dispatch,getState) => {
+    const messages = getState().messages.messages.slice(0)
+    const messageData = {
+      text: text,
+      sender: sender,
+      type: type,
+      key: "temporary"
+    }
+    console.log(messages)
+    messages.push(messageData)
+    dispatch(setMessages(messages))
+  }
+}
+
 export const setMessages = messages => {
+  console.log(messages)
   return {
     type: SET_MESSAGES,
     messages: messages
@@ -31,16 +49,13 @@ export const setMessages = messages => {
 
 export const getMessages = () => {
   return dispatch => {
-    console.log('gett')
     this.ref = firebase.firestore().collection('messages');
     this.ref
       .get()
       .then(querySnapshot => {
         const messages = [];
-        console.log(querySnapshot)
         for (let i in querySnapshot.docs) {
           value = querySnapshot.docs[i].data();
-          console.log('hrllo')
           messages.push({
             ...value,
             key: querySnapshot.docs[i].id

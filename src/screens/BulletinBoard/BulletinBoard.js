@@ -15,42 +15,10 @@ class BulletinBoardScreen extends Component {
 
   state = {
     inputBarText: '',
-    messages: [
-      {
-        key: 'a',
-        text: 'hello',
-        sender: 'sasaya',
-        type: 1
-      },
-      {
-        key: 'b',
-        text: 'helloooooooooo',
-        sender: 'sasaya',
-        type: 1
-      },
-      {
-        key: 'c',
-        text: 'hello',
-        sender: 'sasaya',
-        type: 1
-      },
-      {
-        key: 'd',
-        text: 'hello00000ppppppppppppppppppppppppppppppppppppppppppppppppppppppppp',
-        sender: 'sasaya',
-        type: 1
-      },
-      {
-        key: 'e',
-        text: 'helloooooooo',
-        sender: 'sasaya',
-        type: 1
-      }
-    ]
+    messages: []
   }
 
   componentWillMount() {
-    console.log('event')
     this.props.onLoadMessages();
   }
 

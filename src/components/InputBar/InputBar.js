@@ -5,26 +5,33 @@ import AutogrowInput from 'react-native-autogrow-input';
 class InputBar extends Component {
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.text === '') {
+    if (nextProps.text === '') {
       this.autogrowInput.resetInputText();
     }
   }
 
   render() {
+    const sendButton =
+      this.props.text ?
+        (<TouchableHighlight style={styles.sendButton} onPress={() => this.props.onSendPressed()}>
+          <Text style={{ color: 'white' }}>決定</Text>
+        </TouchableHighlight>)
+        : null
+
     return (
-          <View style={styles.inputBar}>
-            <AutogrowInput style={styles.textBox}
-                        ref={(ref) => { this.autogrowInput = ref }} 
-                        multiline={true}
-                        defaultHeight={30}
-                        onChangeText={(text) => this.props.onChangeText(text)}
-                        onContentSizeChange={this.props.onSizeChange}
-                        value={this.props.text}/>
-            <TouchableHighlight style={styles.sendButton} onPress={() => this.props.onSendPressed()}>
-                <Text style={{color: 'white'}}>決定</Text>
-            </TouchableHighlight>
-          </View> 
-          );
+      <View style={styles.inputBar}>
+        <AutogrowInput
+        placeholder="メッセージを入力"
+          style={styles.textBox}
+          ref={(ref) => { this.autogrowInput = ref }}
+          multiline={true}
+          defaultHeight={30}
+          onChangeText={(text) => this.props.onChangeText(text)}
+          onContentSizeChange={this.props.onSizeChange}
+          value={this.props.text} />
+        {sendButton}
+      </View>
+    );
   }
 }
 

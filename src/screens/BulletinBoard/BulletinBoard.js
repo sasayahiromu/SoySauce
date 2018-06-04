@@ -13,6 +13,14 @@ import { addMessage, getMessages } from '../../store/actions/index';
 
 class BulletinBoardScreen extends Component {
 
+
+  // static navigatorStyle = {
+    // drawUnderNavBar: true,
+    // navBarTranslucent: true,
+    // navBarHidden: true
+  // };
+  
+
   state = {
     inputBarText: '',
     messages: []

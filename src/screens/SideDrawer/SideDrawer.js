@@ -4,13 +4,57 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import App from '../../../App'
 
 class SideDrawer extends Component {
+
+  // logOut = () => {
+    // firebase.auth()
+    //   .signOut()
+    //   .then(() =>
+      //  App()
+      // )
+      // .catch(err => {
+      //   console.log(err);
+      //   alert('fail logout');
+      // })
+  // };
+
+  // required = () => {
+  //   console.log(this.props.navigator)
+
+  //   this.props.navigator.push({
+  //     screen: "soySauce.AuthSwipeScreen",
+  //     title: '求められているもの一覧',
+  //   });
+  // };
+
+
   render() {
     return (
       <View style={[styles.container, { width: Dimensions.get("window").width * 0.8 }]}>
+        <TouchableOpacity>
+          <View style={styles.drawerItem}>
+            <Icon name={Platform.OS === "android" ? "md-log-out" : "ios-log-out"} size={30} color="#aaa" style={styles.drawerItemIcon} />
+            <Text>プロフィール</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.required}>
+          <View style={styles.drawerItem}>
+            <Icon name={Platform.OS === "android" ? "md-log-out" : "ios-log-out"} size={30} color="#aaa" style={styles.drawerItemIcon} />
+            <Text>求められているもの一覧</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <View style={styles.drawerItem}>
+            <Icon name={Platform.OS === "android" ? "md-log-out" : "ios-log-out"} size={30} color="#aaa" style={styles.drawerItemIcon} />
+            <Text>借りれるもの一覧</Text>
+          </View>
+        </TouchableOpacity>
+
         <TouchableOpacity onPress={this.logOut}>
           <View style={styles.drawerItem}>
             <Icon name={Platform.OS === "android" ? "md-log-out" : "ios-log-out"} size={30} color="#aaa" style={styles.drawerItemIcon} />
-            <Text>Sign Out</Text>
+            <Text>サインアウト</Text>
           </View>
         </TouchableOpacity>
       </View>

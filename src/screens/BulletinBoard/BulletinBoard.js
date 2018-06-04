@@ -15,11 +15,11 @@ class BulletinBoardScreen extends Component {
 
 
   // static navigatorStyle = {
-    // drawUnderNavBar: true,
-    // navBarTranslucent: true,
-    // navBarHidden: true
+  // drawUnderNavBar: true,
+  // navBarTranslucent: true,
+  // navBarHidden: true
   // };
-  
+
 
   state = {
     inputBarText: '',
@@ -32,12 +32,30 @@ class BulletinBoardScreen extends Component {
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
 
+  // showAnotherPage = page => {
+  //   if(!page) return null
+  //   let screen = ''
+  //   let title = ''
+  //   switch (page) {
+  //     case "required":
+  //       screen = 'soySauce.AuthSwipeScreen';
+  //       title = '求められているもの一覧';
+  //       break;
+  //     default:
+  //       screen = '';
+  //   }
+  //   this.props.navigator.push({
+  //     screen: screen,
+  //     title: title,
+  //   });
+  // }
+
 
   onNavigatorEvent = event => {
     if (event.type === "NavBarButtonPress") {
       if (event.id === "sideDrawerToggle") {
         this.props.navigator.toggleDrawer({
-          side: "left"
+          side: "left",
         });
       }
     }

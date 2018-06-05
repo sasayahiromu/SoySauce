@@ -4,7 +4,8 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import io.invertase.firebase.RNFirebasePackage;
-import io.invertase.firebase.firestore.RNFirebaseFirestorePackage; 
+import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
+import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -32,6 +33,7 @@ public class MainApplication extends NavigationApplication {
     return Arrays.<ReactPackage>asList(
     new VectorIconsPackage(),
     new RNFirebasePackage(),
+    new RNFirebaseAuthPackage(),
     new RNFirebaseFirestorePackage()
     );
   }

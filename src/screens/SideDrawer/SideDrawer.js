@@ -1,41 +1,60 @@
 import React, { Component } from 'react';
+import { Navigation } from 'react-native-navigation'
 import { View, Text, Dimensions, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import App from '../../../App'
+import firebase from 'react-native-firebase';
+
 
 class SideDrawer extends Component {
-
-  logOut = () => {
-    // firebase.auth()
-    //   .signOut()
-    //   .then(() =>
-    App()
-    // )
-    // .catch(err => {
-    //   console.log(err);
-    //   alert('fail logout');
-    // })
-  };
 
   required = () => {
     this.props.changeDrawerIsClosed()
     this.props.drawer.close();
     this.props.navigator.push({
-      screen: "soySauce.AuthSwipeScreen",
+      screen: "soySauce.RendBoardScreen",
       title: '求められているもの一覧',
     });
+  }
+
+  borrow = () => {
+    this.props.changeDrawerIsClosed()
+    this.props.drawer.close();
+    this.props.navigator.push({
+      screen: "soySauce.BorrowBoardScreen",
+      title: '借りれるもの一覧',
+    });
+  }
+
+  logOut = () => {
+    firebase.auth()
+      .signOut()
+      .then(() => {
+        Navigation.startSingleScreenApp({
+          screen: {
+            screen: "soySauce.AuthSwipeScreen",
+            title: "ログイン"
+          },
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        alert('fail logout');
+      })
   };
+
+
 
 
   render() {
     return (
       <View style={[styles.container, { width: Dimensions.get("window").width * 0.8 }]}>
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <View style={styles.drawerItem}>
             <Icon name={Platform.OS === "android" ? "md-log-out" : "ios-log-out"} size={30} color="#aaa" style={styles.drawerItemIcon} />
             <Text>プロフィール</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <TouchableOpacity onPress={this.required}>
           <View style={styles.drawerItem}>
@@ -44,7 +63,7 @@ class SideDrawer extends Component {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.borrow}>
           <View style={styles.drawerItem}>
             <Icon name={Platform.OS === "android" ? "md-log-out" : "ios-log-out"} size={30} color="#aaa" style={styles.drawerItemIcon} />
             <Text>借りれるもの一覧</Text>

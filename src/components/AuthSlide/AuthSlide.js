@@ -20,9 +20,9 @@ import MainText from "../../components/UI/MainText/MainText";
 import ButtonWithBackground from "../../components/UI/ButtonWithBackground/ButtonWithBackground";
 import backgroundImage from "../../assets/background.jpg";
 import validate from "../../utility/validation";
-// import { tryAuth } from "../../store/actions/index";
-// import startMainTabs from "../../screens/MainTabs/startMainTabs";
-// import firebase from 'react-native-firebase';
+import { tryAuth } from "../../store/actions/index";
+import startMainTabs from "../../models/startMainTabs/startMainTabs";
+import firebase from 'react-native-firebase';
 import ModalDropdown from 'react-native-modal-dropdown';
 
 class AuthScreen extends Component {
@@ -79,26 +79,26 @@ class AuthScreen extends Component {
     Dimensions.addEventListener("change", this.updateStyles);
   }
 
-  // componentWillMount(){
-  //     this.setState({
-  //       checkedAuth: false,
-  //     });
-  // }
+  componentWillMount(){
+      this.setState({
+        checkedAuth: false,
+      });
+  }
 
-  // componentDidMount() {
-  //   this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
-  //     if(user) startMainTabs();
-  //     else{
-  //     this.setState({
-  //       checkedAuth: true
-  //     });
-  //   }
-  //   });
-  // }
+  componentDidMount() {
+    this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
+      if(user) startMainTabs();
+      else{
+      this.setState({
+        checkedAuth: true
+      });
+    }
+    });
+  }
 
   componentWillUnmount() {
     Dimensions.removeEventListener("change", this.updateStyles);
-    // this.authSubscription();
+    this.authSubscription();
   }
 
   switchAuthModeHandler = () => {
@@ -115,13 +115,16 @@ class AuthScreen extends Component {
     });
   };
 
-  // authHandler = () => {
-  //   const authData = {
-  //     email: this.state.controls.email.value,
-  //     password: this.state.controls.password.value
-  //   };
-  //   this.props.onTryAuth(authData, this.state.authMode);
-  // };
+  authHandler = () => {
+    const authData = {
+      email: this.state.controls.email.value,
+      password: this.state.controls.password.value,
+      nickname: this.state.controls.nickname.value,
+      apartmentName: this.state.controls.apartmentName.value,
+      roomNumber: this.state.controls.roomNumber.value,
+    };
+    this.props.onTryAuth(authData, this.state.authMode);
+  };
 
   updateInputState = (key, value) => {
     let connectedValue = {};
@@ -143,17 +146,6 @@ class AuthScreen extends Component {
       return {
         controls: {
           ...prevState.controls,
-          // confirmPassword: {
-          //   ...prevState.controls.confirmPassword,
-          //   valid:
-          //     key === "password"
-          //       ? validate(
-          //         prevState.controls.confirmPassword.value,
-          //         prevState.controls.confirmPassword.validationRules,
-          //         connectedValue
-          //       )
-          //       : prevState.controls.confirmPassword.valid
-          // },
           [key]: {
             ...prevState.controls[key],
             value: value,
@@ -172,14 +164,13 @@ class AuthScreen extends Component {
 
 
   render() {
-    // // Auto logIn
-    // if (!this.state.checkedAuth) {
-    //   return null;
-    // }
-    // else if(this.state.user) return null;
+    // Auto logIn
+    if (!this.state.checkedAuth) {
+      return null;
+    }
+    else if(this.state.user) return null;
 
     let headingText = null;
-    // let confirmPasswordControl = null;
     let inputUserInfo = null;
     let submitButton = (
       <ButtonWithBackground
@@ -370,11 +361,12 @@ const styles = StyleSheet.create({
 //   };
 // };
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     onTryAuth: (authData, authMode) => dispatch(tryAuth(authData, authMode))
-//   };
-// };
+const mapDispatchToProps = dispatch => {
+  return {
+    onTryAuth: (authData, authMode) => dispatch(tryAuth(authData, authMode))
+  };
+};
 
 // export default connect(mapStateToProps, mapDispatchToProps)(AuthScreen);
-export default AuthScreen;
+export default connect(null, mapDispatchToProps)(AuthScreen);
+// export default AuthScreen;

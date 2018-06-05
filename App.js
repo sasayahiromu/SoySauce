@@ -4,6 +4,9 @@ import BulletinBoardScreen from './src/screens/BulletinBoard/BulletinBoard'
 import AuthSwipeScreen from './src/screens/AuthSwipe/AuthSwipe'
 import { Platform } from 'react-native';
 import MainTabsScreen from './src/screens/MainTabs/MainTabs'
+import BorrowBoardScreen from './src/screens/BorrowBoard/BorrowBoard'
+import RendBoardScreen from './src/screens/RendScreen/RendScreen'
+import startLogin from './src/models/startLogin/startLogin'
 
 import configureStore from './src/store/configureStore'
 
@@ -15,24 +18,7 @@ const store = configureStore();
 Navigation.registerComponent("soySauce.BulletinBoardScreen", () => BulletinBoardScreen, store, Provider);
 Navigation.registerComponent("soySauce.AuthSwipeScreen", () => AuthSwipeScreen, store, Provider);
 Navigation.registerComponent("soySauce.MainTabsScreen", () => MainTabsScreen, store, Provider);
+Navigation.registerComponent("soySauce.BorrowBoardScreen", () => BorrowBoardScreen, store, Provider);
+Navigation.registerComponent("soySauce.RendBoardScreen", () => RendBoardScreen, store, Provider);
 
-export default () =>
-Promise.all([
-  Icon.getImageSource(
-    Platform.OS === "android" ? "md-menu" : "ios-menu", 30),
-]).
-  then(sources => {
-    Navigation.startSingleScreenApp({
-      screen: {
-        screen: "soySauce.MainTabsScreen",
-        // title: "メイン",
-        navigatorButtons: {
-          leftButtons: [{
-            icon: sources[0],
-            title: 'Menu',
-            id: "sideDrawerToggle"
-          }]
-        }
-      },
-    });
-  })
+export default () => startLogin()

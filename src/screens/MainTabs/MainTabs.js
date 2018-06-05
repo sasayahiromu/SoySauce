@@ -7,6 +7,7 @@ import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-v
 import BulletinBoardScreen from '../BulletinBoard/BulletinBoard'
 import Drawer from 'react-native-drawer'
 import SideDrawer from '../SideDrawer/SideDrawer'
+import ChatList from '../ChatList/ChatList'
 
 class MainTabs extends Component {
 
@@ -52,7 +53,7 @@ class MainTabs extends Component {
           renderTabBar={() => <DefaultTabBar style={{ height: 40 }} tabStyle={{ paddingBottom: 0 }} />}
         >
           <BulletinBoardScreen tabLabel='掲示板' />
-          <Text tabLabel='チャット'>favorite</Text>
+          <ChatList tabLabel='チャット'/>
         </ScrollableTabView>
       </Drawer>
     )

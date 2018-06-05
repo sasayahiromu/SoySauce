@@ -10,8 +10,8 @@ import { connect } from 'react-redux';
 
 import { addMessage, getMessages } from '../../store/actions/index';
 
-import Drawer from 'react-native-drawer'
-import SideDrawer from '../SideDrawer/SideDrawer'
+// import Drawer from 'react-native-drawer'
+// import SideDrawer from '../SideDrawer/SideDrawer'
 
 
 class BulletinBoardScreen extends Component {
@@ -27,14 +27,14 @@ class BulletinBoardScreen extends Component {
   state = {
     inputBarText: '',
     messages: [],
-    drawerIsClosed: true
+    // drawerIsClosed: true
   }
 
 
-  constructor(props) {
-    super(props);
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+  // }
 
   // showAnotherPage = page => {
   //   if(!page) return null
@@ -55,17 +55,17 @@ class BulletinBoardScreen extends Component {
   // }
 
 
-  onNavigatorEvent = event => {
-    if (event.type === "NavBarButtonPress") {
-      if (event.id === "sideDrawerToggle") {
-        console.log(this.props.navigator)
-        this.state.drawerIsClosed ? this._drawer.open() : this._drawer.close()
-        this.setState({
-          drawerIsClosed: !this.state.drawerIsClosed
-        })
-      }
-    }
-  };
+  // onNavigatorEvent = event => {
+  //   if (event.type === "NavBarButtonPress") {
+  //     if (event.id === "sideDrawerToggle") {
+  //       console.log(this.props.navigator)
+  //       this.state.drawerIsClosed ? this._drawer.open() : this._drawer.close()
+  //       this.setState({
+  //         drawerIsClosed: !this.state.drawerIsClosed
+  //       })
+  //     }
+  //   }
+  // };
 
   componentWillMount() {
     this.props.onLoadMessages();
@@ -88,14 +88,14 @@ class BulletinBoardScreen extends Component {
 
   render() {
     return (
-      <Drawer
-        type="overlay"
-        ref={(ref) => this._drawer = ref}
-        content={<SideDrawer navigator={this.props.navigator} drawer={this._drawer}/>}
-        tapToClose={true}
-        // openDrawerOffset={0.2} // 20% gap on the right side of drawer
-        panCloseMask={0.2}
-      >
+      // <Drawer
+      //   type="overlay"
+      //   ref={(ref) => this._drawer = ref}
+      //   content={<SideDrawer navigator={this.props.navigator} drawer={this._drawer}/>}
+      //   tapToClose={true}
+      //   // openDrawerOffset={0.2} // 20% gap on the right side of drawer
+      //   panCloseMask={0.2}
+      // >
         <View style={styles.outer}>
           <ScrollView>
             <BubbleList messages={this.props.messages} />
@@ -110,7 +110,7 @@ class BulletinBoardScreen extends Component {
           />
           <KeyboardSpacer />
         </View>
-      </Drawer>
+      // </Drawer>
     );
   }
 }

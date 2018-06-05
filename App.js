@@ -3,6 +3,7 @@ import { Provider } from 'react-redux'
 import BulletinBoardScreen from './src/screens/BulletinBoard/BulletinBoard'
 import AuthSwipeScreen from './src/screens/AuthSwipe/AuthSwipe'
 import { Platform } from 'react-native';
+import MainTabsScreen from './src/screens/MainTabs/MainTabs'
 
 import configureStore from './src/store/configureStore'
 
@@ -13,6 +14,7 @@ const store = configureStore();
 
 Navigation.registerComponent("soySauce.BulletinBoardScreen", () => BulletinBoardScreen, store, Provider);
 Navigation.registerComponent("soySauce.AuthSwipeScreen", () => AuthSwipeScreen, store, Provider);
+Navigation.registerComponent("soySauce.MainTabsScreen", () => MainTabsScreen, store, Provider);
 
 export default () =>
 Promise.all([
@@ -22,8 +24,8 @@ Promise.all([
   then(sources => {
     Navigation.startSingleScreenApp({
       screen: {
-        screen: "soySauce.BulletinBoardScreen",
-        title: "掲示板",
+        screen: "soySauce.MainTabsScreen",
+        // title: "メイン",
         navigatorButtons: {
           leftButtons: [{
             icon: sources[0],

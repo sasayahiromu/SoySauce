@@ -18,6 +18,7 @@ class SideDrawer extends Component {
   };
 
   required = () => {
+    this.props.changeDrawerIsClosed()
     this.props.drawer.close();
     this.props.navigator.push({
       screen: "soySauce.AuthSwipeScreen",
@@ -63,7 +64,6 @@ class SideDrawer extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 30,
     backgroundColor: "white",
     flex: 1
   },

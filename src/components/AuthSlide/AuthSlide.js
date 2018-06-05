@@ -98,7 +98,7 @@ class AuthScreen extends Component {
 
   componentWillUnmount() {
     Dimensions.removeEventListener("change", this.updateStyles);
-    this.authSubscription();
+    // this.authSubscription();
   }
 
   switchAuthModeHandler = () => {

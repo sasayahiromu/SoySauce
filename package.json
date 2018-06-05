@@ -24,6 +24,7 @@
     "react-native": "~0.55.2",
     "react-native-autogrow-input": "^0.2.1",
     "react-native-balloon": "0.0.2",
+    "react-native-drawer": "^2.5.0",
     "react-native-firebase": "^4.2.0",
     "react-native-keyboard-spacer": "^0.4.1",
     "react-native-modal-dropdown": "^0.6.2",

@@ -5,26 +5,25 @@ import App from '../../../App'
 
 class SideDrawer extends Component {
 
-  // logOut = () => {
+  logOut = () => {
     // firebase.auth()
     //   .signOut()
     //   .then(() =>
-      //  App()
-      // )
-      // .catch(err => {
-      //   console.log(err);
-      //   alert('fail logout');
-      // })
-  // };
+    App()
+    // )
+    // .catch(err => {
+    //   console.log(err);
+    //   alert('fail logout');
+    // })
+  };
 
-  // required = () => {
-  //   console.log(this.props.navigator)
-
-  //   this.props.navigator.push({
-  //     screen: "soySauce.AuthSwipeScreen",
-  //     title: '求められているもの一覧',
-  //   });
-  // };
+  required = () => {
+    this.props.drawer.close();
+    this.props.navigator.push({
+      screen: "soySauce.AuthSwipeScreen",
+      title: '求められているもの一覧',
+    });
+  };
 
 
   render() {

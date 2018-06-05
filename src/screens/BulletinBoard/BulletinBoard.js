@@ -10,6 +10,9 @@ import { connect } from 'react-redux';
 
 import { addMessage, getMessages } from '../../store/actions/index';
 
+import Drawer from 'react-native-drawer'
+import SideDrawer from '../SideDrawer/SideDrawer'
+
 
 class BulletinBoardScreen extends Component {
 
@@ -23,7 +26,8 @@ class BulletinBoardScreen extends Component {
 
   state = {
     inputBarText: '',
-    messages: []
+    messages: [],
+    drawerIsClosed: true
   }
 
 
@@ -54,9 +58,11 @@ class BulletinBoardScreen extends Component {
   onNavigatorEvent = event => {
     if (event.type === "NavBarButtonPress") {
       if (event.id === "sideDrawerToggle") {
-        this.props.navigator.toggleDrawer({
-          side: "left",
-        });
+        console.log(this.props.navigator)
+        this.state.drawerIsClosed ? this._drawer.open() : this._drawer.close()
+        this.setState({
+          drawerIsClosed: !this.state.drawerIsClosed
+        })
       }
     }
   };
@@ -82,20 +88,29 @@ class BulletinBoardScreen extends Component {
 
   render() {
     return (
-      <View style={styles.outer}>
-        <ScrollView>
-          <BubbleList messages={this.props.messages} />
-        </ScrollView>
-        <View style={styles.multiSwitchContainer}>
-          <MultiSwitch ref={ref => (this.multiSwitch = ref)} />
+      <Drawer
+        type="overlay"
+        ref={(ref) => this._drawer = ref}
+        content={<SideDrawer navigator={this.props.navigator} drawer={this._drawer}/>}
+        tapToClose={true}
+        // openDrawerOffset={0.2} // 20% gap on the right side of drawer
+        panCloseMask={0.2}
+      >
+        <View style={styles.outer}>
+          <ScrollView>
+            <BubbleList messages={this.props.messages} />
+          </ScrollView>
+          <View style={styles.multiSwitchContainer}>
+            <MultiSwitch ref={ref => (this.multiSwitch = ref)} />
+          </View>
+          <InputBar onSendPressed={() => { this.addMessageHandler() }}
+            onSizeChange={() => { }}
+            onChangeText={(text) => { this._onChangeInputBarText(text) }}
+            text={this.state.inputBarText}
+          />
+          <KeyboardSpacer />
         </View>
-        <InputBar onSendPressed={() => { this.addMessageHandler() }}
-          onSizeChange={() => { }}
-          onChangeText={(text) => { this._onChangeInputBarText(text) }}
-          text={this.state.inputBarText}
-        />
-        <KeyboardSpacer />
-      </View>
+      </Drawer>
     );
   }
 }

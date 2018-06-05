@@ -2,7 +2,6 @@ import { Navigation } from 'react-native-navigation'
 import { Provider } from 'react-redux'
 import BulletinBoardScreen from './src/screens/BulletinBoard/BulletinBoard'
 import AuthSwipeScreen from './src/screens/AuthSwipe/AuthSwipe'
-import SideDrawer from './src/screens/SideDrawer/SideDrawer'
 import { Platform } from 'react-native';
 
 import configureStore from './src/store/configureStore'
@@ -14,7 +13,6 @@ const store = configureStore();
 
 Navigation.registerComponent("soySauce.BulletinBoardScreen", () => BulletinBoardScreen, store, Provider);
 Navigation.registerComponent("soySauce.AuthSwipeScreen", () => AuthSwipeScreen, store, Provider);
-Navigation.registerComponent("awesome-places.SideDrawer", () => SideDrawer);
 
 export default () =>
 Promise.all([
@@ -34,10 +32,5 @@ Promise.all([
           }]
         }
       },
-      drawer: {
-        left: {
-          screen: "awesome-places.SideDrawer"
-        }
-      }
     });
   })

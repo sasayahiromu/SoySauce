@@ -40,7 +40,6 @@ export const tempAddMessage = (text, sender, type) => {
 }
 
 export const setMessages = messages => {
-  console.log(messages)
   return {
     type: SET_MESSAGES,
     messages: messages

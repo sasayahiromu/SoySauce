@@ -1,4 +1,4 @@
-import { TRY_AUTH } from './actionTypes';
+import { TRY_AUTH, REGISTER_UID } from './actionTypes';
 import firebase from 'react-native-firebase';
 import startMainTabs from '../../models/startMainTabs/startMainTabs'
 
@@ -21,6 +21,8 @@ export const authSignup = authData => {
       .createUserAndRetrieveDataWithEmailAndPassword(authData.email, authData.password)
       .then(res => {
         console.log(res);
+        const uid = res.user._user.uid
+        dispatch(registerUid(uid))
         // dispatch(uiStopLoading());
         startMainTabs();
       })
@@ -38,6 +40,8 @@ export const authSignin = authData => {
       .signInAndRetrieveDataWithEmailAndPassword(authData.email, authData.password)
       .then(res => {
         console.log(res);
+        const uid = res.user._user.uid
+        dispatch(registerUid(uid))
         // dispatch(uiStopLoading());
         startMainTabs();
       })
@@ -48,3 +52,11 @@ export const authSignin = authData => {
       })
   }
 }
+
+export const registerUid = uid => {
+  console.log(uid)
+  return {
+    type: REGISTER_UID,
+    uid: uid
+  };
+};

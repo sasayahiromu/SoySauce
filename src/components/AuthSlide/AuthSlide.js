@@ -243,10 +243,10 @@ class AuthScreen extends Component {
             marginBottom: 8,
             backgroundColor: 'white'
           }}>
-            <ModalDropdown options={['サンスプリングストーン', 'マーライオン', '石原マンション', 'サンスプリングストーン', 'マーライオン', '石原マンション']}
+            <ModalDropdown options={['サンスプリングストーン', 'グランツ武蔵新城', '石原マンション', 'マーライオン']}
               defaultValue='マンション名を選択してください'
               keyboardShouldPersistTaps='always' 
-              onSelect={(idx, value) =>  this.updateInputState("apartmentName", idx)}
+              onSelect={(idx, value) =>  this.updateInputState("apartmentName", value)}
               />
           </View>
           <DefaultInput

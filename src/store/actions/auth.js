@@ -1,10 +1,13 @@
 import { TRY_AUTH, REGISTER_UID, REGISTER_NICKNAME } from './actionTypes';
 import firebase from 'react-native-firebase';
 import startMainTabs from '../../models/startMainTabs/startMainTabs'
+import communityCorrespondingId from '../../utility/communityId'
 
 //userの他の情報をあとで適用
 
 export const tryAuth = (authData, authMode) => {
+  console.log(authData);
+
   return dispatch => {
     // dispatch(uiStartLoading());
     if (authMode === "login") {
@@ -21,10 +24,27 @@ export const authSignup = authData => {
       .createUserAndRetrieveDataWithEmailAndPassword(authData.email, authData.password)
       .then(res => {
         console.log(res);
-        const uid = res.user._user.uid
-        dispatch(registerUid(uid))
-        // dispatch(uiStopLoading());
-        startMainTabs();
+        const uid = res.user._user.uid;
+        const userData = {
+          community_id: communityCorrespondingId(authData.apartmentName),
+          nick_name: authData.nickname,
+          room_id: authData.roomNumber
+        }
+        firebase.firestore()
+        .collection('users')
+        .doc(uid)
+        .set(userData)
+        .then(() => {
+          dispatch(registerUid(uid))
+          startMainTabs();
+        })
+        .catch(err => {
+          alert('signUp failed. Try again.');
+          console.log(err)
+          // dispatch(uiStopLoading());
+        })
+        // dispatch(registerUid(uid))
+        // startMainTabs();
       })
       .catch(err => {
         alert('Authentication failed. Try again.');

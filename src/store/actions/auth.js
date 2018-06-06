@@ -1,4 +1,4 @@
-import { TRY_AUTH, REGISTER_UID } from './actionTypes';
+import { TRY_AUTH, REGISTER_UID, REGISTER_NICKNAME } from './actionTypes';
 import firebase from 'react-native-firebase';
 import startMainTabs from '../../models/startMainTabs/startMainTabs'
 
@@ -53,6 +53,24 @@ export const authSignin = authData => {
   }
 }
 
+export const registerUser = uid => {
+  return dispatch => {
+    firebase.firestore()
+      .collection('users')
+      .doc(uid)
+      .get()
+      .then((documentSnapshot) => {
+        dispatch(registerUid(uid))
+        dispatch(registerNickname(documentSnapshot._data.nick_name));
+      })
+      .catch(err => {
+        console.log(err);
+        alert('something error happen')
+      })
+
+  }
+}
+
 export const registerUid = uid => {
   console.log(uid)
   return {
@@ -60,3 +78,10 @@ export const registerUid = uid => {
     uid: uid
   };
 };
+
+export const registerNickname = nickname => {
+  return {
+    type: REGISTER_NICKNAME,
+    nickname: nickname
+  };
+}

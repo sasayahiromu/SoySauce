@@ -36,7 +36,7 @@ class MessageBubble extends Component {
         </View>
 
         <View style={{ flexDirection: 'column', flex: 7 }}>
-          <Text style={{ fontSize: 10 }}>{this.props.sender}</Text>
+          <Text style={{ fontSize: 10 }}>{this.props.sender_nick_name}</Text>
           <View style={bubbleStyles}>
             <Text style={bubbleTextStyle}>
               {this.props.text}

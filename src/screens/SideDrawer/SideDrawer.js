@@ -4,7 +4,7 @@ import { View, Text, Dimensions, StyleSheet, TouchableOpacity, Platform } from '
 import Icon from 'react-native-vector-icons/Ionicons'
 import App from '../../../App'
 import firebase from 'react-native-firebase';
-import { registerUid } from "../../store/actions/index";
+import { registerUid, registerNickname } from "../../store/actions/index";
 import { connect } from "react-redux";
 
 
@@ -14,7 +14,7 @@ class SideDrawer extends Component {
 
   constructor(props) {
     super(props);
-  }  
+  }
 
   required = () => {
     this.props.changeDrawerIsClosed()
@@ -38,7 +38,8 @@ class SideDrawer extends Component {
     firebase.auth()
       .signOut()
       .then(() => {
-        this.props.onregisterUid("")
+        this.props.onregisterUid("");
+        this.props.onregisterNickname("");
         Navigation.startSingleScreenApp({
           screen: {
             screen: "soySauce.AuthSwipeScreen",
@@ -108,7 +109,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    onregisterUid: (uid) => dispatch(registerUid(uid))
+    onregisterUid: (uid) => dispatch(registerUid(uid)),
+    onregisterNickname: (nickname) => dispatch(registerNickname(nickname)),
   };
 };
 

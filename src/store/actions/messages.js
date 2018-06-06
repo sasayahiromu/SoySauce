@@ -2,16 +2,24 @@ import { SET_MESSAGES } from './actionTypes';
 import firebase from 'react-native-firebase';
 
 
-export const addMessage = (text, sender, type) => {
-  return dispatch => {
-    dispatch(tempAddMessage(text, sender, type))
+export const addMessage = (message, type) => {
+  return (dispatch, getState) => {
+    sender_uid = getState().auth.uid.slice(0);
+    sender_nick_name = getState().auth.nickname.slice(0);
+    dispatch(tempAddMessage(message, sender_nick_name, type))
     const messageData = {
-      text: text,
-      sender: sender,
+      deal_status: 0,
+      message: message,
+      sender_nick_name: sender_nick_name,
+      sender_uid: sender_uid,
       type: type,
+      sent_at: firebase.firestore.FieldValue.serverTimestamp()
     }
-    this.ref = firebase.firestore().collection('messages')
-    this.ref.add(messageData)
+    firebase.firestore()
+      .collection('chat_messages')
+      .doc('chat-01')
+      .collection('messages')
+      .add(messageData)
       .then(res => {
         console.log(res.id);
         dispatch(getMessages());
@@ -24,12 +32,12 @@ export const addMessage = (text, sender, type) => {
 }
 
 //addを即時反映させるため
-export const tempAddMessage = (text, sender, type) => {
+export const tempAddMessage = (message, sender_nick_name, type) => {
   return (dispatch, getState) => {
     const messages = getState().messages.messages.slice(0)
     const messageData = {
-      text: text,
-      sender: sender,
+      message: message,
+      sender_nick_name: sender_nick_name,
       type: type,
       key: "temporary"
     }
@@ -52,15 +60,9 @@ export const getMessages = () => {
       .collection('chat_messages')
       .doc('chat-01')
       .collection('messages')
-      .orderBy('sent_at', 'desc')
+      .orderBy('sent_at')
       .get()
-    //   .then(snapshot => {
-    //     snapshot.forEach(doc => {
-    //       console.log(doc.data().sent_at, '=>', doc.data().message);
-    //     });
-    //   });
-    // }}
-          .then(querySnapshot => {
+      .then(querySnapshot => {
         const messages = [];
         for (let i in querySnapshot.docs) {
           value = querySnapshot.docs[i].data();

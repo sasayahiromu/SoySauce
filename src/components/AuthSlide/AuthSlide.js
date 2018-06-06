@@ -20,7 +20,7 @@ import MainText from "../../components/UI/MainText/MainText";
 import ButtonWithBackground from "../../components/UI/ButtonWithBackground/ButtonWithBackground";
 import backgroundImage from "../../assets/background.jpg";
 import validate from "../../utility/validation";
-import { tryAuth, registerUid } from "../../store/actions/index";
+import { tryAuth, registerUser } from "../../store/actions/index";
 import startMainTabs from "../../models/startMainTabs/startMainTabs";
 import firebase from 'react-native-firebase';
 import ModalDropdown from 'react-native-modal-dropdown';
@@ -88,7 +88,7 @@ class AuthScreen extends Component {
   componentDidMount() {
     this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
       if(user){
-        this.props.onregisterUid(user._user.uid)
+        this.props.onregisterUser(user._user.uid)
         startMainTabs();
       }
       else{
@@ -369,7 +369,7 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = dispatch => {
   return {
     onTryAuth: (authData, authMode) => dispatch(tryAuth(authData, authMode)),
-    onregisterUid: (uid) => dispatch(registerUid(uid))
+    onregisterUser: (uid) => dispatch(registerUser(uid)),    
   };
 };
 

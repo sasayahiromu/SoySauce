@@ -22,10 +22,10 @@ class BulletinBoardScreen extends Component {
   }
 
   addMessageHandler = () => {
-    const text = this.state.inputBarText
-    const sender = 'sasaya' ///変更する
+    const message = this.state.inputBarText
+    // const sender = 'sasaya' ///変更する
     const type = this.multiSwitch.state.selectedPosition
-    this.props.onAddMessage(text, sender, type);
+    this.props.onAddMessage(message, type);
   }
 
 

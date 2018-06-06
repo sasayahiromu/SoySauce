@@ -3,6 +3,7 @@ import { StyleSheet, FlatList } from "react-native";
 import MessageBubble from '../MessageBubble/MessageBubble'
 
 const bubbleList = props => {
+  console.log(props.messages)
   return (
     <FlatList
       style={styles.listContainer}
@@ -11,7 +12,8 @@ const bubbleList = props => {
        return (
         <MessageBubble
           text={info.item.message}
-          sender={info.item.sender}
+          sender_uid={info.item.sender_uid}
+          sender_nick_name={info.item.sender_nick_name}
           type={info.item.type}
           sentAt={info.item.sent_at}
           dealStatus={info.item.deal_status}

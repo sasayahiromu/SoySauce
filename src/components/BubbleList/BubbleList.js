@@ -19,6 +19,7 @@ const bubbleList = props => {
           direction='left' //消す
           onItemPressed={() => {}}
           authUid = {props.authUid}
+          messageId={info.item.key}
         />
       )}}
     />

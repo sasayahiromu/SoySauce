@@ -10,9 +10,11 @@ const bubbleList = props => {
       renderItem={(info) => {
        return (
         <MessageBubble
-          text={info.item.text}
+          text={info.item.message}
           sender={info.item.sender}
           type={info.item.type}
+          sentAt={info.item.sent_at}
+          dealStatus={info.item.deal_status}
           direction='left' //消す
           onItemPressed={() => {}}
         />

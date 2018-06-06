@@ -3,7 +3,7 @@ import {
 } from "../actions/actionTypes";
 
 const initialState = {
-  messages: []
+  uid: ""
 };
 
 const reducer = (state = initialState, action) => {

@@ -25,7 +25,7 @@ export const addMessage = (text, sender, type) => {
 
 //addを即時反映させるため
 export const tempAddMessage = (text, sender, type) => {
-  return (dispatch,getState) => {
+  return (dispatch, getState) => {
     const messages = getState().messages.messages.slice(0)
     const messageData = {
       text: text,
@@ -48,10 +48,19 @@ export const setMessages = messages => {
 
 export const getMessages = () => {
   return dispatch => {
-    this.ref = firebase.firestore().collection('messages');
-    this.ref
+    firebase.firestore()
+      .collection('chat_messages')
+      .doc('chat-01')
+      .collection('messages')
+      .orderBy('sent_at', 'desc')
       .get()
-      .then(querySnapshot => {
+    //   .then(snapshot => {
+    //     snapshot.forEach(doc => {
+    //       console.log(doc.data().sent_at, '=>', doc.data().message);
+    //     });
+    //   });
+    // }}
+          .then(querySnapshot => {
         const messages = [];
         for (let i in querySnapshot.docs) {
           value = querySnapshot.docs[i].data();

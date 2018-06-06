@@ -18,6 +18,7 @@ const bubbleList = props => {
           dealStatus={info.item.deal_status}
           direction='left' //消す
           onItemPressed={() => {}}
+          authUid = {props.authUid}
         />
       )}}
     />

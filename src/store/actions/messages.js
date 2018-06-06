@@ -6,7 +6,7 @@ export const addMessage = (message, type) => {
   return (dispatch, getState) => {
     sender_uid = getState().auth.uid.slice(0);
     sender_nick_name = getState().auth.nickname.slice(0);
-    dispatch(tempAddMessage(message, sender_nick_name, type))
+    dispatch(tempAddMessage(message, sender_nick_name, sender_uid, type))
     const messageData = {
       deal_status: 0,
       message: message,
@@ -32,12 +32,13 @@ export const addMessage = (message, type) => {
 }
 
 //addを即時反映させるため
-export const tempAddMessage = (message, sender_nick_name, type) => {
+export const tempAddMessage = (message, sender_nick_name, sender_uid, type) => {
   return (dispatch, getState) => {
     const messages = getState().messages.messages.slice(0)
     const messageData = {
       message: message,
       sender_nick_name: sender_nick_name,
+      sender_uid: sender_uid,
       type: type,
       key: "temporary"
     }

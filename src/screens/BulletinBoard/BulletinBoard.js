@@ -40,7 +40,7 @@ class BulletinBoardScreen extends Component {
     return (
         <View style={styles.outer}>
           <ScrollView>
-            <BubbleList messages={this.props.messages} />
+            <BubbleList authUid={this.props.authUid} messages={this.props.messages} />
           </ScrollView>
           <View style={styles.multiSwitchContainer}>
             <MultiSwitch ref={ref => (this.multiSwitch = ref)} />
@@ -85,7 +85,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    messages: state.messages.messages
+    messages: state.messages.messages,
+    authUid: state.auth.uid
   };
 };
 

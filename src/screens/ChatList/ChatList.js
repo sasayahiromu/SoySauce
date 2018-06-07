@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Content, List, ListItem, Left, Body, Right, Text } from 'native-base';
-import { TouchableOpacity } from 'react-native'
+import { Container, Content, List, ListItem, Left, Body, Right, Text, Thumbnail } from 'native-base';
+import { TouchableOpacity, View } from 'react-native'
 
 export default class ListAvatarExample extends Component {
   render() {
@@ -12,8 +12,12 @@ export default class ListAvatarExample extends Component {
             <ListItem>
               <TouchableOpacity>
                 <Body>
-                  <Text>Kumar Pratik</Text>
-                  <Text note>Doing what you like will always keep you happy . .</Text>
+                  <View style={{ flexDirection: 'row' }}>
+                    <Thumbnail small source={{ uri: "https://facebook.github.io/react-native/docs/assets/favicon.png" }} style={{ width: 20, height: 20 }} />
+                    <Text>sasaya</Text>
+                  </View>
+                  <Text>こんにちはゲームウォッチ貸しますよ</Text>
+                  <Text note>明日の12時くらいに届けに行きます</Text>
                 </Body>
               </TouchableOpacity>
               {/* <Right>

@@ -16,10 +16,10 @@ const bubbleList = props => {
           type={info.item.type}
           sentAt={info.item.sent_at}
           dealStatus={info.item.deal_status}
-          direction='left' //消す
           onItemPressed={() => {}}
           authUid = {props.authUid}
           messageId={info.item.key}
+          startIndividualChat={props.startIndividualChat}
         />
       )}}
     />

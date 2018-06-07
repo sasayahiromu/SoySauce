@@ -23,7 +23,6 @@ class BulletinBoardScreen extends Component {
 
   addMessageHandler = () => {
     const message = this.state.inputBarText
-    // const sender = 'sasaya' ///変更する
     const type = this.multiSwitch.state.selectedPosition
     this.props.onAddMessage(message, type);
   }
@@ -35,23 +34,37 @@ class BulletinBoardScreen extends Component {
     });
   }
 
+  startIndividualChat = (messageId) => {
+    console.log('helooooooo',messageId)
+    this.props.navigator.push({
+      screen: "soySauce.IndividualChatScreen"
+      // passProps: {
+      //   messageId: messageId,
+      // },
+      // title: 'こんにちはゲームウォッチ貸しますよ'
+    });
+  }
 
   render() {
     return (
-        <View style={styles.outer}>
-          <ScrollView>
-            <BubbleList authUid={this.props.authUid} messages={this.props.messages} />
-          </ScrollView>
-          <View style={styles.multiSwitchContainer}>
-            <MultiSwitch ref={ref => (this.multiSwitch = ref)} />
-          </View>
-          <InputBar onSendPressed={() => { this.addMessageHandler() }}
-            onSizeChange={() => { }}
-            onChangeText={(text) => { this._onChangeInputBarText(text) }}
-            text={this.state.inputBarText}
+      <View style={styles.outer}>
+        <ScrollView>
+          <BubbleList
+            authUid={this.props.authUid}
+            messages={this.props.messages}
+            startIndividualChat={this.startIndividualChat}
           />
-          <KeyboardSpacer />
+        </ScrollView>
+        <View style={styles.multiSwitchContainer}>
+          <MultiSwitch ref={ref => (this.multiSwitch = ref)} />
         </View>
+        <InputBar onSendPressed={() => { this.addMessageHandler() }}
+          onSizeChange={() => { }}
+          onChangeText={(text) => { this._onChangeInputBarText(text) }}
+          text={this.state.inputBarText}
+        />
+        <KeyboardSpacer />
+      </View>
     );
   }
 }

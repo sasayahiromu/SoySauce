@@ -52,7 +52,7 @@ class MainTabs extends Component {
           initialPage={0}
           renderTabBar={() => <DefaultTabBar style={{ height: 40 }} tabStyle={{ paddingBottom: 0 }} />}
         >
-          <BulletinBoardScreen tabLabel='掲示板' />
+          <BulletinBoardScreen tabLabel='掲示板' navigator={this.props.navigator}/>
           <ChatList tabLabel='チャット'/>
         </ScrollableTabView>
       </Drawer>

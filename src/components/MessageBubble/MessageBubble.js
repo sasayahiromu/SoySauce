@@ -6,6 +6,10 @@ import { Button, Text, Thumbnail } from 'native-base'
 //props text type　sender
 
 class MessageBubble extends Component {
+  onstartIndividualChat = () => {
+    this.props.startIndividualChat(this.props.messageId);
+  }
+
   render() {
     thumbnail = (
       <Thumbnail small source={{ uri: "https://facebook.github.io/react-native/docs/assets/favicon.png" }} style={{ width: 25, height: 25 }} />
@@ -27,7 +31,10 @@ class MessageBubble extends Component {
               marginRight: 4,
               marginLeft: 3,
               height: 30,
-            }}>
+            }}
+            onPress = {this.onstartIndividualChat}
+            // onPress = {alert('pushed')}
+            >
                 <Text adjustsFontSizeToFit={true} style={{ fontSize: 10 }}>借りる</Text>
             </Button>
           </View>

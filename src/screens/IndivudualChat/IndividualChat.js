@@ -7,24 +7,24 @@ import IndividualBubbleList from '../../components/IndividualBubbleList.js/Indiv
 
 import { connect } from 'react-redux';
 
-import { addMessage, getMessages } from '../../store/actions/index';
+import { addMessage, getMessages, getIndividualMessages } from '../../store/actions/index';
 
 
 class IndividualChat extends Component {
 
   state = {
     inputBarText: '',
-    messages: [],
+    individualMessages: [],
   }
 
   componentWillMount() {
-    this.props.onLoadMessages();
+      this.props.onLoadIndividualMessagesMessages(this.props.messageId)
   }
 
   addMessageHandler = () => {
-    const message = this.state.inputBarText
-    const type = this.multiSwitch.state.selectedPosition
-    this.props.onAddMessage(message, type);
+    // const message = this.state.inputBarText
+    // const type = this.multiSwitch.state.selectedPosition
+    // this.props.onAddMessage(message, type);
   }
 
 
@@ -37,20 +37,25 @@ class IndividualChat extends Component {
 
   render() {
     return (
-        <View style={styles.outer}>
-          <ScrollView>
-            <IndividualBubbleList authUid={this.props.authUid} messages={this.props.messages} />
-          </ScrollView>
-          {/* <View style={styles.multiSwitchContainer}>
+      <View style={styles.outer}>
+        <ScrollView>
+          <IndividualBubbleList
+           authUid={this.props.authUid} 
+           allMessages={this.props.individualMessages} 
+           messageId={this.props.messageId} 
+           messagetriger={this.props.messagetriger}
+           />
+        </ScrollView>
+        {/* <View style={styles.multiSwitchContainer}>
             <MultiSwitch ref={ref => (this.multiSwitch = ref)} />
           </View> */}
-          <InputBar onSendPressed={() => { this.addMessageHandler() }}
-            onSizeChange={() => { }}
-            onChangeText={(text) => { this._onChangeInputBarText(text) }}
-            text={this.state.inputBarText}
-          />
-          <KeyboardSpacer />
-        </View>
+        <InputBar onSendPressed={() => { this.addMessageHandler() }}
+          onSizeChange={() => { }}
+          onChangeText={(text) => { this._onChangeInputBarText(text) }}
+          text={this.state.inputBarText}
+        />
+        <KeyboardSpacer />
+      </View>
     );
   }
 }
@@ -77,15 +82,17 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLoadMessages: () => dispatch(getMessages()),
-    onAddMessage: (text, sender, type) => dispatch(addMessage(text, sender, type))
+    onLoadIndividualMessagesMessages: (messageId) => dispatch(getIndividualMessages(messageId)),
+    // onAddMessage: (text, sender, type) => dispatch(addMessage(text, sender, type))
   };
 };
 
 const mapStateToProps = state => {
   return {
     messages: state.messages.messages,
-    authUid: state.auth.uid
+    authUid: state.auth.uid,
+    individualMessages: state.messages.individualMessages, //ここで全ての個別チャットを取得してしまうのはどうにかできないか
+    messagetriger: state.messages.messagetriger
   };
 };
 

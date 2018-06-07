@@ -7,10 +7,11 @@ import { Button, Text, Thumbnail } from 'native-base'
 
 class IndivudualChatBubble extends Component {
   render() {
+
     thumbnail = (
       <Thumbnail small source={{ uri: "https://facebook.github.io/react-native/docs/assets/favicon.png" }} style={{ width: 25, height: 25 }} />
     )
-    //These spacers make the message bubble stay to the left or the right, depending on who is speaking, even if the message is multiple lines.
+
     var leftSpacer = this.props.authUid !== this.props.sender_uid ? thumbnail : <View style={{ width: 70 }} />;
     var rightSpacer = null
     if (this.props.authUid !== this.props.sender_uid) {

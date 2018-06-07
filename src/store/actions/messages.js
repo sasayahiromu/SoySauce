@@ -1,4 +1,4 @@
-import { SET_MESSAGES } from './actionTypes';
+import { SET_MESSAGES, SET_INDIVIDUAL_MESSAGES } from './actionTypes';
 import firebase from 'react-native-firebase';
 
 
@@ -78,5 +78,39 @@ export const getMessages = () => {
         alert('something wrong');
         console.log(err)
       })
+  };
+};
+
+export const getIndividualMessages = (messageId) => {
+  return dispatch => {
+    firebase.firestore()
+      .collection('deals')
+      .doc(messageId)
+      .collection('messages')
+      .orderBy('sent_at')
+      .get()
+      .then(querySnapshot => {
+        const messages = [];
+        for (let i in querySnapshot.docs) {
+          value = querySnapshot.docs[i].data();
+          messages.push({
+            ...value,
+            key: querySnapshot.docs[i].id
+          });
+        }
+        dispatch(setIndividualMessages(messages, messageId));
+      })
+      .catch(err => {
+        alert('something wrong');
+        console.log(err)
+      })
+  };
+};
+
+export const setIndividualMessages = (messages, messageId) => {
+  return {
+    type: SET_INDIVIDUAL_MESSAGES,
+    messages: messages,
+    messageId: messageId
   };
 };

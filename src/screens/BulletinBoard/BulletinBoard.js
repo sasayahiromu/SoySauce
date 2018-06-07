@@ -35,17 +35,17 @@ class BulletinBoardScreen extends Component {
   }
 
   startIndividualChat = (messageId) => {
-    console.log('helooooooo',messageId)
     this.props.navigator.push({
-      screen: "soySauce.IndividualChatScreen"
-      // passProps: {
-      //   messageId: messageId,
-      // },
-      // title: 'こんにちはゲームウォッチ貸しますよ'
+      screen: "soySauce.IndividualChatScreen",
+      passProps: {
+        messageId: messageId,
+      },
+      title: 'こんにちはゲームウォッチ貸しますよ'
     });
   }
 
   render() {
+    console.log(this.props.messages, 'there')
     return (
       <View style={styles.outer}>
         <ScrollView>

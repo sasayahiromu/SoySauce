@@ -48,7 +48,9 @@ class MessageBubble extends Component {
               marginRight: 4,
               marginLeft: 3,
               height: 30,
-            }}>
+            }}
+            onPress = {this.onstartIndividualChat}
+            >
               <Text style={{ fontSize: 13, textAlign: 'center' }}>借す</Text>
             </Button>
           </View>

@@ -88,6 +88,7 @@ class AuthScreen extends Component {
   componentDidMount() {
     this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
       if(user){
+        console.log('hereeeeee',user)
         this.props.onregisterUser(user._user.uid)
         startMainTabs();
       }

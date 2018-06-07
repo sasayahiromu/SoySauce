@@ -25,11 +25,21 @@ export const authSignup = authData => {
       .then(res => {
         console.log(res);
         const uid = res.user._user.uid;
+        const community_id = communityCorrespondingId(authData.apartmentName);
         const userData = {
-          community_id: communityCorrespondingId(authData.apartmentName),
+          community_id: community_id,
           nick_name: authData.nickname,
           room_id: authData.roomNumber
         }
+        // firebase.firestore()
+        // .collection('communities')
+        // .doc(community_id)
+        // .update({
+        //   users:{
+        //     uid: true
+        //   }
+        // })
+        //   .then(() =>
         firebase.firestore()
         .collection('users')
         .doc(uid)
@@ -37,6 +47,21 @@ export const authSignup = authData => {
         .then(() => {
           dispatch(registerUid(uid))
           startMainTabs();
+
+          firebase.firestore()
+          .collection('communities')
+          .doc(community_id)
+          .get()
+          .then(documentSnapshot => {
+            let users = documentSnapshot._data.users;
+            users[uid] = true
+            firebase.firestore()
+            .collection('communities')
+            .doc(community_id)
+            .update({users: users})
+          })
+          .catch('community register error')
+  
         })
         .catch(err => {
           alert('signUp failed. Try again.');
@@ -45,12 +70,14 @@ export const authSignup = authData => {
         })
         // dispatch(registerUid(uid))
         // startMainTabs();
+      // )
       })
       .catch(err => {
         alert('Authentication failed. Try again.');
         console.log(err)
         // dispatch(uiStopLoading());
       })
+      
   };
 };
 
@@ -80,6 +107,7 @@ export const registerUser = uid => {
       .doc(uid)
       .get()
       .then((documentSnapshot) => {
+        console.log(documentSnapshot._data)
         dispatch(registerUid(uid))
         dispatch(registerNickname(documentSnapshot._data.nick_name));
       })

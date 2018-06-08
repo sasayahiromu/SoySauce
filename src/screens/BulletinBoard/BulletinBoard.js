@@ -7,7 +7,7 @@ import BubbleList from '../../components/BubbleList/BubbleList'
 
 import { connect } from 'react-redux';
 
-import { addMessage, getMessages } from '../../store/actions/index';
+import { addMessage, getMessages, addDeals } from '../../store/actions/index';
 
 
 class BulletinBoardScreen extends Component {
@@ -34,7 +34,8 @@ class BulletinBoardScreen extends Component {
     });
   }
 
-  startIndividualChat = (messageId) => {
+  startIndividualChat = 
+  (messageId, initialMessage, senderUid, senderNickname, type) => {
     this.props.navigator.push({
       screen: "soySauce.IndividualChatScreen",
       passProps: {
@@ -42,6 +43,31 @@ class BulletinBoardScreen extends Component {
       },
       title: 'こんにちはゲームウォッチ貸しますよ'
     });
+
+    let lenderNickname;
+    let lenderUid;
+    let borrowerNickname;
+    let borrowerUid;
+    if(type===1){
+      lenderNickname = senderNickname;
+      lenderUid = senderUid;
+      borrowerNickname = this.props.authNickname;
+      borrowerUid = this.props.authUid;
+    }
+    if(type===2){
+      borrowerNickname = senderNickname;
+      borrowerUid = senderUid;
+      lenderNickname = this.props.authNickname;
+      lenderUid = this.props.authUid;
+    }
+    this.props.onAddDeals(
+      borrowerNickname,
+      borrowerUid,
+      lenderNickname,
+      lenderUid,
+      messageId,
+      initialMessage,
+      )
   }
 
   render() {
@@ -92,14 +118,30 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = dispatch => {
   return {
     onLoadMessages: () => dispatch(getMessages()),
-    onAddMessage: (text, sender, type) => dispatch(addMessage(text, sender, type))
+    onAddMessage: (text, sender, type) => dispatch(addMessage(text, sender, type)),
+    onAddDeals: (
+      borrowerNickname,
+      borrowerUid,
+      lenderNickname,
+      lenderUid,
+      messageId,
+      initialMessage
+    ) => dispatch(addDeals(
+        borrowerNickname,
+        borrowerUid,
+        lenderNickname,
+        lenderUid,
+        messageId,
+        initialMessage,
+      ))
   };
 };
 
 const mapStateToProps = state => {
   return {
     messages: state.messages.messages,
-    authUid: state.auth.uid
+    authUid: state.auth.uid,
+    authNickname: state.auth.nickname
   };
 };
 

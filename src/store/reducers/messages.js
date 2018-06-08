@@ -1,12 +1,14 @@
 import {
   SET_MESSAGES,
-  SET_INDIVIDUAL_MESSAGES
+  SET_INDIVIDUAL_MESSAGES,
+  SET_DEALS
 } from "../actions/actionTypes";
 
 const initialState = {
   messages: [],
   individualMessages: {},
-  messagetriger: 0
+  messagetriger: 0,
+  deals: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -27,6 +29,12 @@ const reducer = (state = initialState, action) => {
       individualMessages: newState,
       messagetriger: state.messagetriger + 1
     };
+
+    case SET_DEALS:
+    return {
+      ...state,
+      deals: action.deals
+    }
 
     default: return state;
   }

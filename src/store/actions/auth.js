@@ -29,7 +29,8 @@ export const authSignup = authData => {
         const userData = {
           community_id: community_id,
           nick_name: authData.nickname,
-          room_id: authData.roomNumber
+          room_id: authData.roomNumber,
+          deals: {}
         }
         // firebase.firestore()
         // .collection('communities')
@@ -60,7 +61,10 @@ export const authSignup = authData => {
             .doc(community_id)
             .update({users: users})
           })
-          .catch('community register error')
+          .catch(err => {
+            console.log(err)
+            alert('community register error');
+          })
   
         })
         .catch(err => {

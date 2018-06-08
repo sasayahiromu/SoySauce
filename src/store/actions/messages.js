@@ -1,4 +1,4 @@
-import { SET_MESSAGES, SET_INDIVIDUAL_MESSAGES } from './actionTypes';
+import { SET_MESSAGES, SET_INDIVIDUAL_MESSAGES, SET_DEALS } from './actionTypes';
 import firebase from 'react-native-firebase';
 
 
@@ -115,6 +115,7 @@ export const setIndividualMessages = (messages, messageId) => {
   };
 };
 
+
 export const addIndividualMessage = (message, messageId) => {
   return (dispatch, getState) => {
     sender_uid = getState().auth.uid.slice(0);
@@ -133,6 +134,7 @@ export const addIndividualMessage = (message, messageId) => {
       .add(messageData)
       .then(res => {
         dispatch(getIndividualMessages(messageId));
+        dispatch(updateDealMessageState(message, messageId))
       })
       .catch(err => {
         alert('Try again');
@@ -140,6 +142,22 @@ export const addIndividualMessage = (message, messageId) => {
       });
   }
 }
+
+export const updateDealMessageState = (message, messageId) => {
+  return (dispatch) => {
+    let lastMessage = '';
+    if(message.length < 25){lastMessage = message}
+    else{lastMessage = message.slice(0,23) + '...'}
+    firebase.firestore()
+      .collection('deals')
+      .doc(messageId)
+      .update({ 
+        last_deal_message: lastMessage,
+        deal_last_at: firebase.firestore.FieldValue.serverTimestamp()
+      })
+    }
+}
+
 
 //addを即時反映させるため
 export const tempAddIndividualMessage = (message, sender_nick_name, sender_uid, messageId) => {
@@ -155,4 +173,117 @@ export const tempAddIndividualMessage = (message, sender_nick_name, sender_uid, 
     messages[messageId].push(messageData);
     dispatch(setIndividualMessages(messages))
   }
+}
+
+export const addDeals =
+  (borrowerNickname,
+    borrowerUid,
+    lenderNickname,
+    lenderUid,
+    messageId,
+    initialMessage,
+  ) => {
+    return (dispatch) => {
+
+      let newInitialMessage = '';
+      if(initialMessage.length < 19){newInitialMessage = initialMessage}
+      else{newInitialMessage = initialMessage.slice(0,17) + '...'}
+  
+      const dealData = {
+        borrower_nick_name: borrowerNickname,
+        borrower_uid: borrowerUid,
+        deal_start_at: firebase.firestore.FieldValue.serverTimestamp(),
+        deal_last_at: firebase.firestore.FieldValue.serverTimestamp(),
+        lender_nick_name: lenderNickname,
+        lender_uid: lenderUid,
+        initial_message: initialMessage,
+        last_deal_message: ''
+      }
+      firebase.firestore()
+        .collection('deals')
+        .doc(messageId)
+        .set(dealData)
+        .then(res => {
+          dispatch(addDealsToUser(messageId, borrowerUid))
+          dispatch(addDealsToUser(messageId, lenderUid))
+        })
+        .catch(err => {
+          alert('deals add error');
+          console.log(err);
+        });
+
+    }
+  }
+
+export const addDealsToUser = (messageId, userUid) => {
+  return (dispatch) => {
+    firebase.firestore()
+      .collection('users')
+      .doc(userUid)
+      .get()
+      .then(documentSnapshot => {
+        let deals = documentSnapshot._data.deals;
+        deals[messageId] = true
+        firebase.firestore()
+          .collection('users')
+          .doc(userUid)
+          .update({ deals: deals })
+        dispatch(getDeals())
+      })
+      .catch(err => {
+        console.log(err)
+        alert('addDealsToUser error');
+      })
+  }
+}
+
+
+export const getDeals = () => {
+  return (dispatch, getState) => {
+    const auth_uid = getState().auth.uid.slice(0);
+    firebase.firestore()
+      .collection('users')
+      .doc(auth_uid)
+      .get()
+      .then(documentSnapshot => {
+        let deals = []
+        const dealsIds = documentSnapshot._data.deals;
+        // console.log(Object.keys(dealsIds).length)
+        let roopNum = 0
+        for (key in dealsIds) {
+          firebase.firestore()
+            .collection('deals')
+            .doc(key)
+            .get()
+            .then(documentSnapshot => {
+              deals.push(documentSnapshot._data)
+              roopNum += 1;
+              if (roopNum === 3) {
+                deals.sort(function (a, b) {
+                  // あとでlastupdateに変える
+                  return a.deal_start_at < b.deal_start_at ? -1 : 1;
+                })
+                console.log(deals);
+                dispatch(setDeals(deals));
+              }
+            })
+            .catch(err => {
+              console.log(err)
+              alert('importDeals error');
+            })
+        }
+      })
+      .catch(err => {
+        console.log(err)
+        alert('getDeals error');
+      })
+  }
+
+}
+
+export const setDeals = (deals) => {
+  return {
+    type: SET_DEALS,
+    deals: deals
+  };
 }

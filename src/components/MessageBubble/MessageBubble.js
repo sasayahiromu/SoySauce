@@ -7,7 +7,13 @@ import { Button, Text, Thumbnail } from 'native-base'
 
 class MessageBubble extends Component {
   onstartIndividualChat = () => {
-    this.props.startIndividualChat(this.props.messageId);
+    this.props.startIndividualChat(
+      this.props.messageId,
+      this.props.text,
+      this.props.sender_uid,
+      this.props.sender_nick_name,
+      this.props.type
+    );
   }
 
   render() {
@@ -32,10 +38,10 @@ class MessageBubble extends Component {
               marginLeft: 3,
               height: 30,
             }}
-            onPress = {this.onstartIndividualChat}
+              onPress={this.onstartIndividualChat}
             // onPress = {alert('pushed')}
             >
-                <Text adjustsFontSizeToFit={true} style={{ fontSize: 10 }}>借りる</Text>
+              <Text adjustsFontSizeToFit={true} style={{ fontSize: 10 }}>借りる</Text>
             </Button>
           </View>
         )
@@ -49,7 +55,7 @@ class MessageBubble extends Component {
               marginLeft: 3,
               height: 30,
             }}
-            onPress = {this.onstartIndividualChat}
+              onPress={this.onstartIndividualChat}
             >
               <Text style={{ fontSize: 13, textAlign: 'center' }}>借す</Text>
             </Button>

@@ -32,8 +32,9 @@ class IndividualBubbleList extends Component {
       <FlatList
         style={styles.listContainer}
         data={this.props.allMessages[this.props.messageId]}
+        extradata={this.props.messagetriger}
         renderItem={(info) => {
-          return(
+          return (
             <IndivudualChatBubble
               text={info.item.message}
               sender_uid={info.item.sender_uid}

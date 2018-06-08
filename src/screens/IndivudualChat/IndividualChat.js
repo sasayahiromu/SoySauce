@@ -7,7 +7,7 @@ import IndividualBubbleList from '../../components/IndividualBubbleList.js/Indiv
 
 import { connect } from 'react-redux';
 
-import { addMessage, getMessages, getIndividualMessages } from '../../store/actions/index';
+import { addMessage, getMessages, getIndividualMessages, addIndividualMessage } from '../../store/actions/index';
 
 
 class IndividualChat extends Component {
@@ -22,9 +22,8 @@ class IndividualChat extends Component {
   }
 
   addMessageHandler = () => {
-    // const message = this.state.inputBarText
-    // const type = this.multiSwitch.state.selectedPosition
-    // this.props.onAddMessage(message, type);
+    const message = this.state.inputBarText
+    this.props.onAddIndividualMessage(message, this.props.messageId) 
   }
 
 
@@ -83,7 +82,7 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = dispatch => {
   return {
     onLoadIndividualMessagesMessages: (messageId) => dispatch(getIndividualMessages(messageId)),
-    // onAddMessage: (text, sender, type) => dispatch(addMessage(text, sender, type))
+    onAddIndividualMessage: (message, messageId) => dispatch(addIndividualMessage(message, messageId))
   };
 };
 

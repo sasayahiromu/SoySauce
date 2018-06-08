@@ -114,3 +114,45 @@ export const setIndividualMessages = (messages, messageId) => {
     messageId: messageId
   };
 };
+
+export const addIndividualMessage = (message, messageId) => {
+  return (dispatch, getState) => {
+    sender_uid = getState().auth.uid.slice(0);
+    sender_nick_name = getState().auth.nickname.slice(0);
+    dispatch(tempAddIndividualMessage(message, sender_nick_name, sender_uid, messageId))
+    const messageData = {
+      message: message,
+      sender_nick_name: sender_nick_name,
+      sender_uid: sender_uid,
+      sent_at: firebase.firestore.FieldValue.serverTimestamp()
+    }
+    firebase.firestore()
+      .collection('deals')
+      .doc(messageId)
+      .collection('messages')
+      .add(messageData)
+      .then(res => {
+        dispatch(getIndividualMessages(messageId));
+      })
+      .catch(err => {
+        alert('Try again');
+        console.log(err);
+      });
+  }
+}
+
+//addを即時反映させるため
+export const tempAddIndividualMessage = (message, sender_nick_name, sender_uid, messageId) => {
+  return (dispatch, getState) => {
+    const messages = getState().messages.individualMessages
+    const messageData = {
+      message: message,
+      sender_nick_name: sender_nick_name,
+      sender_uid: sender_uid,
+      key: "temporary"
+    }
+    console.log(messages)
+    messages[messageId].push(messageData);
+    dispatch(setIndividualMessages(messages))
+  }
+}

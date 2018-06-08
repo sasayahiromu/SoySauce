@@ -250,15 +250,21 @@ export const getDeals = () => {
         const dealsIds = documentSnapshot._data.deals;
         // console.log(Object.keys(dealsIds).length)
         let roopNum = 0
+        console.log(dealsIds)
         for (key in dealsIds) {
           firebase.firestore()
             .collection('deals')
             .doc(key)
             .get()
             .then(documentSnapshot => {
-              deals.push(documentSnapshot._data)
+              deals.push(
+                {
+                ...documentSnapshot._data,
+                messageId: documentSnapshot.id
+                }
+              )
               roopNum += 1;
-              if (roopNum === 3) {
+              if (roopNum === Object.keys(dealsIds).length) {
                 deals.sort(function (a, b) {
                   // あとでlastupdateに変える
                   return a.deal_start_at < b.deal_start_at ? -1 : 1;

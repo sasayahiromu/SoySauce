@@ -206,14 +206,28 @@ export const addDeals =
         .then(res => {
           dispatch(addDealsToUser(messageId, borrowerUid))
           dispatch(addDealsToUser(messageId, lenderUid))
+          dispatch(disabledButton(messageId))
         })
         .catch(err => {
           alert('deals add error');
           console.log(err);
         });
-
     }
   }
+
+export const disabledButton = (messageId) => {
+  return (dispatch) => {
+    firebase.firestore()
+    .collection('chat_messages')
+    .doc('chat-01')
+    .collection('messages')
+    .doc(messageId)
+    .update({
+      deal_status: 1
+    })
+    .then(res => console.log(res))
+  }
+}
 
 export const addDealsToUser = (messageId, userUid) => {
   return (dispatch) => {

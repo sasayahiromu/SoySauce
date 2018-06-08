@@ -14,7 +14,6 @@ class BulletinBoardScreen extends Component {
 
   state = {
     inputBarText: '',
-    messages: [],
   }
 
   componentWillMount() {

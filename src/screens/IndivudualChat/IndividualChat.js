@@ -23,6 +23,9 @@ class IndividualChat extends Component {
   addMessageHandler = () => {
     const message = this.state.inputBarText
     this.props.onAddIndividualMessage(message, this.props.messageId)
+    this.setState({
+      inputBarText: ''
+    });
   }
 
 

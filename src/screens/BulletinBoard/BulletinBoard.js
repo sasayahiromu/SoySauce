@@ -41,6 +41,9 @@ class BulletinBoardScreen extends Component {
     const message = this.state.inputBarText
     const type = this.multiSwitch.state.selectedPosition
     this.props.onAddMessage(message, type);
+    this.setState({
+      inputBarText: ''
+    })
   }
 
 

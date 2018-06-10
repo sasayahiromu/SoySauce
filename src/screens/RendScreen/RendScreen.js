@@ -18,28 +18,18 @@ class RendBoard extends Component {
     this.props.onLoadMessages();
   }
 
-  addMessageHandler = () => {
-    const text = this.state.inputBarText
-    const sender = 'sasaya' ///変更する
-    const type = this.multiSwitch.state.selectedPosition
-    this.props.onAddMessage(text, sender, type);
-  }
-
-
-  _onChangeInputBarText(text) {
-    this.setState({
-      inputBarText: text
-    });
-  }
-
-
   render() {
     return (
-        <View style={styles.outer}>
-          <ScrollView>
-            <BubbleList messages={this.props.messages} />
-          </ScrollView>
-        </View>
+      <View style={styles.outer}>
+        <ScrollView ref="scrollView"
+          onContentSizeChange={(width, height) =>
+            this.refs.scrollView.scrollToEnd({ animated: true })}>
+          <BubbleList
+            messages={this.props.messages.filter(function (value) {
+              return value.type === 1;
+            })} />
+        </ScrollView>
+      </View>
     );
   }
 }

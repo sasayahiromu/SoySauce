@@ -7,7 +7,6 @@ import communityCorrespondingId from '../../utility/communityId'
 
 export const tryAuth = (authData, authMode) => {
   console.log(authData);
-
   return dispatch => {
     // dispatch(uiStartLoading());
     if (authMode === "login") {
@@ -87,6 +86,7 @@ export const authSignup = authData => {
 
 export const authSignin = authData => {
   return dispatch => {
+    console.log(authData)
     firebase.auth()
       .signInAndRetrieveDataWithEmailAndPassword(authData.email, authData.password)
       .then(res => {

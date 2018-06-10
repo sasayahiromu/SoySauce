@@ -4,6 +4,7 @@ import InputBar from "../../components/InputBar/InputBar";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import MultiSwitch from '../../components/MultiSwitch/MultiSwitch'
 import BubbleList from '../../components/BubbleList/BubbleList'
+import firebase from 'react-native-firebase';
 
 import { connect } from 'react-redux';
 
@@ -18,6 +19,22 @@ class BulletinBoardScreen extends Component {
 
   componentWillMount() {
     this.props.onLoadMessages();
+  }
+
+  componentDidMount() {
+    // Firestoreの「messages」コレクションを参照
+    this.ref = firebase.firestore()
+    .collection('chat_messages')
+    .doc('chat-01')
+    .collection('messages');
+
+    // refの更新時イベントにonCollectionUpdate登録
+    this.unsubscribe = this.ref.onSnapshot(this.props.onLoadMessages);
+  }
+
+  componentWillunmount() {
+    // onCollectionUpdateの登録解除
+    this.unsubscribe();
   }
 
   addMessageHandler = () => {

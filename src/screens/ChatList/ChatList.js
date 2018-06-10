@@ -3,12 +3,27 @@ import { Container, Content, List, ListItem, Left, Body, Right, Text, Thumbnail 
 import { TouchableOpacity, View } from 'react-native'
 import { getDeals } from '../../store/actions/index';
 import { connect } from 'react-redux';
+import firebase from 'react-native-firebase';
 
 
 class ChatList extends Component {
 
   componentWillMount() {
     this.props.onGetDeals();
+  }
+
+  componentDidMount() {
+    // Firestoreの「messages」コレクションを参照
+    this.ref = firebase.firestore()
+    .collection('deals');
+
+    // refの更新時イベントにonCollectionUpdate登録
+    this.unsubscribe = this.ref.onSnapshot(this.props.onGetDeals);
+  }
+
+  componentWillunmount() {
+    // onCollectionUpdateの登録解除
+    this.unsubscribe();
   }
 
   startIndividualChat = (messageId, initialMessage) => {
@@ -22,8 +37,6 @@ class ChatList extends Component {
       title: initialMessage
     });
   }
-
-  // onPress={this.startIndividualChat(item.messageId, item.initial_message)}
 
   pressHandler = (name) =>{
     console.log(name)

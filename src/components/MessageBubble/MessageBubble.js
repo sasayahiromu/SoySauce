@@ -35,7 +35,7 @@ class MessageBubble extends Component {
         }}
           onPress={this.onstartIndividualChat}
         >
-          <Text adjustsFontSizeToFit={true} style={{ fontSize: 10 }}>借りる</Text>
+          <Text adjustsFontSizeToFit={true} style={{ fontSize: 10, color:'black' }}>借りる</Text>
         </Button>
       )
     }
@@ -64,7 +64,7 @@ class MessageBubble extends Component {
         }}
           onPress={this.onstartIndividualChat}
         >
-          <Text adjustsFontSizeToFit={true} style={{ fontSize: 13 }}>貸す</Text>
+          <Text adjustsFontSizeToFit={true} style={{ fontSize: 13, color:'black' }}>貸す</Text>
         </Button>
       )
     }

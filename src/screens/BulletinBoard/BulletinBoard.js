@@ -57,7 +57,7 @@ class BulletinBoardScreen extends Component {
         passProps: {
           messageId: messageId,
         },
-        title: 'こんにちはゲームウォッチ貸しますよ'
+        title: initialMessage
       });
 
       let lenderNickname;

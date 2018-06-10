@@ -281,7 +281,7 @@ export const getDeals = () => {
               if (roopNum === Object.keys(dealsIds).length) {
                 deals.sort(function (a, b) {
                   // あとでlastupdateに変える
-                  return a.deal_start_at < b.deal_start_at ? -1 : 1;
+                  return a.deal_last_at < b.deal_last_at ? -1 : 1;
                 })
                 console.log(deals);
                 dispatch(setDeals(deals));

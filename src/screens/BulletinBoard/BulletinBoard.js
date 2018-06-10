@@ -33,47 +33,49 @@ class BulletinBoardScreen extends Component {
     });
   }
 
-  startIndividualChat = 
-  (messageId, initialMessage, senderUid, senderNickname, type) => {
-    this.props.navigator.push({
-      screen: "soySauce.IndividualChatScreen",
-      passProps: {
-        messageId: messageId,
-      },
-      title: 'こんにちはゲームウォッチ貸しますよ'
-    });
+  startIndividualChat =
+    (messageId, initialMessage, senderUid, senderNickname, type) => {
+      this.props.navigator.push({
+        screen: "soySauce.IndividualChatScreen",
+        passProps: {
+          messageId: messageId,
+        },
+        title: 'こんにちはゲームウォッチ貸しますよ'
+      });
 
-    let lenderNickname;
-    let lenderUid;
-    let borrowerNickname;
-    let borrowerUid;
-    if(type===1){
-      lenderNickname = senderNickname;
-      lenderUid = senderUid;
-      borrowerNickname = this.props.authNickname;
-      borrowerUid = this.props.authUid;
-    }
-    if(type===2){
-      borrowerNickname = senderNickname;
-      borrowerUid = senderUid;
-      lenderNickname = this.props.authNickname;
-      lenderUid = this.props.authUid;
-    }
-    this.props.onAddDeals(
-      borrowerNickname,
-      borrowerUid,
-      lenderNickname,
-      lenderUid,
-      messageId,
-      initialMessage,
+      let lenderNickname;
+      let lenderUid;
+      let borrowerNickname;
+      let borrowerUid;
+      if (type === 1) {
+        lenderNickname = senderNickname;
+        lenderUid = senderUid;
+        borrowerNickname = this.props.authNickname;
+        borrowerUid = this.props.authUid;
+      }
+      if (type === 2) {
+        borrowerNickname = senderNickname;
+        borrowerUid = senderUid;
+        lenderNickname = this.props.authNickname;
+        lenderUid = this.props.authUid;
+      }
+      this.props.onAddDeals(
+        borrowerNickname,
+        borrowerUid,
+        lenderNickname,
+        lenderUid,
+        messageId,
+        initialMessage,
       )
-  }
+    }
 
   render() {
     console.log(this.props.messages, 'there')
     return (
       <View style={styles.outer}>
-        <ScrollView>
+        <ScrollView ref="scrollView"
+          onContentSizeChange={(width, height) => 
+          this.refs.scrollView.scrollToEnd({ animated: true })}>
           <BubbleList
             authUid={this.props.authUid}
             messages={this.props.messages}
@@ -126,13 +128,13 @@ const mapDispatchToProps = dispatch => {
       messageId,
       initialMessage
     ) => dispatch(addDeals(
-        borrowerNickname,
-        borrowerUid,
-        lenderNickname,
-        lenderUid,
-        messageId,
-        initialMessage,
-      ))
+      borrowerNickname,
+      borrowerUid,
+      lenderNickname,
+      lenderUid,
+      messageId,
+      initialMessage,
+    ))
   };
 };
 

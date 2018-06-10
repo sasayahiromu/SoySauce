@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TextInput, ScrollView, Text } from 'react-native'
+import { View, StyleSheet, ScrollView, SafeAreaView } from 'react-native'
 import InputBar from "../../components/InputBar/InputBar";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import MultiSwitch from '../../components/MultiSwitch/MultiSwitch'
 import IndividualBubbleList from '../../components/IndividualBubbleList.js/IndividualBubbleList'
 
 import { connect } from 'react-redux';
 
-import { addMessage, getMessages, getIndividualMessages, addIndividualMessage } from '../../store/actions/index';
+import { getIndividualMessages, addIndividualMessage } from '../../store/actions/index';
 
 
 class IndividualChat extends Component {
@@ -18,12 +17,12 @@ class IndividualChat extends Component {
   }
 
   componentWillMount() {
-      this.props.onLoadIndividualMessagesMessages(this.props.messageId)
+    this.props.onLoadIndividualMessagesMessages(this.props.messageId)
   }
 
   addMessageHandler = () => {
     const message = this.state.inputBarText
-    this.props.onAddIndividualMessage(message, this.props.messageId) 
+    this.props.onAddIndividualMessage(message, this.props.messageId)
   }
 
 
@@ -36,25 +35,27 @@ class IndividualChat extends Component {
 
   render() {
     return (
-      <View style={styles.outer}>
-        <ScrollView>
-          <IndividualBubbleList
-           authUid={this.props.authUid} 
-           allMessages={this.props.individualMessages} 
-           messageId={this.props.messageId} 
-           messagetriger={this.props.messagetriger}
-           />
-        </ScrollView>
-        {/* <View style={styles.multiSwitchContainer}>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.outer}>
+          <ScrollView>
+            <IndividualBubbleList
+              authUid={this.props.authUid}
+              allMessages={this.props.individualMessages}
+              messageId={this.props.messageId}
+              messagetriger={this.props.messagetriger}
+            />
+          </ScrollView>
+          {/* <View style={styles.multiSwitchContainer}>
             <MultiSwitch ref={ref => (this.multiSwitch = ref)} />
           </View> */}
-        <InputBar onSendPressed={() => { this.addMessageHandler() }}
-          onSizeChange={() => { }}
-          onChangeText={(text) => { this._onChangeInputBarText(text) }}
-          text={this.state.inputBarText}
-        />
-        <KeyboardSpacer />
-      </View>
+          <InputBar onSendPressed={() => { this.addMessageHandler() }}
+            onSizeChange={() => { }}
+            onChangeText={(text) => { this._onChangeInputBarText(text) }}
+            text={this.state.inputBarText}
+          />
+          <KeyboardSpacer />
+        </View>
+      </SafeAreaView>
     );
   }
 }
@@ -76,6 +77,10 @@ const styles = StyleSheet.create({
   messages: {
     flex: 1
   },
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#ddd'
+  }
 })
 
 

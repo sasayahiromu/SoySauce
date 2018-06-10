@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TextInput, ScrollView, Text } from 'react-native'
+import { View, StyleSheet, ScrollView, SafeAreaView } from 'react-native'
 import InputBar from "../../components/InputBar/InputBar";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import MultiSwitch from '../../components/MultiSwitch/MultiSwitch'
@@ -24,9 +24,9 @@ class BulletinBoardScreen extends Component {
   componentDidMount() {
     // Firestoreの「messages」コレクションを参照
     this.ref = firebase.firestore()
-    .collection('chat_messages')
-    .doc('chat-01')
-    .collection('messages');
+      .collection('chat_messages')
+      .doc('chat-01')
+      .collection('messages');
 
     // refの更新時イベントにonCollectionUpdate登録
     this.unsubscribe = this.ref.onSnapshot(this.props.onLoadMessages);
@@ -89,26 +89,28 @@ class BulletinBoardScreen extends Component {
   render() {
     console.log(this.props.messages, 'there')
     return (
-      <View style={styles.outer}>
-        <ScrollView ref="scrollView"
-          onContentSizeChange={(width, height) => 
-          this.refs.scrollView.scrollToEnd({ animated: true })}>
-          <BubbleList
-            authUid={this.props.authUid}
-            messages={this.props.messages}
-            startIndividualChat={this.startIndividualChat}
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.outer}>
+          <ScrollView ref="scrollView"
+            onContentSizeChange={(width, height) =>
+              this.refs.scrollView.scrollToEnd({ animated: true })}>
+            <BubbleList
+              authUid={this.props.authUid}
+              messages={this.props.messages}
+              startIndividualChat={this.startIndividualChat}
+            />
+          </ScrollView>
+          <View style={styles.multiSwitchContainer}>
+            <MultiSwitch ref={ref => (this.multiSwitch = ref)} />
+          </View>
+          <InputBar onSendPressed={() => { this.addMessageHandler() }}
+            onSizeChange={() => { }}
+            onChangeText={(text) => { this._onChangeInputBarText(text) }}
+            text={this.state.inputBarText}
           />
-        </ScrollView>
-        <View style={styles.multiSwitchContainer}>
-          <MultiSwitch ref={ref => (this.multiSwitch = ref)} />
+          <KeyboardSpacer />
         </View>
-        <InputBar onSendPressed={() => { this.addMessageHandler() }}
-          onSizeChange={() => { }}
-          onChangeText={(text) => { this._onChangeInputBarText(text) }}
-          text={this.state.inputBarText}
-        />
-        <KeyboardSpacer />
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -130,6 +132,10 @@ const styles = StyleSheet.create({
   messages: {
     flex: 1
   },
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#ddd'
+  }
 })
 
 

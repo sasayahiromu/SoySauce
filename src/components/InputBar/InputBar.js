@@ -25,10 +25,12 @@ class InputBar extends Component {
           style={styles.textBox}
           ref={(ref) => { this.autogrowInput = ref }}
           multiline={true}
-          defaultHeight={30}
+          defaultHeight={40}
           onChangeText={(text) => this.props.onChangeText(text)}
           onContentSizeChange={this.props.onSizeChange}
-          value={this.props.text} />
+          value={this.props.text}
+          underlineColorAndroid="transparent"
+          />
         {sendButton}
       </View>
     );

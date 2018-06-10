@@ -53,11 +53,7 @@ class ChatList extends Component {
               let name = item.borrower_nick_name;
               if(this.props.authUid===item.borrower_uid) name = item.lender_nick_name;
               return (
-                <ListItem>
-                  <TouchableOpacity 
-                  // onPress={(messageId, initialMessage) => this.startIndividualChat(messageId, initialMessage)}
-                  onPress = {() => this.startIndividualChat(item.messageId ,item.initial_message)}
-                  >
+                <ListItem button onPress={() => {this.startIndividualChat(item.messageId ,item.initial_message)}}>
                     <Body>
                       <View style={{ flexDirection: 'row' }}>
                         <Thumbnail small source={{ uri: "https://facebook.github.io/react-native/docs/assets/favicon.png" }} style={{ width: 20, height: 20 }} />
@@ -66,7 +62,6 @@ class ChatList extends Component {
                       <Text>{item.initial_message}</Text>
                       <Text note>{item.last_deal_message}</Text>
                     </Body>
-                  </TouchableOpacity>
                   {/* <Right>
         <Text note>3:43 pm</Text>
       </Right> */}

@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, SafeAreaView, KeyboardAvoidingView,Keyboard } from 'react-native'
+import { View, StyleSheet, ScrollView, SafeAreaView,Keyboard } from 'react-native'
 import InputBar from "../../components/InputBar/InputBar";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import MultiSwitch from '../../components/MultiSwitch/MultiSwitch'
 import BubbleList from '../../components/BubbleList/BubbleList'
 import firebase from 'react-native-firebase';
-import { Platform } from 'react-native';
-
 
 import { connect } from 'react-redux';
 
 import { addMessage, getMessages, addDeals } from '../../store/actions/index';
+import { Platform } from 'react-native';
 
 
 class BulletinBoardScreen extends Component {
 
   state = {
     inputBarText: '',
-    keyboard: false
   }
 
   componentWillMount() {
@@ -57,7 +55,6 @@ class BulletinBoardScreen extends Component {
       inputBarText: text
     });
   }
-
 
   _keyboardDidShow = () => {
     this.refs.scrollView.scrollToEnd({ animated: true })
@@ -106,10 +103,7 @@ class BulletinBoardScreen extends Component {
         <View style={styles.outer}>
           <ScrollView ref="scrollView"
             onContentSizeChange={(width, height) =>
-              this.refs.scrollView.scrollToEnd({ animated: true })}
-              keyboardDismissMode="on-drag" keyboardShouldPersistTaps="always"
-              style={{flex: 1}}
-              >
+              this.refs.scrollView.scrollToEnd({ animated: true })}>
             <BubbleList
               authUid={this.props.authUid}
               messages={this.props.messages}
@@ -127,7 +121,6 @@ class BulletinBoardScreen extends Component {
           {Platform.OS === "ios" && <KeyboardSpacer />}
         </View>
       </SafeAreaView>
-      
     );
   }
 }

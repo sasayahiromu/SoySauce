@@ -55,7 +55,6 @@ class MainTabs extends Component {
         <ScrollableTabView
           initialPage={0}
           renderTabBar={() => <DefaultTabBar style={{ height: 40 }} tabStyle={{ paddingBottom: 0 }} 
-          keyboardDismissMode='on-drag'
           />}
           contentProps={ scrollBarProps }
         >

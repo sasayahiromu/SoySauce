@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, SafeAreaView,Keyboard } from 'react-native'
+import { View, StyleSheet, ScrollView, SafeAreaView, Keyboard } from 'react-native'
 import InputBar from "../../components/InputBar/InputBar";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import MultiSwitch from '../../components/MultiSwitch/MultiSwitch'

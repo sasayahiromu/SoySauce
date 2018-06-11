@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Text,
-} from 'react-native';
+import { Text } from 'react-native';
 
 import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import BulletinBoardScreen from '../BulletinBoard/BulletinBoard'
@@ -37,7 +35,7 @@ class MainTabs extends Component {
       }
     }
   };
-  
+
   render() {
     const scrollBarProps = {
       keyboardShouldPersistTaps: 'always',

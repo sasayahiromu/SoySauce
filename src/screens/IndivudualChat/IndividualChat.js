@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, SafeAreaView } from 'react-native'
+import { View, StyleSheet, ScrollView, SafeAreaView, Keyboard } from 'react-native'
 import InputBar from "../../components/InputBar/InputBar";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import IndividualBubbleList from '../../components/IndividualBubbleList.js/IndividualBubbleList'
+import { Platform } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -17,7 +18,17 @@ class IndividualChat extends Component {
   }
 
   componentWillMount() {
-    this.props.onLoadIndividualMessagesMessages(this.props.messageId)
+    if (this.props.authUid) {
+      this.props.onLoadIndividualMessages(this.props.messageId)
+    }
+  }
+
+  componentDidMount() {
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+  }
+
+  componentWillunmount() {
+    this.keyboardDidShowListener.remove();
   }
 
   addMessageHandler = () => {
@@ -28,6 +39,11 @@ class IndividualChat extends Component {
     });
   }
 
+  _keyboardDidShow = () => {
+    if(this.refs.scrollView){
+    this.refs.scrollView.scrollToEnd({ animated: true })
+    }
+  }
 
   _onChangeInputBarText(text) {
     this.setState({
@@ -40,7 +56,9 @@ class IndividualChat extends Component {
     return (
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.outer}>
-          <ScrollView>
+          <ScrollView ref="scrollView"
+            onContentSizeChange={(width, height) =>
+              this.refs.scrollView.scrollToEnd({ animated: true })}>
             <IndividualBubbleList
               authUid={this.props.authUid}
               allMessages={this.props.individualMessages}
@@ -56,7 +74,7 @@ class IndividualChat extends Component {
             onChangeText={(text) => { this._onChangeInputBarText(text) }}
             text={this.state.inputBarText}
           />
-          <KeyboardSpacer />
+          {Platform.OS === "ios" && <KeyboardSpacer />}
         </View>
       </SafeAreaView>
     );
@@ -89,7 +107,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLoadIndividualMessagesMessages: (messageId) => dispatch(getIndividualMessages(messageId)),
+    onLoadIndividualMessages: (messageId) => dispatch(getIndividualMessages(messageId)),
     onAddIndividualMessage: (message, messageId) => dispatch(addIndividualMessage(message, messageId))
   };
 };

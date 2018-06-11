@@ -8,6 +8,8 @@ import { Platform } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getIndividualMessages, addIndividualMessage } from '../../store/actions/index';
+import firebase from 'react-native-firebase';
+
 
 
 class IndividualChat extends Component {
@@ -19,16 +21,23 @@ class IndividualChat extends Component {
 
   componentWillMount() {
     if (this.props.authUid) {
-      this.props.onLoadIndividualMessages(this.props.messageId)
+      this.loadMessage()
     }
   }
 
   componentDidMount() {
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    this.ref = firebase.firestore().collection('deals').doc(this.props.messageId);
+    this.unsubscribe = this.ref.onSnapshot(this.loadMessage);
+  }
+
+  loadMessage = () =>{
+    this.props.onLoadIndividualMessages(this.props.messageId);
   }
 
   componentWillunmount() {
     this.keyboardDidShowListener.remove();
+    this.unsubscribe();
   }
 
   addMessageHandler = () => {

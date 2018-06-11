@@ -90,6 +90,7 @@ export const getIndividualMessages = (messageId) => {
       .orderBy('sent_at')
       .get()
       .then(querySnapshot => {
+        console.log('here')
         const messages = [];
         for (let i in querySnapshot.docs) {
           value = querySnapshot.docs[i].data();
@@ -134,7 +135,8 @@ export const addIndividualMessage = (message, messageId) => {
       .add(messageData)
       .then(res => {
         dispatch(getIndividualMessages(messageId));
-        dispatch(updateDealMessageState(message, messageId))
+        dispatch(updateDealMessageState(message, messageId));
+        dispatch(updateUserLaseMessageAt(messageId));
       })
       .catch(err => {
         alert('Try again');
@@ -143,19 +145,52 @@ export const addIndividualMessage = (message, messageId) => {
   }
 }
 
-export const updateDealMessageState = (message, messageId) => {
+export const updateUserLaseMessageAt = (messageId) => {
   return (dispatch) => {
-    let lastMessage = '';
-    if(message.length < 25){lastMessage = message}
-    else{lastMessage = message.slice(0,23) + '...'}
+    let senderUid = '';
+    let lenderUid = '';
+
     firebase.firestore()
       .collection('deals')
       .doc(messageId)
-      .update({ 
+      .get()
+      .then(documentSnapshot => {
+        senderUid = documentSnapshot._data.borrower_uid
+        lenderUid = documentSnapshot._data.lender_uid
+
+        firebase.firestore()
+          .collection('users')
+          .doc(senderUid)
+          .update({
+            last_deal_message_at: firebase.firestore.FieldValue.serverTimestamp()
+          })
+        firebase.firestore()
+          .collection('users')
+          .doc(lenderUid)
+          .update({
+            last_deal_message_at: firebase.firestore.FieldValue.serverTimestamp()
+          })
+      })
+      .catch(err => {
+        console.log(err)
+        alert('updateUserLaseMessageAt error');
+      })
+  }
+}
+
+export const updateDealMessageState = (message, messageId) => {
+  return (dispatch) => {
+    let lastMessage = '';
+    if (message.length < 25) { lastMessage = message }
+    else { lastMessage = message.slice(0, 23) + '...' }
+    firebase.firestore()
+      .collection('deals')
+      .doc(messageId)
+      .update({
         last_deal_message: lastMessage,
         deal_last_at: firebase.firestore.FieldValue.serverTimestamp()
       })
-    }
+  }
 }
 
 
@@ -186,9 +221,9 @@ export const addDeals =
     return (dispatch) => {
 
       let newInitialMessage = '';
-      if(initialMessage.length < 19){newInitialMessage = initialMessage}
-      else{newInitialMessage = initialMessage.slice(0,17) + '...'}
-  
+      if (initialMessage.length < 19) { newInitialMessage = initialMessage }
+      else { newInitialMessage = initialMessage.slice(0, 17) + '...' }
+
       const dealData = {
         borrower_nick_name: borrowerNickname,
         borrower_uid: borrowerUid,
@@ -218,14 +253,14 @@ export const addDeals =
 export const disabledButton = (messageId) => {
   return (dispatch) => {
     firebase.firestore()
-    .collection('chat_messages')
-    .doc('chat-01')
-    .collection('messages')
-    .doc(messageId)
-    .update({
-      deal_status: 1
-    })
-    .then(res => console.log(res))
+      .collection('chat_messages')
+      .doc('chat-01')
+      .collection('messages')
+      .doc(messageId)
+      .update({
+        deal_status: 1
+      })
+      .then(res => console.log(res))
   }
 }
 
@@ -241,7 +276,10 @@ export const addDealsToUser = (messageId, userUid) => {
         firebase.firestore()
           .collection('users')
           .doc(userUid)
-          .update({ deals: deals })
+          .update({
+            deals: deals,
+            last_deal_message_at: firebase.firestore.FieldValue.serverTimestamp()
+          })
         dispatch(getDeals())
       })
       .catch(err => {
@@ -262,7 +300,6 @@ export const getDeals = () => {
       .then(documentSnapshot => {
         let deals = []
         const dealsIds = documentSnapshot._data.deals;
-        // console.log(Object.keys(dealsIds).length)
         let roopNum = 0
         console.log(dealsIds)
         for (key in dealsIds) {
@@ -273,17 +310,20 @@ export const getDeals = () => {
             .then(documentSnapshot => {
               deals.push(
                 {
-                ...documentSnapshot._data,
-                messageId: documentSnapshot.id
+                  ...documentSnapshot._data,
+                  messageId: documentSnapshot.id
                 }
               )
               roopNum += 1;
+              console.log(roopNum)
+              console.log(Object.keys(dealsIds).length)
+              console.log(deals, 'a')
               if (roopNum === Object.keys(dealsIds).length) {
                 deals.sort(function (a, b) {
                   // あとでlastupdateに変える
                   return a.deal_last_at > b.deal_last_at ? -1 : 1;
                 })
-                console.log(deals);
+                console.log(deals, 'b');
                 dispatch(setDeals(deals));
               }
             })

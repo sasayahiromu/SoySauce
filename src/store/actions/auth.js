@@ -31,15 +31,6 @@ export const authSignup = authData => {
           room_id: authData.roomNumber,
           deals: {}
         }
-        // firebase.firestore()
-        // .collection('communities')
-        // .doc(community_id)
-        // .update({
-        //   users:{
-        //     uid: true
-        //   }
-        // })
-        //   .then(() =>
         firebase.firestore()
         .collection('users')
         .doc(uid)

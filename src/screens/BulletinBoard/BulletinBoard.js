@@ -57,7 +57,9 @@ class BulletinBoardScreen extends Component {
   }
 
   _keyboardDidShow = () => {
-    this.refs.scrollView.scrollToEnd({ animated: true })
+    if (this.refs.scrollView) {
+      this.refs.scrollView.scrollToEnd({ animated: true })
+    }
   }
 
   startIndividualChat =

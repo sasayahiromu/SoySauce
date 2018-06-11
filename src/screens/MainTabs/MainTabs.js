@@ -37,8 +37,12 @@ class MainTabs extends Component {
       }
     }
   };
-
+  
   render() {
+    const scrollBarProps = {
+      keyboardShouldPersistTaps: 'always',
+      keyboardDismissMode: 'none',
+    };
     return (
       <Drawer
         type="overlay"
@@ -50,7 +54,10 @@ class MainTabs extends Component {
       >
         <ScrollableTabView
           initialPage={0}
-          renderTabBar={() => <DefaultTabBar style={{ height: 40 }} tabStyle={{ paddingBottom: 0 }} />}
+          renderTabBar={() => <DefaultTabBar style={{ height: 40 }} tabStyle={{ paddingBottom: 0 }} 
+          keyboardDismissMode='on-drag'
+          />}
+          contentProps={ scrollBarProps }
         >
           <BulletinBoardScreen tabLabel='掲示板' navigator={this.props.navigator}/>
           <ChatList tabLabel='チャット' navigator={this.props.navigator}/>

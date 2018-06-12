@@ -35,7 +35,7 @@ class MessageBubble extends Component {
         }}
           onPress={this.onstartIndividualChat}
         >
-          <Text adjustsFontSizeToFit={true} style={{ fontSize: 10, color:'black' }}>借りる</Text>
+          <Text adjustsFontSizeToFit={true} style={{ fontSize: 10, color: 'black' }}>借りる</Text>
         </Button>
       )
     }
@@ -49,7 +49,7 @@ class MessageBubble extends Component {
         }}
           onPress={this.onstartIndividualChat}
         >
-          <Text adjustsFontSizeToFit={true} style={{ fontSize: 10, color:'#CCFFCC' }}>借りる</Text>
+          <Text adjustsFontSizeToFit={true} style={{ fontSize: 10, color: '#CCFFCC' }}>借りる</Text>
         </Button>
       )
     }
@@ -64,7 +64,7 @@ class MessageBubble extends Component {
         }}
           onPress={this.onstartIndividualChat}
         >
-          <Text adjustsFontSizeToFit={true} style={{ fontSize: 13, color:'black' }}>貸す</Text>
+          <Text adjustsFontSizeToFit={true} style={{ fontSize: 13, color: 'black' }}>貸す</Text>
         </Button>
       )
     }
@@ -78,7 +78,7 @@ class MessageBubble extends Component {
         }}
           onPress={this.onstartIndividualChat}
         >
-          <Text adjustsFontSizeToFit={true} style={{ fontSize: 13, color:'#CCFFCC' }}>貸す</Text>
+          <Text adjustsFontSizeToFit={true} style={{ fontSize: 13, color: '#CCFFCC' }}>貸す</Text>
         </Button>
       )
     }
@@ -111,7 +111,22 @@ class MessageBubble extends Component {
       (<Text style={{ fontSize: 10 }}>{this.props.sender_nick_name}</Text>)
       : null
 
-    var bubbleStyles = this.props.authUid !== this.props.sender_uid ? [styles.messageBubble, styles.messageBubbleLeft] : [styles.messageBubble, styles.messageBubbleRight];
+    var rightBubbleStyle;
+
+    if (this.props.type === 0) {
+      rightBubbleStyle = styles.messageBubbleRight_0
+    }
+    else if (this.props.type === 1) {
+      rightBubbleStyle = styles.messageBubbleRight_1
+    }
+    else if (this.props.type === 2) {
+      rightBubbleStyle = styles.messageBubbleRight_2
+    }
+
+    var bubbleStyles =
+      this.props.authUid !== this.props.sender_uid ?
+        [styles.messageBubble, styles.messageBubbleLeft] :
+        [styles.messageBubble, rightBubbleStyle];
 
     var bubbleTextStyle = this.props.authUid !== this.props.sender_uid ? styles.messageBubbleTextLeft : styles.messageBubbleTextRight;
     return (
@@ -157,6 +172,18 @@ const styles = StyleSheet.create({
 
   messageBubbleRight: {
     backgroundColor: '#66db30'
+  },
+
+  messageBubbleRight_0: {
+    backgroundColor: '#46a11c'
+  },
+
+  messageBubbleRight_1: {
+    backgroundColor: '#2a65c6'
+  },
+
+  messageBubbleRight_2: {
+    backgroundColor: '#a4196d'
   },
 
   messageBubbleTextRight: {

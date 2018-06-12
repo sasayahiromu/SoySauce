@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         elevation: 4,
         shadowOpacity: 0.31,
         shadowRadius: 10,
-        shadowColor: Colors.shadowColor
+        shadowColor: Colors.shadowColor,
     },
     buttonStyle: {
         flex: 1,

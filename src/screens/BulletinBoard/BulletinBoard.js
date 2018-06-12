@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, SafeAreaView, Keyboard } from 'react-native'
+import { View, StyleSheet, ScrollView, SafeAreaView, Keyboard, Text } from 'react-native'
 import InputBar from "../../components/InputBar/InputBar";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import MultiSwitch from '../../components/MultiSwitch/MultiSwitch'
@@ -8,7 +8,7 @@ import firebase from 'react-native-firebase';
 
 import { connect } from 'react-redux';
 
-import { addMessage, getMessages, addDeals } from '../../store/actions/index';
+import { addMessage, getMessages, addDeals, deleteMessage } from '../../store/actions/index';
 import { Platform } from 'react-native';
 
 
@@ -47,6 +47,10 @@ class BulletinBoardScreen extends Component {
     this.setState({
       inputBarText: ''
     })
+  }
+
+  deleteMessageHandler = (messageId) => {
+    this.props.onDeleteMessage(messageId);
   }
 
 
@@ -99,7 +103,6 @@ class BulletinBoardScreen extends Component {
     }
 
   render() {
-    console.log(this.props.messages, 'there')
     return (
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.outer}>
@@ -110,6 +113,7 @@ class BulletinBoardScreen extends Component {
               authUid={this.props.authUid}
               messages={this.props.messages}
               startIndividualChat={this.startIndividualChat}
+              deleteMessage = {this.deleteMessageHandler}
             />
           </ScrollView>
           <View style={styles.multiSwitchContainer}>
@@ -169,7 +173,8 @@ const mapDispatchToProps = dispatch => {
       lenderUid,
       messageId,
       initialMessage,
-    ))
+    )),
+    onDeleteMessage: (messageId) => dispatch(deleteMessage(messageId))
   };
 };
 

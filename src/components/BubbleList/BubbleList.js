@@ -20,6 +20,7 @@ const bubbleList = props => {
           authUid = {props.authUid}
           messageId={info.item.key}
           startIndividualChat={props.startIndividualChat}
+          deleteMessage = {props.deleteMessage}
         />
       )}}
     />

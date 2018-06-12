@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Clipboard } from 'react-native'
 import { Button, Text, Thumbnail } from 'native-base'
+import ActionSheet from 'react-native-actionsheet'
 
 
 //props text type　sender
@@ -14,6 +15,24 @@ class MessageBubble extends Component {
       this.props.sender_nick_name,
       this.props.type
     );
+  }
+
+  showActionSheet = () => {
+    this.ActionSheet.show();
+  }
+
+  actionSheetAction = (index) => {
+    switch (index) {
+      case 0:
+        Clipboard.setString(this.props.text);
+
+        break;
+      case 1:
+        break;
+      case 2:
+        this.props.deleteMessage(this.props.messageId);
+        break;
+    }
   }
 
   render() {
@@ -129,21 +148,36 @@ class MessageBubble extends Component {
         [styles.messageBubble, rightBubbleStyle];
 
     var bubbleTextStyle = this.props.authUid !== this.props.sender_uid ? styles.messageBubbleTextLeft : styles.messageBubbleTextRight;
+
+    let options;
+    if (this.props.authUid === this.props.sender_uid) {
+      options = ['Copy', 'cancel', 'Delete']
+    } else {
+      options = ['Copy', 'cancel']
+    }
+
     return (
       <View style={{ justifyContent: 'space-between', flexDirection: 'row', marginTop: 10 }}>
         <View style={{ flex: 1 }}>
           {leftSpacer}
         </View>
 
-        <View style={{ flexDirection: 'column', flex: 7 }}>
+        <TouchableOpacity style={{ flexDirection: 'column', flex: 7 }} onLongPress={() => this.showActionSheet()}>
           {name}
           <View style={bubbleStyles}>
             <Text style={bubbleTextStyle}>
               {this.props.text}
             </Text>
           </View>
-        </View>
+        </TouchableOpacity>
         {rightSpacer}
+        <ActionSheet
+          ref={o => this.ActionSheet = o}
+          options={options}
+          cancelButtonIndex={1}
+          destructiveButtonIndex={2}
+          onPress={(index) => { this.actionSheetAction(index) }}
+        />
       </View>
     );
   }

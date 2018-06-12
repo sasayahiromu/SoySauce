@@ -2,7 +2,6 @@ import { Navigation } from 'react-native-navigation'
 import { Provider } from 'react-redux'
 import BulletinBoardScreen from './src/screens/BulletinBoard/BulletinBoard'
 import AuthSwipeScreen from './src/screens/AuthSwipe/AuthSwipe'
-import { Platform } from 'react-native';
 import MainTabsScreen from './src/screens/MainTabs/MainTabs'
 import BorrowBoardScreen from './src/screens/BorrowBoard/BorrowBoard'
 import RendBoardScreen from './src/screens/RendScreen/RendScreen'
@@ -12,7 +11,6 @@ import ChatListScreen from './src/screens/ChatList/ChatList'
 
 import configureStore from './src/store/configureStore'
 
-import Icon from 'react-native-vector-icons/Ionicons'
 
 
 const store = configureStore();

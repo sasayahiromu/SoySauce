@@ -48,6 +48,35 @@ export const tempAddMessage = (message, sender_nick_name, sender_uid, type) => {
   }
 }
 
+export const deleteMessage = (messageId) => {
+  return (dispatch) => {
+    dispatch(tempDeleteMessage(messageId))
+    firebase.firestore()
+      .collection('chat_messages')
+      .doc('chat-01')
+      .collection('messages')
+      .doc(messageId)
+      .delete()
+      .then(res => {
+        dispatch(getMessages());
+      })
+      .catch(err => {
+        alert('Error in delete message');
+        console.log(err);
+      });
+  }
+}
+
+export const tempDeleteMessage = (messageId) => {
+  return (dispatch, getState) => {
+    var messages = getState().messages.messages.slice(0)
+    messages.some(function (v, i) {
+      if (v.key === messageId) messages.splice(i, 1)
+    })
+    dispatch(setMessages(messages))
+  }
+}
+
 export const setMessages = messages => {
   return {
     type: SET_MESSAGES,

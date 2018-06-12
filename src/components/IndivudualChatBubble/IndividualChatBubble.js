@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native'
-import { Button, Text, Thumbnail } from 'native-base'
+import { View, StyleSheet, TouchableOpacity, Clipboard } from 'react-native'
+import { Text, Thumbnail } from 'native-base'
+import ActionSheet from 'react-native-actionsheet'
 
 
 //props text type　sender
 
 class IndivudualChatBubble extends Component {
-  render() {
 
+  showActionSheet = () => {
+    this.ActionSheet.show();
+  }
+
+  actionSheetAction = (index) => {
+    switch (index) {
+      case 0:
+        Clipboard.setString(this.props.text);
+        break;
+      case 1:
+        break;
+      case 2:
+        this.props.deleteIndividualMessage(this.props.messageId, this.props.individualMessageId);
+        break;
+    }
+  }
+
+  render() {
     thumbnail = (
       <Thumbnail small source={{ uri: "https://facebook.github.io/react-native/docs/assets/favicon.png" }} style={{ width: 25, height: 25 }} />
     )
@@ -27,21 +45,36 @@ class IndivudualChatBubble extends Component {
     var bubbleStyles = this.props.authUid !== this.props.sender_uid ? [styles.messageBubble, styles.messageBubbleLeft] : [styles.messageBubble, styles.messageBubbleRight];
 
     var bubbleTextStyle = this.props.authUid !== this.props.sender_uid ? styles.messageBubbleTextLeft : styles.messageBubbleTextRight;
+
+    let options;
+    if (this.props.authUid === this.props.sender_uid) {
+      options = ['Copy', 'cancel', 'Delete']
+    } else {
+      options = ['Copy', 'cancel']
+    }
+
     return (
       <View style={{ justifyContent: 'space-between', flexDirection: 'row', marginTop: 10 }}>
         <View style={{ flex: 1 }}>
           {leftSpacer}
         </View>
 
-        <View style={{ flexDirection: 'column', flex: 7 }}>
+        <TouchableOpacity style={{ flexDirection: 'column', flex: 7 }} onLongPress={() => this.showActionSheet()}>
           {name}
           <View style={bubbleStyles}>
             <Text style={bubbleTextStyle}>
               {this.props.text}
             </Text>
           </View>
-        </View>
+          </TouchableOpacity>
         {rightSpacer}
+        <ActionSheet
+          ref={o => this.ActionSheet = o}
+          options={options}
+          cancelButtonIndex={1}
+          destructiveButtonIndex={2}
+          onPress={(index) => { this.actionSheetAction(index) }}
+        />
       </View>
     );
   }

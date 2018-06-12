@@ -7,7 +7,7 @@ import { Platform } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { getIndividualMessages, addIndividualMessage } from '../../store/actions/index';
+import { getIndividualMessages, addIndividualMessage, deleteIndividualMessage } from '../../store/actions/index';
 import firebase from 'react-native-firebase';
 
 
@@ -73,6 +73,7 @@ class IndividualChat extends Component {
               allMessages={this.props.individualMessages}
               messageId={this.props.messageId}
               messagetriger={this.props.messagetriger}
+              deleteIndividualMessage = {this.props.ondeleteIndividualMessage}
             />
           </ScrollView>
           {/* <View style={styles.multiSwitchContainer}>
@@ -117,7 +118,8 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = dispatch => {
   return {
     onLoadIndividualMessages: (messageId) => dispatch(getIndividualMessages(messageId)),
-    onAddIndividualMessage: (message, messageId) => dispatch(addIndividualMessage(message, messageId))
+    onAddIndividualMessage: (message, messageId) => dispatch(addIndividualMessage(message, messageId)),
+    ondeleteIndividualMessage: (messageId, individualMessageId) => dispatch(deleteIndividualMessage(messageId, individualMessageId))
   };
 };
 
@@ -126,7 +128,7 @@ const mapStateToProps = state => {
     messages: state.messages.messages,
     authUid: state.auth.uid,
     individualMessages: state.messages.individualMessages, //ここで全ての個別チャットを取得してしまうのはどうにかできないか
-    messagetriger: state.messages.messagetriger
+    messagetriger: state.messages.messagetriger,
   };
 };
 

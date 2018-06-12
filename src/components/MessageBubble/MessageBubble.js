@@ -25,7 +25,6 @@ class MessageBubble extends Component {
     switch (index) {
       case 0:
         Clipboard.setString(this.props.text);
-
         break;
       case 1:
         break;

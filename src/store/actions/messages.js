@@ -174,6 +174,43 @@ export const addIndividualMessage = (message, messageId) => {
   }
 }
 
+export const deleteIndividualMessage = (messageId, Individualkey) => {
+  return (dispatch) => {
+    dispatch(tempDeleteIndividualMessage(messageId, Individualkey));
+    firebase.firestore()
+      .collection('deals')
+      .doc(messageId)
+      .collection('messages')
+      .doc(Individualkey)
+      .delete()
+      .then(res => {
+        dispatch(getIndividualMessages(messageId));
+        //updateDealMessageState
+        //updateUserLaseMessageAt
+        //変更していない
+      })
+      .catch(err => {
+        alert('Error in delete individual message');
+        console.log(err);
+      });
+  }
+}
+
+export const tempDeleteIndividualMessage = (messageId, Individualkey) => {
+  return (dispatch, getState) => {
+    console.log(messageId, Individualkey)
+    console.log(getState().messages.individualMessages[messageId].slice())
+    var individualMessages = getState().messages.individualMessages[messageId].slice()
+    individualMessages.some(function (v, i) {
+      if (v.key === Individualkey) individualMessages.splice(i, 1)
+    })
+    var messages = {}
+    Object.assign(messages , getState().messages.individualMessages);
+    messages[messageId] = individualMessages;
+    dispatch(setMessages(messages))
+  }
+}
+
 export const updateUserLaseMessageAt = (messageId) => {
   return (dispatch) => {
     let senderUid = '';

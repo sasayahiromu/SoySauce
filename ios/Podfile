@@ -8,6 +8,7 @@ target 'SoySauce' do
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'
+  pod 'Firebase/Messaging'
 
 
 #  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'

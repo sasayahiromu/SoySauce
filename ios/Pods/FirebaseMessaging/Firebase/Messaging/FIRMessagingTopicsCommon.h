@@ -18,9 +18,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** Logs to NSLog if [FIRFirestore isLoggingEnabled] is YES. */
-void FSTLog(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
-
-void FSTWarn(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
+/**
+ *  Represents the action taken on a subscription topic.
+ */
+typedef NS_ENUM(NSInteger, FIRMessagingTopicAction) {
+  FIRMessagingTopicActionSubscribe,
+  FIRMessagingTopicActionUnsubscribe
+};
 
 NS_ASSUME_NONNULL_END

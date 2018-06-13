@@ -14,28 +14,22 @@
  * limitations under the License.
  */
 
-#import "Firestore/Source/Util/FSTLogger.h"
+#import "NSError+FIRMessaging.h"
 
-#import <FirebaseCore/FIRLogger.h>
+NSString *const kFIRMessagingDomain = @"com.google.fcm";
 
-#import "Firestore/Source/API/FIRFirestore+Internal.h"
+@implementation NSError (FIRMessaging)
 
-NS_ASSUME_NONNULL_BEGIN
-
-void FSTLog(NSString *format, ...) {
-  if ([FIRFirestore isLoggingEnabled]) {
-    va_list args;
-    va_start(args, format);
-    FIRLogBasic(FIRLoggerLevelDebug, kFIRLoggerFirestore, @"I-FST000001", format, args);
-    va_end(args);
-  }
+- (FIRMessagingInternalErrorCode)fcmErrorCode {
+  return (FIRMessagingInternalErrorCode)self.code;
 }
 
-void FSTWarn(NSString *format, ...) {
-  va_list args;
-  va_start(args, format);
-  FIRLogBasic(FIRLoggerLevelWarning, kFIRLoggerFirestore, @"I-FST000001", format, args);
-  va_end(args);
++ (NSError *)errorWithFCMErrorCode:(FIRMessagingInternalErrorCode)fcmErrorCode {
+  return [NSError errorWithDomain:kFIRMessagingDomain code:fcmErrorCode userInfo:nil];
 }
 
-NS_ASSUME_NONNULL_END
++ (NSError *)fcm_errorWithCode:(NSInteger)code userInfo:(NSDictionary *)userInfo {
+  return [NSError errorWithDomain:kFIRMessagingDomain code:code userInfo:userInfo];
+}
+
+@end

@@ -30,11 +30,16 @@ export const addMessage = (message, type) => {
       });
   }
 }
-
+///////ここでエラーでまくり
 //addを即時反映させるため
 export const tempAddMessage = (message, sender_nick_name, sender_uid, type) => {
   return (dispatch, getState) => {
+    // console.log(getState().messages.messages)
+    console.log(getState().messages.messages)
+
     const messages = getState().messages.messages.slice(0)
+    // var messages = {}
+    // Object.assign(messages , getState().messages.messages);
     const messageData = {
       message: message,
       sender_nick_name: sender_nick_name,
@@ -70,6 +75,7 @@ export const deleteMessage = (messageId) => {
 export const tempDeleteMessage = (messageId) => {
   return (dispatch, getState) => {
     var messages = getState().messages.messages.slice(0)
+    console.log(messages);
     messages.some(function (v, i) {
       if (v.key === messageId) messages.splice(i, 1)
     })
@@ -198,16 +204,12 @@ export const deleteIndividualMessage = (messageId, Individualkey) => {
 
 export const tempDeleteIndividualMessage = (messageId, Individualkey) => {
   return (dispatch, getState) => {
-    console.log(messageId, Individualkey)
-    console.log(getState().messages.individualMessages[messageId].slice())
     var individualMessages = getState().messages.individualMessages[messageId].slice()
+    console.log(individualMessages)
     individualMessages.some(function (v, i) {
       if (v.key === Individualkey) individualMessages.splice(i, 1)
     })
-    var messages = {}
-    Object.assign(messages , getState().messages.individualMessages);
-    messages[messageId] = individualMessages;
-    dispatch(setMessages(messages))
+    dispatch(setIndividualMessages(individualMessages, messageId))
   }
 }
 

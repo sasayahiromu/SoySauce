@@ -6,6 +6,7 @@ import com.facebook.react.ReactApplication;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -34,7 +35,8 @@ public class MainApplication extends NavigationApplication {
     new VectorIconsPackage(),
     new RNFirebasePackage(),
     new RNFirebaseAuthPackage(),
-    new RNFirebaseFirestorePackage()
+    new RNFirebaseFirestorePackage(),
+    new RNFirebaseMessagingPackage()
     );
   }
 
@@ -48,4 +50,10 @@ public class MainApplication extends NavigationApplication {
   super.attachBaseContext(base);
   MultiDex.install(this);
  }
+
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    SoLoader.init(this, /* native exopackage */ false);
+  }
 }

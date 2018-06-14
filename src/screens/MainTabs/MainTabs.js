@@ -1,16 +1,53 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
+import { connect } from "react-redux";
 
 import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import BulletinBoardScreen from '../BulletinBoard/BulletinBoard'
 import Drawer from 'react-native-drawer'
 import SideDrawer from '../SideDrawer/SideDrawer'
 import ChatList from '../ChatList/ChatList'
+import firebase from 'react-native-firebase';
+import type { RemoteMessage } from 'react-native-firebase';
 
 class MainTabs extends Component {
 
   state = {
     drawerIsClosed: true
+  }
+  componentDidMount() {
+    this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
+      console.log(user)
+    firebase.messaging().hasPermission()
+      .then(enabled => {
+        if (!enabled) {
+          alert('here')
+          firebase.messaging().requestPermission()
+            .then(() => {
+              firebase.messaging().getToken().then(token => {
+                firebase.firestore().collection("users").doc(user._user.uid).update({ pushToken: token });
+              });
+            })
+            .catch(error => {
+              // User has rejected permissions  
+            });
+        } else {
+          alert('1')
+          firebase.messaging().getToken().then(token => {
+            alert(user)
+              firebase.firestore().collection("users").doc(user._user.uid).update({ pushToken: token });
+        });
+        }
+      });
+    }
+    this.messageListener = firebase.messaging().onMessage((message: RemoteMessage) => {
+      alert('message')
+      alert(message)
+    });
+  }
+
+  componentWillUnmount() {
+    this.messageListener();
   }
 
   constructor(props) {
@@ -52,16 +89,22 @@ class MainTabs extends Component {
       >
         <ScrollableTabView
           initialPage={0}
-          renderTabBar={() => <DefaultTabBar style={{ height: 40 }} tabStyle={{ paddingBottom: 0 }} 
+          renderTabBar={() => <DefaultTabBar style={{ height: 40 }} tabStyle={{ paddingBottom: 0 }}
           />}
-          contentProps={ scrollBarProps }
+          contentProps={scrollBarProps}
         >
-          <BulletinBoardScreen tabLabel='掲示板' navigator={this.props.navigator}/>
-          <ChatList tabLabel='チャット' navigator={this.props.navigator}/>
+          <BulletinBoardScreen tabLabel='掲示板' navigator={this.props.navigator} />
+          <ChatList tabLabel='チャット' navigator={this.props.navigator} />
         </ScrollableTabView>
       </Drawer>
     )
   }
 }
 
-export default MainTabs;
+const mapStateToProps = state => {
+  return {
+    authUid: state.auth.uid,
+  };
+};
+
+export default connect(mapStateToProps, null)(MainTabs);

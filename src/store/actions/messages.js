@@ -214,7 +214,8 @@ export const tempDeleteIndividualMessage = (messageId, Individualkey) => {
 }
 
 export const updateUserLaseMessageAt = (messageId) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const authUid = getState().auth.uid.slice(0);
     let senderUid = '';
     let lenderUid = '';
 
@@ -223,21 +224,19 @@ export const updateUserLaseMessageAt = (messageId) => {
       .doc(messageId)
       .get()
       .then(documentSnapshot => {
-        senderUid = documentSnapshot._data.borrower_uid
-        lenderUid = documentSnapshot._data.lender_uid
-
-        firebase.firestore()
-          .collection('users')
-          .doc(senderUid)
-          .update({
-            last_deal_message_at: firebase.firestore.FieldValue.serverTimestamp()
-          })
-        firebase.firestore()
-          .collection('users')
-          .doc(lenderUid)
-          .update({
-            last_deal_message_at: firebase.firestore.FieldValue.serverTimestamp()
-          })
+        senderUid = documentSnapshot._data.borrower_uid;
+        lenderUid = documentSnapshot._data.lender_uid;
+        uidArray = [senderUid, lenderUid];
+        for (uidIndex in uidArray) {
+          if (uidArray[uidIndex] !== authUid) {
+            firebase.firestore()
+              .collection('users')
+              .doc(uidArray[uidIndex])
+              .update({
+                last_deal_message_at: firebase.firestore.FieldValue.serverTimestamp()
+              })
+          }
+        }
       })
       .catch(err => {
         console.log(err)

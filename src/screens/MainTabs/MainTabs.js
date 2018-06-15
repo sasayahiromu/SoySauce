@@ -21,7 +21,6 @@ class MainTabs extends Component {
     firebase.messaging().hasPermission()
       .then(enabled => {
         if (!enabled) {
-          alert('here')
           firebase.messaging().requestPermission()
             .then(() => {
               firebase.messaging().getToken().then(token => {
@@ -32,9 +31,7 @@ class MainTabs extends Component {
               // User has rejected permissions  
             });
         } else {
-          alert('1')
           firebase.messaging().getToken().then(token => {
-            alert(user)
               firebase.firestore().collection("users").doc(user._user.uid).update({ pushToken: token });
         });
         }

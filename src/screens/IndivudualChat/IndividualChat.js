@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, SafeAreaView, Keyboard } from 'react-native'
+import { View, StyleSheet, ScrollView, SafeAreaView, Keyboard, ActivityIndicator} from 'react-native'
 import InputBar from "../../components/InputBar/InputBar";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import IndividualBubbleList from '../../components/IndividualBubbleList.js/IndividualBubbleList'
@@ -62,6 +62,11 @@ class IndividualChat extends Component {
 
 
   render() {
+    if (!this.props.individualMessages[this.props.messageId]) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center' }}><ActivityIndicator /></View>
+      )
+    }
     return (
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.outer}>

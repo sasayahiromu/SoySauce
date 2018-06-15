@@ -22,7 +22,7 @@ class IndividualBubbleList extends Component {
               authUid={this.props.authUid}
               individualMessageId={info.item.key} //個別チャットのID
               messageId={this.props.messageId} //全体チャット内のID
-              deleteIndividualMessage = {this.props.deleteIndividualMessage}
+              deleteIndividualMessage={this.props.deleteIndividualMessage}
             />
           )
         }}

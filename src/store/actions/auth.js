@@ -1,4 +1,5 @@
 import { TRY_AUTH, REGISTER_UID, REGISTER_NICKNAME } from './actionTypes';
+import { uiStartLoading, uiStopLoading } from './index'
 import firebase from 'react-native-firebase';
 import startMainTabs from '../../models/startMainTabs/startMainTabs'
 import communityCorrespondingId from '../../utility/communityId'
@@ -6,9 +7,8 @@ import communityCorrespondingId from '../../utility/communityId'
 //userの他の情報をあとで適用
 
 export const tryAuth = (authData, authMode) => {
-  console.log(authData);
   return dispatch => {
-    // dispatch(uiStartLoading());
+    dispatch(uiStartLoading());
     if (authMode === "login") {
       dispatch(authSignin(authData))
     } else {
@@ -36,6 +36,7 @@ export const authSignup = authData => {
         .doc(uid)
         .set(userData)
         .then(() => {
+          dispatch(uiStopLoading());
           dispatch(registerUid(uid))
           startMainTabs();
 
@@ -58,6 +59,7 @@ export const authSignup = authData => {
   
         })
         .catch(err => {
+          dispatch(uiStopLoading());
           alert('signUp failed. Try again.');
           console.log(err)
           // dispatch(uiStopLoading());
@@ -67,6 +69,7 @@ export const authSignup = authData => {
       // )
       })
       .catch(err => {
+        dispatch(uiStopLoading());
         alert('Authentication failed. Try again.');
         console.log(err)
         // dispatch(uiStopLoading());
@@ -81,6 +84,7 @@ export const authSignin = authData => {
     firebase.auth()
       .signInAndRetrieveDataWithEmailAndPassword(authData.email, authData.password)
       .then(res => {
+        dispatch(uiStopLoading());
         console.log(res);
         const uid = res.user._user.uid
         dispatch(registerUid(uid))
@@ -88,6 +92,7 @@ export const authSignin = authData => {
         startMainTabs();
       })
       .catch(err => {
+        dispatch(uiStopLoading());
         alert('Authentication failed. Try again.');
         console.log(err)
         // dispatch(uiStopLoading());

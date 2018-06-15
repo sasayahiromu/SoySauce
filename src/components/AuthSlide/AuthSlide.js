@@ -10,7 +10,7 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   TouchableWithoutFeedback,
-  ActivityIndicator,
+  ActivityIndicator
 } from "react-native";
 import { connect } from "react-redux";
 
@@ -197,6 +197,13 @@ class AuthScreen extends Component {
     </ButtonWithBackground>
     );
 
+    console.log(this.props.isLoading, 11222222222222222222222)
+
+    if (this.props.isLoading) {
+      console.log(11111111111111111111111111111111111111)
+      submitButton = <ActivityIndicator />
+    }
+
     if (this.state.viewMode === "portrait") {
       headingText = (
         <MainText>
@@ -205,25 +212,7 @@ class AuthScreen extends Component {
       );
     }
     if (this.state.authMode === "signup") {
-      // confirmPasswordControl = (
-      //   <View
-      //     style={
-      //       this.state.viewMode === "portrait"
-      //         ? styles.portraitPasswordWrapper
-      //         : styles.landscapePasswordWrapper
-      //     }
-      //   >
-      //     <DefaultInput
-      //       placeholder="Confirm Password"
-      //       style={styles.input}
-      //       value={this.state.controls.confirmPassword.value}
-      //       onChangeText={val => this.updateInputState("confirmPassword", val)}
-      //       valid={this.state.controls.confirmPassword.valid}
-      //       touched={this.state.controls.confirmPassword.touched}
-      //       secureTextEntry
-      //     />
-      //   </View>
-      // );
+
       inputUserInfo = (
         <View>
           <DefaultInput
@@ -263,9 +252,7 @@ class AuthScreen extends Component {
         </View>
       );
     }
-    if (this.props.isLoading) {
-      submitButton = <ActivityIndicator />
-    }
+
     return (
       <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
         <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -361,11 +348,6 @@ const styles = StyleSheet.create({
   }
 });
 
-// mapStateToProps = state => {
-//   return {
-//     isLoading: state.ui.isLoading
-//   };
-// };
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -374,6 +356,12 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+mapStateToProps = state => {
+  return {
+    isLoading: state.ui.isLoading
+  };
+};
+
 // export default connect(mapStateToProps, mapDispatchToProps)(AuthScreen);
-export default connect(null, mapDispatchToProps)(AuthScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthScreen);
 // export default AuthScreen;

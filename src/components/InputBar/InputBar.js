@@ -28,7 +28,7 @@ class InputBar extends Component {
           defaultHeight={40}
           onChangeText={(text) => this.props.onChangeText(text)}
           onContentSizeChange={this.props.onSizeChange}
-          value={this.props.text}
+          // value={this.props.text}
           underlineColorAndroid="transparent"
           />
         {sendButton}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, SafeAreaView, Keyboard, Text } from 'react-native'
+import { View, StyleSheet, ScrollView, SafeAreaView, Keyboard, Text, ActivityIndicator } from 'react-native'
 import InputBar from "../../components/InputBar/InputBar";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import MultiSwitch from '../../components/MultiSwitch/MultiSwitch'
@@ -103,6 +103,11 @@ class BulletinBoardScreen extends Component {
     }
 
   render() {
+    if (this.props.messages.length === 0) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center' }}><ActivityIndicator /></View>
+      )
+    }
     return (
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.outer}>
@@ -113,7 +118,7 @@ class BulletinBoardScreen extends Component {
               authUid={this.props.authUid}
               messages={this.props.messages}
               startIndividualChat={this.startIndividualChat}
-              deleteMessage = {this.deleteMessageHandler}
+              deleteMessage={this.deleteMessageHandler}
             />
           </ScrollView>
           <View style={styles.multiSwitchContainer}>

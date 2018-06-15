@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Content, List, ListItem, Left, Body, Right, Text, Thumbnail } from 'native-base';
-import { TouchableOpacity, View } from 'react-native'
+import { Container, Content, List, ListItem, Left, Body, Right, Text, Thumbnail} from 'native-base';
+import { TouchableOpacity, View ,ActivityIndicator} from 'react-native'
 import { getDeals, getIndividualMessages } from '../../store/actions/index';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
@@ -44,6 +44,11 @@ class ChatList extends Component {
   }
 
   render() {
+    if (this.props.deals.length === 0) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center' }}><ActivityIndicator /></View>
+      )
+    }
     return (
       <Container>
         <Content>

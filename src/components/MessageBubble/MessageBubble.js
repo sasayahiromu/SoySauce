@@ -39,7 +39,31 @@ class MessageBubble extends Component {
       <Thumbnail small source={{ uri: "https://facebook.github.io/react-native/docs/assets/favicon.png" }} style={{ width: 25, height: 25 }} />
     )
     //These spacers make the message bubble stay to the left or the right, depending on who is speaking, even if the message is multiple lines.
-    var leftSpacer = this.props.authUid !== this.props.sender_uid ? thumbnail : <View style={{ width: 70 }} />;
+    var leftSpacer = this.props.authUid !== this.props.sender_uid
+      ? (
+        <View style={{
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'space-around',
+          alignItems: 'center'
+        }}>
+          {thumbnail}
+          {this.props.sentAt &&
+            <Text style={{ fontSize: 8 }}>{this.props.sentAt.toTimeString().slice(0, 5)}</Text>
+          }
+        </View>
+      )
+      : (<View style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: 0
+      }}>
+        {this.props.sentAt &&
+          <Text style={{ fontSize: 8 }}>{this.props.sentAt.toTimeString().slice(0, 5)}</Text>
+        }
+      </View>);
+
     var rightSpacer = null
     let borrowButton;
     let lendButton;

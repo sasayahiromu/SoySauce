@@ -94,13 +94,13 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-     compileSdkVersion 25
+     compileSdkVersion 27
      buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.soysauce"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         ndk {
@@ -153,6 +153,10 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-navigation')
+    compile(project(':react-native-firebase')) {
+        transitive = false
+    }
     implementation project(':react-native-vector-icons')
     implementation 'com.android.support:multidex:1.0.3'
     implementation project(':react-native-vector-icons')
@@ -161,7 +165,7 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(':react-native-navigation')
     // Firebase dependencies
-    implementation "com.google.android.gms:play-services-base:15.0.0"
+    implementation "com.google.android.gms:play-services-base:15.0.1"
     implementation "com.google.firebase:firebase-core:15.0.2"
     implementation "com.google.firebase:firebase-firestore:16.0.0"
     implementation "com.google.firebase:firebase-auth:15.1.0"
@@ -183,6 +187,13 @@ task copyDownloadableDepsToLibs(type: Copy) {
 project.ext.vectoricons = [
     iconFontNames: [ 'Ionicons.ttf' ] // Name of the font files you want to copy
 ]
+
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/' } // Gradle Plugin Portal
+    }
+}
+
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 

@@ -6,6 +6,7 @@ import IndivudualChatBubble from '../IndivudualChatBubble/IndividualChatBubble'
 class IndividualBubbleList extends Component {
 
   render() {
+    console.log(this.props.allMessages[this.props.messageId])
     return (
       <FlatList
         style={styles.listContainer}

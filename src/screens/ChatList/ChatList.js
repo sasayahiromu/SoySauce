@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Content, List, ListItem, Left, Body, Right, Text, Thumbnail} from 'native-base';
-import { TouchableOpacity, View ,ActivityIndicator} from 'react-native'
+import { Container, Content, List, ListItem, Left, Body, Right, Text, Thumbnail } from 'native-base';
+import { TouchableOpacity, View, ActivityIndicator } from 'react-native'
 import { getDeals, getIndividualMessages } from '../../store/actions/index';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
@@ -54,7 +54,12 @@ class ChatList extends Component {
         <Content>
           <List dataArray={this.props.deals}
             renderRow={(item) => {
-              console.log(item)
+              let date;
+              if (item.deal_last_at.toLocaleDateString()[1] === '/' || item.deal_last_at.toLocaleDateString()[2] === '/') {
+                date = item.deal_last_at.toLocaleDateString().slice(0, -5)
+              } else {
+                date = item.deal_last_at.toLocaleDateString().slice(5)
+              }
               let name = item.borrower_nick_name;
               if (this.props.authUid === item.borrower_uid) name = item.lender_nick_name;
               return (
@@ -67,9 +72,10 @@ class ChatList extends Component {
                     <Text>{item.initial_message}</Text>
                     <Text note>{item.last_deal_message}</Text>
                   </Body>
-                  {/* <Right>
-        <Text note>3:43 pm</Text>
-      </Right> */}
+                  <Right>
+                    <Text note>{item.deal_last_at.toTimeString().slice(0, 5)}</Text>
+                    <Text note>{date}</Text>
+                  </Right>
                 </ListItem>
               )
             }

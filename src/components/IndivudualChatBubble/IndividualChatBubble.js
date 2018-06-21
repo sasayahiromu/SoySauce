@@ -30,8 +30,30 @@ class IndivudualChatBubble extends Component {
       <Thumbnail small source={{ uri: "https://facebook.github.io/react-native/docs/assets/favicon.png" }} style={{ width: 25, height: 25 }} />
     )
 
-    var leftSpacer = this.props.authUid !== this.props.sender_uid ? thumbnail : <View style={{ width: 70 }} />;
-    var rightSpacer = null
+    var leftSpacer = this.props.authUid !== this.props.sender_uid
+      ? (
+        <View style={{
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'space-around',
+          alignItems: 'center'
+        }}>
+          {thumbnail}
+          {this.props.sentAt &&
+            <Text style={{ fontSize: 8 }}>{this.props.sentAt.toTimeString().slice(0, 5)}</Text>
+          }
+        </View>
+      )
+      : (<View style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: 0
+      }}>
+        {this.props.sentAt &&
+          <Text style={{ fontSize: 8 }}>{this.props.sentAt.toTimeString().slice(0, 5)}</Text>
+        }
+      </View>); var rightSpacer = null
     if (this.props.authUid !== this.props.sender_uid) {
       <View style={{ flex: 2 }}>
         <View style={{ width: 70 }} />
@@ -66,7 +88,7 @@ class IndivudualChatBubble extends Component {
               {this.props.text}
             </Text>
           </View>
-          </TouchableOpacity>
+        </TouchableOpacity>
         {rightSpacer}
         <ActionSheet
           ref={o => this.ActionSheet = o}

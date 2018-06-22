@@ -17,6 +17,7 @@ const bubbleList = props => {
           } else {
             date = item.sent_at.toLocaleDateString().slice(5)
           }
+          console.log(date)
           if (index === 0 || props.messages[index].sent_at.toDateString() !== props.messages[index - 1].sent_at.toDateString()) {
             dateBox = (<View style={{
               flex: 1,

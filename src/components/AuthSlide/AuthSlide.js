@@ -193,21 +193,18 @@ class AuthScreen extends Component {
           !this.state.controls.email.valid ||
           !this.state.controls.password.valid
         }>
-        Submit
+        送信
     </ButtonWithBackground>
     );
 
-    console.log(this.props.isLoading, 11222222222222222222222)
-
     if (this.props.isLoading) {
-      console.log(11111111111111111111111111111111111111)
       submitButton = <ActivityIndicator />
     }
 
     if (this.state.viewMode === "portrait") {
       headingText = (
         <MainText>
-          <HeadingText>Please Log In</HeadingText>
+          <HeadingText>{this.state.authMode === "login" ? "ログイン" : "新規登録"}</HeadingText>
         </MainText>
       );
     }
@@ -261,7 +258,7 @@ class AuthScreen extends Component {
             color="#29aaf4"
             onPress={this.switchAuthModeHandler}
           >
-            Switch to {this.state.authMode === "login" ? "Sign Up" : "Login"}
+            {this.state.authMode === "login" ? "新規登録" : "ログイン"} に進む
           </ButtonWithBackground>
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.inputContainer}>

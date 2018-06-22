@@ -4,8 +4,8 @@ import firebase from 'react-native-firebase';
 import type { RemoteMessage } from 'react-native-firebase';
 
 export default async (message: RemoteMessage) => {
-    // handle your message
-    alert(message)
+    // // handle your message
+    // alert(message)
 
     return Promise.resolve();
 }

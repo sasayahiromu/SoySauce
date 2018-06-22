@@ -38,11 +38,6 @@ class ChatList extends Component {
     });
   }
 
-  pressHandler = (name) => {
-    console.log(name)
-    alert(name)
-  }
-
   render() {
     if (this.props.deals.length === 0) {
       return (

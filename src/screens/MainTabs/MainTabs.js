@@ -38,8 +38,8 @@ class MainTabs extends Component {
       });
     })
     this.messageListener = firebase.messaging().onMessage((message: RemoteMessage) => {
-      alert('message')
-      alert(message)
+      // alert('message')
+      // alert(message)
     });
   }
 

@@ -18,24 +18,24 @@ class MainTabs extends Component {
   componentDidMount() {
     this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
       console.log(user)
-    firebase.messaging().hasPermission()
-      .then(enabled => {
-        if (!enabled) {
-          firebase.messaging().requestPermission()
-            .then(() => {
-              firebase.messaging().getToken().then(token => {
-                firebase.firestore().collection("users").doc(user._user.uid).update({ pushToken: token });
+      firebase.messaging().hasPermission()
+        .then(enabled => {
+          if (!enabled) {
+            firebase.messaging().requestPermission()
+              .then(() => {
+                firebase.messaging().getToken().then(token => {
+                  firebase.firestore().collection("users").doc(user._user.uid).update({ push_token: token });
+                });
+              })
+              .catch(error => {
+                // User has rejected permissions  
               });
-            })
-            .catch(error => {
-              // User has rejected permissions  
+          } else {
+            firebase.messaging().getToken().then(token => {
+              firebase.firestore().collection("users").doc(user._user.uid).update({ push_token: token });
             });
-        } else {
-          firebase.messaging().getToken().then(token => {
-              firebase.firestore().collection("users").doc(user._user.uid).update({ pushToken: token });
+          }
         });
-        }
-      });
     })
     this.messageListener = firebase.messaging().onMessage((message: RemoteMessage) => {
       // alert('message')

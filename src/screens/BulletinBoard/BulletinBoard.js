@@ -8,7 +8,7 @@ import firebase from 'react-native-firebase';
 
 import { connect } from 'react-redux';
 
-import { addMessage, getMessages, addDeals, deleteMessage } from '../../store/actions/index';
+import { addMessage, getMessages, addDeals, deleteMessage, getDeals } from '../../store/actions/index';
 import { Platform } from 'react-native';
 
 
@@ -108,6 +108,7 @@ class BulletinBoardScreen extends Component {
         <View style={{ flex: 1, justifyContent: 'center' }}><ActivityIndicator /></View>
       )
     }
+    // this.props.onGetDeals()
     return (
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.outer}>
@@ -162,6 +163,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
+    onGetDeals: () => dispatch(getDeals()),
     onLoadMessages: () => dispatch(getMessages()),
     onAddMessage: (text, sender, type) => dispatch(addMessage(text, sender, type)),
     onAddDeals: (

@@ -44,11 +44,37 @@ class ChatList extends Component {
         <View style={{ flex: 1, justifyContent: 'center' }}><ActivityIndicator /></View>
       )
     }
+
+    //既読確認
+    var unreadIndex = [99999];//空だとなぜかpushできない
+    for (let i = 0; i < this.props.deals.length; i++) {
+      if (!!this.props.deals[i].deal_last_at) {
+        if (this.props.authUid === this.props.deals[i].borrower_uid) {
+          if (!this.props.deals[i].borrower_last_read_at) { unreadIndex.push(i) }
+          else {
+            if (this.props.deals[i].borrower_last_read_at.getTime() < this.props.deals[i].deal_last_at) {
+              unreadIndex.push(i)
+            }
+          }
+        }
+        if (this.props.authUid === this.props.deals[i].lender_uid) {
+          if (!this.props.deals[i].lender_last_read_at) { unreadIndex.push(i) }
+          else {
+            if (this.props.deals[i].lender_last_read_at.getTime() < this.props.deals[i].deal_last_at) {
+              unreadIndex.push(i)
+            }
+          }
+        }
+      }
+    }
+    console.log(unreadIndex)
     return (
       <Container>
         <Content>
           <List dataArray={this.props.deals}
-            renderRow={(item) => {
+            renderRow={(item,_,index) => {
+              console.log(unreadIndex,parseInt(index, 10),unreadIndex.indexOf(parseInt(index, 10)))
+              const isUnreaded = (unreadIndex.indexOf(parseInt(index, 10)) !== -1)
               let date;
               if (item.deal_last_at.toLocaleDateString()[1] === '/' || item.deal_last_at.toLocaleDateString()[2] === '/') {
                 date = item.deal_last_at.toLocaleDateString().slice(0, -5)
@@ -58,20 +84,22 @@ class ChatList extends Component {
               let name = item.borrower_nick_name;
               if (this.props.authUid === item.borrower_uid) name = item.lender_nick_name;
               return (
-                <ListItem button onPress={() => { this.startIndividualChat(item.messageId, item.initial_message) }}>
-                  <Body>
-                    <View style={{ flexDirection: 'row' }}>
-                      <Thumbnail small source={{ uri: "https://facebook.github.io/react-native/docs/assets/favicon.png" }} style={{ width: 20, height: 20 }} />
-                      <Text>{name}</Text>
-                    </View>
-                    <Text>{item.initial_message}</Text>
-                    <Text note>{item.last_deal_message}</Text>
-                  </Body>
-                  <Right>
-                    <Text note>{item.deal_last_at.toTimeString().slice(0, 5)}</Text>
-                    <Text note>{date}</Text>
-                  </Right>
-                </ListItem>
+                <View style={{ backgroundColor: isUnreaded=== true ? '#B1F9D0' : null }}>
+                  <ListItem button onPress={() => { this.startIndividualChat(item.messageId, item.initial_message) }} >
+                    <Body>
+                      <View style={{ flexDirection: 'row' }}>
+                        <Thumbnail small source={{ uri: "https://facebook.github.io/react-native/docs/assets/favicon.png" }} style={{ width: 20, height: 20 }} />
+                        <Text>{name}</Text>
+                      </View>
+                      <Text>{item.initial_message}</Text>
+                      <Text note>{item.last_deal_message}</Text>
+                    </Body>
+                    <Right>
+                      <Text note>{item.deal_last_at.toTimeString().slice(0, 5)}</Text>
+                      <Text note>{date}</Text>
+                    </Right>
+                  </ListItem>
+                </View>
               )
             }
             }>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, SafeAreaView, Keyboard, ActivityIndicator} from 'react-native'
+import { View, StyleSheet, ScrollView, SafeAreaView, Keyboard, ActivityIndicator } from 'react-native'
 import InputBar from "../../components/InputBar/InputBar";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import IndividualBubbleList from '../../components/IndividualBubbleList.js/IndividualBubbleList'
@@ -7,7 +7,7 @@ import { Platform } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { getIndividualMessages, addIndividualMessage, deleteIndividualMessage } from '../../store/actions/index';
+import { getIndividualMessages, addIndividualMessage, deleteIndividualMessage, updateOpenIndividualMessageAt } from '../../store/actions/index';
 import firebase from 'react-native-firebase';
 
 
@@ -31,7 +31,7 @@ class IndividualChat extends Component {
     this.unsubscribe = this.ref.onSnapshot(this.loadMessage);
   }
 
-  loadMessage = () =>{
+  loadMessage = () => {
     this.props.onLoadIndividualMessages(this.props.messageId);
   }
 
@@ -49,8 +49,8 @@ class IndividualChat extends Component {
   }
 
   _keyboardDidShow = () => {
-    if(this.refs.scrollView){
-    this.refs.scrollView.scrollToEnd({ animated: true })
+    if (this.refs.scrollView) {
+      this.refs.scrollView.scrollToEnd({ animated: true })
     }
   }
 
@@ -78,7 +78,8 @@ class IndividualChat extends Component {
               allMessages={this.props.individualMessages}
               messageId={this.props.messageId}
               messagetriger={this.props.messagetriger}
-              deleteIndividualMessage = {this.props.ondeleteIndividualMessage}
+              deleteIndividualMessage={this.props.ondeleteIndividualMessage}
+              onUpdateOpenIndividualMessageAt={this.props.onUpdateOpenIndividualMessageAt}
             />
           </ScrollView>
           {/* <View style={styles.multiSwitchContainer}>
@@ -124,7 +125,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onLoadIndividualMessages: (messageId) => dispatch(getIndividualMessages(messageId)),
     onAddIndividualMessage: (message, messageId) => dispatch(addIndividualMessage(message, messageId)),
-    ondeleteIndividualMessage: (messageId, individualMessageId) => dispatch(deleteIndividualMessage(messageId, individualMessageId))
+    ondeleteIndividualMessage: (messageId, individualMessageId) => dispatch(deleteIndividualMessage(messageId, individualMessageId)),
+    onUpdateOpenIndividualMessageAt: (messageId) => dispatch(updateOpenIndividualMessageAt(messageId))
   };
 };
 

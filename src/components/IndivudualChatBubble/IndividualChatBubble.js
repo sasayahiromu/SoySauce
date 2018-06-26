@@ -26,6 +26,7 @@ class IndivudualChatBubble extends Component {
   }
 
   render() {
+    console.log('hellowww')
     thumbnail = (
       <Thumbnail small source={{ uri: "https://facebook.github.io/react-native/docs/assets/favicon.png" }} style={{ width: 25, height: 25 }} />
     )

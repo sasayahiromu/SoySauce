@@ -277,6 +277,70 @@ export const tempAddIndividualMessage = (message, sender_nick_name, sender_uid, 
   }
 }
 
+export const updateOpenIndividualMessageAt = (messageId) => {
+  return (dispatch, getState) => {
+    const authUid = getState().auth.uid.slice(0);
+    let borrowerUid = '';
+    let lenderUid = '';
+
+    firebase.firestore()
+      .collection('deals')
+      .doc(messageId)
+      .get()
+      .then(documentSnapshot => {
+        dealLastAt = documentSnapshot._data.deal_last_at
+        borrowerUid = documentSnapshot._data.borrower_uid;
+        lenderUid = documentSnapshot._data.lender_uid;
+        borrowerReadAt = documentSnapshot._data.borrower_last_read_at;
+        lenderReadAt = documentSnapshot._data.lender_last_read_at;
+
+        let lastReadAt;
+        if (borrowerUid === authUid) {
+          lastReadAt = borrowerReadAt
+        }
+        if (lenderUid === authUid) {
+          lastReadAt = lenderReadAt
+        }
+
+        if (!!dealLastAt && !!lastReadAt && (!lastReadAt || dealLastAt.getTime() > lastReadAt.getTime())) {
+          console.log('wettt')
+
+          firebase.firestore()
+          .collection('users')
+          .doc(authUid)
+          .update({
+            last_read_at: firebase.firestore.FieldValue.serverTimestamp()
+          })
+
+
+          if (borrowerUid === authUid) {
+            console.log('1')
+            firebase.firestore()
+              .collection('deals')
+              .doc(messageId)
+              .update({
+                borrower_last_read_at: firebase.firestore.FieldValue.serverTimestamp()
+              })
+          }
+          if (lenderUid === authUid) {
+            console.log('2')
+            firebase.firestore()
+              .collection('deals')
+              .doc(messageId)
+              .update({
+                lender_last_read_at: firebase.firestore.FieldValue.serverTimestamp()
+              })
+          }
+        }
+      })
+      .catch(err => {
+        console.log(err)
+        alert('updateOpenIndividualMessageAt error');
+      })
+  }
+}
+
+
 export const addDeals =
   (borrowerNickname,
     borrowerUid,
@@ -366,6 +430,7 @@ export const getDeals = () => {
       .get()
       .then(documentSnapshot => {
         let deals = []
+        console.log(documentSnapshot)
         const dealsIds = documentSnapshot._data.deals;
         let roopNum = 0
         console.log(dealsIds)
@@ -382,15 +447,11 @@ export const getDeals = () => {
                 }
               )
               roopNum += 1;
-              console.log(roopNum)
-              console.log(Object.keys(dealsIds).length)
-              console.log(deals, 'a')
               if (roopNum === Object.keys(dealsIds).length) {
                 deals.sort(function (a, b) {
                   // あとでlastupdateに変える
                   return a.deal_last_at > b.deal_last_at ? -1 : 1;
                 })
-                console.log(deals, 'b');
                 dispatch(setDeals(deals));
               }
             })

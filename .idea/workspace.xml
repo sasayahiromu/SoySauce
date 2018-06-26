@@ -2,13 +2,110 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2d729b8-55bb-4895-8b5c-a8a379f7e100" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/4.4/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/android/.gradle/4.4/fileHashes/fileHashes.bin" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/4.4/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/android/.gradle/4.4/fileHashes/fileHashes.lock" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/4.4/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/android/.gradle/4.4/javaCompile/javaCompile.lock" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/4.4/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/android/.gradle/4.4/taskHistory/taskHistory.bin" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/android/.gradle/4.4/taskHistory/taskHistory.lock" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" afterPath="$PROJECT_DIR$/android/app/build.gradle" />
+      <change beforePath="$PROJECT_DIR$/functions/index.js" afterPath="$PROJECT_DIR$/functions/index.js" />
+      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" afterPath="$PROJECT_DIR$/ios/Podfile.lock" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseCore/Firebase/Core/FIRLogger.m" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseCore/Firebase/Core/FIRLogger.m" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseCore/Firebase/Core/FIROptions.m" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseCore/Firebase/Core/FIROptions.m" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/firestore/local/maybe_document.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/firestore/local/maybe_document.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/firestore/local/maybe_document.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/firestore/local/mutation.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/firestore/local/mutation.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/firestore/local/mutation.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/firestore/local/target.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/firestore/local/target.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/firestore/local/target.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/api/annotations.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/api/annotations.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/api/annotations.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/api/http.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/api/http.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/api/http.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1beta1/common.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1beta1/common.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1beta1/common.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1beta1/document.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1beta1/document.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1beta1/document.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1beta1/firestore.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1beta1/firestore.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1beta1/firestore.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1beta1/query.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1beta1/query.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1beta1/query.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1beta1/write.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1beta1/write.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1beta1/write.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/any.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/any.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/any.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/empty.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/empty.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/empty.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/struct.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/struct.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/struct.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/timestamp.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/timestamp.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/timestamp.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/wrappers.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/wrappers.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/wrappers.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/rpc/status.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/rpc/status.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/rpc/status.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/type/latlng.pb.c" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/type/latlng.pb.c" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/type/latlng.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/API/FIRFirestore.mm" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/API/FIRFirestore.mm" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/API/FSTUserDataConverter.mm" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/API/FSTUserDataConverter.mm" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Core/FSTQuery.mm" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Core/FSTQuery.mm" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Core/FSTSyncEngine.mm" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Core/FSTSyncEngine.mm" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Core/FSTView.mm" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Core/FSTView.mm" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Local/FSTLevelDB.mm" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Local/FSTLevelDB.mm" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Local/FSTLocalStore.mm" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Local/FSTLocalStore.mm" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Model/FSTFieldValue.mm" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Model/FSTFieldValue.mm" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Remote/FSTDatastore.mm" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Remote/FSTDatastore.mm" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Remote/FSTRemoteEvent.h" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Remote/FSTRemoteEvent.h" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Remote/FSTRemoteEvent.mm" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Remote/FSTRemoteEvent.mm" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Remote/FSTRemoteStore.h" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Remote/FSTRemoteStore.h" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Remote/FSTRemoteStore.mm" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Remote/FSTRemoteStore.mm" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Remote/FSTSerializerBeta.mm" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Remote/FSTSerializerBeta.mm" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Remote/FSTStream.mm" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Remote/FSTStream.mm" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Remote/FSTWatchChange.mm" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/Source/Remote/FSTWatchChange.mm" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/auth/credentials_provider.h" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/auth/credentials_provider.h" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/auth/empty_credentials_provider.cc" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/auth/empty_credentials_provider.cc" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/auth/empty_credentials_provider.h" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/auth/empty_credentials_provider.h" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/auth/firebase_credentials_provider_apple.h" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/auth/firebase_credentials_provider_apple.h" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/auth/firebase_credentials_provider_apple.mm" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/auth/firebase_credentials_provider_apple.mm" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/nanopb/reader.cc" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/nanopb/reader.cc" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/nanopb/reader.h" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/nanopb/reader.h" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/nanopb/writer.cc" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/nanopb/writer.cc" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/remote/serializer.cc" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/remote/serializer.cc" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/comparison.cc" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/comparison.cc" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/comparison.h" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/comparison.h" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/hard_assert_apple.mm" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/hard_assert_apple.mm" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/hashing.h" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/hashing.h" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/status.cc" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/status.cc" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/status.h" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/status.h" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/statusor.h" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/statusor.h" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/string_format.h" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/string_format.h" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/string_util.h" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseFirestore/Firestore/core/src/firebase/firestore/util/string_util.h" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseInstanceID/CHANGELOG.md" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseInstanceID/CHANGELOG.md" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/FirebaseInstanceID/Frameworks/FirebaseInstanceID.framework/FirebaseInstanceID" afterPath="$PROJECT_DIR$/ios/Pods/FirebaseInstanceID/Frameworks/FirebaseInstanceID.framework/FirebaseInstanceID" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/annotations.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/any.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/common.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/document.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/empty.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/firestore.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/http.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/latlng.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/maybe_document.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/mutation.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/query.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/status.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/struct.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/target.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/timestamp.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/wrappers.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/FirebaseFirestore/write.pb.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Manifest.lock" afterPath="$PROJECT_DIR$/ios/Pods/Manifest.lock" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/project.pbxproj" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Target Support Files/FirebaseCore/FirebaseCore.xcconfig" afterPath="$PROJECT_DIR$/ios/Pods/Target Support Files/FirebaseCore/FirebaseCore.xcconfig" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Target Support Files/FirebaseFirestore/FirebaseFirestore.xcconfig" afterPath="$PROJECT_DIR$/ios/Pods/Target Support Files/FirebaseFirestore/FirebaseFirestore.xcconfig" />
+      <change beforePath="$PROJECT_DIR$/src/components/IndivudualChatBubble/IndividualChatBubble.js" afterPath="$PROJECT_DIR$/src/components/IndivudualChatBubble/IndividualChatBubble.js" />
+      <change beforePath="$PROJECT_DIR$/src/screens/MainTabs/MainTabs.js" afterPath="$PROJECT_DIR$/src/screens/MainTabs/MainTabs.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,9 +144,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="306" />
-    <option name="y" value="-959" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="438" />
+    <option name="y" value="202" />
     <option name="width" value="1360" />
     <option name="height" value="799" />
   </component>
@@ -68,6 +165,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -79,7 +178,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -122,7 +220,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -248,7 +345,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="306" y="-959" width="1360" height="799" extended-state="0" />
+    <frame x="438" y="202" width="1360" height="799" extended-state="1" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -288,6 +385,14 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/App.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">

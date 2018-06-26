@@ -15,8 +15,6 @@ class IndividualBubbleList extends Component {
         data={this.props.allMessages[this.props.messageId]}
         extradata={this.props.messagetriger}
         renderItem={({ item, index }) => {
-
-          console.log(item, index)
           let date;
           let dateBox = null;
           if (item.sent_at) {

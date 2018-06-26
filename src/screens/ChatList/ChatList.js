@@ -4,6 +4,7 @@ import { TouchableOpacity, View, ActivityIndicator } from 'react-native'
 import { getDeals, getIndividualMessages } from '../../store/actions/index';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
+import checkUnreadIndex from '../../utility/unreadIndex'
 
 
 class ChatList extends Component {
@@ -46,34 +47,14 @@ class ChatList extends Component {
     }
 
     //既読確認
-    var unreadIndex = [99999];//空だとなぜかpushできない
-    for (let i = 0; i < this.props.deals.length; i++) {
-      if (!!this.props.deals[i].deal_last_at) {
-        if (this.props.authUid === this.props.deals[i].borrower_uid) {
-          if (!this.props.deals[i].borrower_last_read_at) { unreadIndex.push(i) }
-          else {
-            if (this.props.deals[i].borrower_last_read_at.getTime() < this.props.deals[i].deal_last_at) {
-              unreadIndex.push(i)
-            }
-          }
-        }
-        if (this.props.authUid === this.props.deals[i].lender_uid) {
-          if (!this.props.deals[i].lender_last_read_at) { unreadIndex.push(i) }
-          else {
-            if (this.props.deals[i].lender_last_read_at.getTime() < this.props.deals[i].deal_last_at) {
-              unreadIndex.push(i)
-            }
-          }
-        }
-      }
-    }
+    var unreadIndex = checkUnreadIndex(this.props.deals, this.props.authUid)
     console.log(unreadIndex)
     return (
       <Container>
         <Content>
           <List dataArray={this.props.deals}
-            renderRow={(item,_,index) => {
-              console.log(unreadIndex,parseInt(index, 10),unreadIndex.indexOf(parseInt(index, 10)))
+            renderRow={(item, _, index) => {
+              console.log(unreadIndex, parseInt(index, 10), unreadIndex.indexOf(parseInt(index, 10)))
               const isUnreaded = (unreadIndex.indexOf(parseInt(index, 10)) !== -1)
               let date;
               if (item.deal_last_at.toLocaleDateString()[1] === '/' || item.deal_last_at.toLocaleDateString()[2] === '/') {
@@ -84,7 +65,7 @@ class ChatList extends Component {
               let name = item.borrower_nick_name;
               if (this.props.authUid === item.borrower_uid) name = item.lender_nick_name;
               return (
-                <View style={{ backgroundColor: isUnreaded=== true ? '#B1F9D0' : null }}>
+                <View style={{ backgroundColor: isUnreaded === true ? '#B1F9D0' : null }}>
                   <ListItem button onPress={() => { this.startIndividualChat(item.messageId, item.initial_message) }} >
                     <Body>
                       <View style={{ flexDirection: 'row' }}>

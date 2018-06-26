@@ -278,6 +278,7 @@ export const tempAddIndividualMessage = (message, sender_nick_name, sender_uid, 
 }
 
 export const updateOpenIndividualMessageAt = (messageId) => {
+  console.log('ssssssssssssssssssssssss')
   return (dispatch, getState) => {
     const authUid = getState().auth.uid.slice(0);
     let borrowerUid = '';
@@ -302,8 +303,7 @@ export const updateOpenIndividualMessageAt = (messageId) => {
           lastReadAt = lenderReadAt
         }
 
-        if (!!dealLastAt && !!lastReadAt && (!lastReadAt || dealLastAt.getTime() > lastReadAt.getTime())) {
-          console.log('wettt')
+        if (!!dealLastAt  && (!lastReadAt || dealLastAt.getTime() > lastReadAt.getTime())) {
 
           firebase.firestore()
           .collection('users')
@@ -323,7 +323,6 @@ export const updateOpenIndividualMessageAt = (messageId) => {
               })
           }
           if (lenderUid === authUid) {
-            console.log('2')
             firebase.firestore()
               .collection('deals')
               .doc(messageId)

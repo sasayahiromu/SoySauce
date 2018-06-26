@@ -2,19 +2,27 @@ import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from "react-redux";
 
-import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 import BulletinBoardScreen from '../BulletinBoard/BulletinBoard'
 import Drawer from 'react-native-drawer'
 import SideDrawer from '../SideDrawer/SideDrawer'
 import ChatList from '../ChatList/ChatList'
 import firebase from 'react-native-firebase';
 import type { RemoteMessage } from 'react-native-firebase';
+import DefaultTabBar from '../../components/UI/CustomTabBar/CustomTabBar'
+import checkUnreadIndex from '../../utility/unreadIndex'
+import { getDeals } from '../../store/actions/index';
+
 
 class MainTabs extends Component {
 
   state = {
     drawerIsClosed: true
   }
+  componentWillMount() {
+    this.props.onGetDeals();
+  }
+
   componentDidMount() {
     this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
       console.log(user)
@@ -41,10 +49,17 @@ class MainTabs extends Component {
       // alert('message')
       // alert(message)
     });
+    // Firestoreの「messages」コレクションを参照
+    this.ref = firebase.firestore()
+      .collection('users')
+      .doc(this.props.authUid);
+    // refの更新時イベントにonCollectionUpdate登録
+    this.unsubscribe = this.ref.onSnapshot(this.props.onGetDeals);
   }
 
   componentWillUnmount() {
     this.messageListener();
+    this.unsubscribe();
   }
 
   constructor(props) {
@@ -75,6 +90,12 @@ class MainTabs extends Component {
       keyboardShouldPersistTaps: 'always',
       keyboardDismissMode: 'none',
     };
+    var unreadIndex = checkUnreadIndex(this.props.deals, this.props.authUid);
+    let isThereUnread = false;
+    console.log(unreadIndex, unreadIndex.length, 'rere')
+    if (unreadIndex.length !== 0) {
+      isThereUnread = true;
+    }
     return (
       <Drawer
         type="overlay"
@@ -86,8 +107,14 @@ class MainTabs extends Component {
       >
         <ScrollableTabView
           initialPage={0}
-          renderTabBar={() => <DefaultTabBar style={{ height: 40 }} tabStyle={{ paddingBottom: 0 }}
-          />}
+          renderTabBar={() =>
+            <DefaultTabBar
+              style={{ height: 40 }}
+              tabStyle={{ paddingBottom: 0 }}
+              chatTabName='チャット'
+              isThereUnread={isThereUnread}
+              unreadStyle={{ backgroundColor: 'red' }}
+            />}
           contentProps={scrollBarProps}
         >
           <BulletinBoardScreen tabLabel='掲示板' navigator={this.props.navigator} />
@@ -100,8 +127,16 @@ class MainTabs extends Component {
 
 const mapStateToProps = state => {
   return {
-    authUid: state.auth.uid,
+    deals: state.messages.deals,
+    authUid: state.auth.uid
   };
 };
 
-export default connect(mapStateToProps, null)(MainTabs);
+const mapDispatchToProps = dispatch => {
+  return {
+    onGetDeals: () => dispatch(getDeals()),
+    // onGetIndividualMessages: (messageId) => dispatch(getIndividualMessages(messageId))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainTabs);

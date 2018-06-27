@@ -7,7 +7,7 @@ import IndivudualChatBubble from '../IndivudualChatBubble/IndividualChatBubble'
 class IndividualBubbleList extends Component {
 
   render() {
-    this.props.onUpdateOpenIndividualMessageAt(this.props.messageId);
+    // this.props.onUpdateOpenIndividualMessageAt(this.props.messageId);
     console.log(this.props.allMessages[this.props.messageId])
     return (
       <FlatList

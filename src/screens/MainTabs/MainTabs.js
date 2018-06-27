@@ -17,9 +17,11 @@ import { getDeals } from '../../store/actions/index';
 class MainTabs extends Component {
 
   state = {
-    drawerIsClosed: true
+    drawerIsClosed: true,
+    loadedDeals: false
   }
   componentWillMount() {
+    console.log(!this.props.authUid)
     this.props.onGetDeals();
   }
 
@@ -86,6 +88,16 @@ class MainTabs extends Component {
   };
 
   render() {
+    console.log(1)
+    if(!this.state.loadedDeals){
+      console.log(2)
+      if(!!this.props.authUid){
+        console.log(3)
+        this.props.onGetDeals();
+        this.setState({loadedDeals: true});
+      }
+    }
+
     const scrollBarProps = {
       keyboardShouldPersistTaps: 'always',
       keyboardDismissMode: 'none',

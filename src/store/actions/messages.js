@@ -4,6 +4,7 @@ import firebase from 'react-native-firebase';
 
 export const addMessage = (message, type) => {
   return (dispatch, getState) => {
+    console.log('addMessage')
     sender_uid = getState().auth.uid.slice(0);
     sender_nick_name = getState().auth.nickname.slice(0);
     dispatch(tempAddMessage(message, sender_nick_name, sender_uid, type))
@@ -30,13 +31,11 @@ export const addMessage = (message, type) => {
       });
   }
 }
-///////ここでエラーでまくり
+
 //addを即時反映させるため
 export const tempAddMessage = (message, sender_nick_name, sender_uid, type) => {
   return (dispatch, getState) => {
-    // console.log(getState().messages.messages)
-    console.log(getState().messages.messages)
-
+    console.log('tempAddMessage')
     const messages = getState().messages.messages.slice(0)
     // var messages = {}
     // Object.assign(messages , getState().messages.messages);
@@ -55,6 +54,7 @@ export const tempAddMessage = (message, sender_nick_name, sender_uid, type) => {
 
 export const deleteMessage = (messageId) => {
   return (dispatch) => {
+    console.log('deleteMessage')
     dispatch(tempDeleteMessage(messageId))
     firebase.firestore()
       .collection('chat_messages')
@@ -74,6 +74,7 @@ export const deleteMessage = (messageId) => {
 
 export const tempDeleteMessage = (messageId) => {
   return (dispatch, getState) => {
+    console.log('tempDeleteMessage')
     var messages = getState().messages.messages.slice(0)
     console.log(messages);
     messages.some(function (v, i) {
@@ -84,6 +85,8 @@ export const tempDeleteMessage = (messageId) => {
 }
 
 export const setMessages = messages => {
+  console.log('setMessages')
+
   return {
     type: SET_MESSAGES,
     messages: messages
@@ -92,6 +95,7 @@ export const setMessages = messages => {
 
 export const getMessages = () => {
   return dispatch => {
+    console.log('getMessages')
     firebase.firestore()
       .collection('chat_messages')
       .doc('chat-01')
@@ -117,6 +121,7 @@ export const getMessages = () => {
 };
 
 export const getIndividualMessages = (messageId) => {
+  console.log('getIndividualMessages')
   return dispatch => {
     firebase.firestore()
       .collection('deals')
@@ -144,6 +149,7 @@ export const getIndividualMessages = (messageId) => {
 };
 
 export const setIndividualMessages = (messages, messageId) => {
+  console.log('setIndividualMessages')
   return {
     type: SET_INDIVIDUAL_MESSAGES,
     messages: messages,
@@ -153,6 +159,7 @@ export const setIndividualMessages = (messages, messageId) => {
 
 
 export const addIndividualMessage = (message, messageId) => {
+  console.log('addIndividualMessage')
   return (dispatch, getState) => {
     sender_uid = getState().auth.uid.slice(0);
     sender_nick_name = getState().auth.nickname.slice(0);
@@ -181,6 +188,7 @@ export const addIndividualMessage = (message, messageId) => {
 }
 
 export const deleteIndividualMessage = (messageId, Individualkey) => {
+  console.log('deleteIndividualMessage')
   return (dispatch) => {
     dispatch(tempDeleteIndividualMessage(messageId, Individualkey));
     firebase.firestore()
@@ -203,6 +211,7 @@ export const deleteIndividualMessage = (messageId, Individualkey) => {
 }
 
 export const tempDeleteIndividualMessage = (messageId, Individualkey) => {
+  console.log('tempDeleteIndividualMessage')
   return (dispatch, getState) => {
     var individualMessages = getState().messages.individualMessages[messageId].slice()
     console.log(individualMessages)
@@ -214,6 +223,7 @@ export const tempDeleteIndividualMessage = (messageId, Individualkey) => {
 }
 
 export const updateUserLaseMessageAt = (messageId) => {
+  console.log('updateUserLaseMessageAt')
   return (dispatch, getState) => {
     const authUid = getState().auth.uid.slice(0);
     let senderUid = '';
@@ -246,6 +256,7 @@ export const updateUserLaseMessageAt = (messageId) => {
 }
 
 export const updateDealMessageState = (message, messageId) => {
+  console.log('updateDealMessageState')
   return (dispatch) => {
     let lastMessage = '';
     if (message.length < 25) { lastMessage = message }
@@ -262,7 +273,8 @@ export const updateDealMessageState = (message, messageId) => {
 
 
 //addを即時反映させるため
-export const tempAddIndividualMessage = (message, sender_nick_name, sender_uid, messageId) => {
+export const tempAddIndividualMessage= (message, sender_nick_name, sender_uid, messageId) => {
+  console.log('tempAddIndividualMessage')
   return (dispatch, getState) => {
     const messages = getState().messages.individualMessages
     const messageData = {
@@ -278,7 +290,7 @@ export const tempAddIndividualMessage = (message, sender_nick_name, sender_uid, 
 }
 
 export const updateOpenIndividualMessageAt = (messageId) => {
-  console.log('ssssssssssssssssssssssss')
+  console.log('updateOpenIndividualMessageAt')
   return (dispatch, getState) => {
     const authUid = getState().auth.uid.slice(0);
     let borrowerUid = '';
@@ -349,7 +361,7 @@ export const addDeals =
     initialMessage,
   ) => {
     return (dispatch) => {
-
+      console.log('addDeals')
       let newInitialMessage = '';
       if (initialMessage.length < 19) { newInitialMessage = initialMessage }
       else { newInitialMessage = initialMessage.slice(0, 17) + '...' }
@@ -381,6 +393,7 @@ export const addDeals =
   }
 
 export const disabledButton = (messageId) => {
+  console.log('disabledButton')
   return (dispatch) => {
     firebase.firestore()
       .collection('chat_messages')
@@ -395,6 +408,7 @@ export const disabledButton = (messageId) => {
 }
 
 export const addDealsToUser = (messageId, userUid) => {
+  console.log('addDealsToUser')
   return (dispatch) => {
     firebase.firestore()
       .collection('users')
@@ -421,8 +435,11 @@ export const addDealsToUser = (messageId, userUid) => {
 
 
 export const getDeals = () => {
+  console.log('getDeals')
   return (dispatch, getState) => {
     const auth_uid = getState().auth.uid.slice(0);
+    if(!!auth_uid)
+    {
     firebase.firestore()
       .collection('users')
       .doc(auth_uid)
@@ -464,11 +481,13 @@ export const getDeals = () => {
         console.log(err)
         alert('getDeals error');
       })
+    }
   }
 
 }
 
 export const setDeals = (deals) => {
+  console.log('setDeals')
   return {
     type: SET_DEALS,
     deals: deals

@@ -27,6 +27,7 @@ class IndividualChat extends Component {
 
   componentDidMount() {
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    console.log('IndividualChat')
     this.ref = firebase.firestore().collection('deals').doc(this.props.messageId);
     this.unsubscribe = this.ref.onSnapshot(this.loadMessage);
   }
@@ -62,6 +63,7 @@ class IndividualChat extends Component {
 
 
   render() {
+    console.log('IndividualChat')
     if (!this.props.individualMessages[this.props.messageId]) {
       return (
         <View style={{ flex: 1, justifyContent: 'center' }}><ActivityIndicator /></View>
@@ -85,11 +87,13 @@ class IndividualChat extends Component {
           {/* <View style={styles.multiSwitchContainer}>
             <MultiSwitch ref={ref => (this.multiSwitch = ref)} />
           </View> */}
-          <InputBar onSendPressed={() => { this.addMessageHandler() }}
-            onSizeChange={() => { }}
-            onChangeText={(text) => { this._onChangeInputBarText(text) }}
-            text={this.state.inputBarText}
-          />
+          {this.props.individualMessages &&
+            this.props.individualMessages[this.props.messageId].length < 50 &&
+            <InputBar onSendPressed={() => { this.addMessageHandler() }}
+              onSizeChange={() => { }}
+              onChangeText={(text) => { this._onChangeInputBarText(text) }}
+              text={this.state.inputBarText}
+            />}
           {Platform.OS === "ios" && <KeyboardSpacer />}
         </View>
       </SafeAreaView>

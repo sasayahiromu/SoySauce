@@ -27,6 +27,7 @@ class MainTabs extends Component {
 
   componentDidMount() {
     this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
+      console.log('MainTabs')
       console.log(user)
       firebase.messaging().hasPermission()
         .then(enabled => {
@@ -47,10 +48,10 @@ class MainTabs extends Component {
           }
         });
     })
-    this.messageListener = firebase.messaging().onMessage((message: RemoteMessage) => {
-      // alert('message')
-      // alert(message)
-    });
+    // this.messageListener = firebase.messaging().onMessage((message: RemoteMessage) => {
+    //   // alert('message')
+    //   // alert(message)
+    // });
     // Firestoreの「messages」コレクションを参照
     this.ref = firebase.firestore()
       .collection('users')

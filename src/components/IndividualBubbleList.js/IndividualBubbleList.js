@@ -7,7 +7,8 @@ import IndivudualChatBubble from '../IndivudualChatBubble/IndividualChatBubble'
 class IndividualBubbleList extends Component {
 
   render() {
-    // this.props.onUpdateOpenIndividualMessageAt(this.props.messageId);
+    console.log('IndividualBubbleList', this.props.allMessages[this.props.messageId])
+    this.props.onUpdateOpenIndividualMessageAt(this.props.messageId);
     console.log(this.props.allMessages[this.props.messageId])
     return (
       <FlatList
@@ -15,6 +16,44 @@ class IndividualBubbleList extends Component {
         data={this.props.allMessages[this.props.messageId]}
         extradata={this.props.messagetriger}
         renderItem={({ item, index }) => {
+          console.log(index)
+          let messageMaxAlert = null;
+          if (index === 19) {
+            messageMaxAlert = (<View style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              marginTop: 10
+            }}>
+              <Button rounded dark disabled style={{ height: 25 }}>
+                <Text style={{ fontSize: 10, color: 'white' }}>メッセージ数上限まで残り30です</Text>
+              </Button>
+            </View>)
+          }
+          if (index === 39) {
+            messageMaxAlert = (<View style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              marginTop: 10
+            }}>
+              <Button rounded dark disabled style={{ height: 25 }}>
+                <Text style={{ fontSize: 10, color: 'white' }}>メッセージ数上限まで残り10です</Text>
+              </Button>
+            </View>)
+          }
+          if (index === 49) {
+            messageMaxAlert = (<View style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              marginTop: 10
+            }}>
+              <Button rounded dark disabled style={{ height: 25 }}>
+                <Text style={{ fontSize: 10, color: 'white' }}>メッセージ数上限に達しました</Text>
+              </Button>
+            </View>)
+          }
           let date;
           let dateBox = null;
           if (item.sent_at) {
@@ -52,6 +91,7 @@ class IndividualBubbleList extends Component {
                 messageId={this.props.messageId} //全体チャット内のID
                 deleteIndividualMessage={this.props.deleteIndividualMessage}
               />
+              {messageMaxAlert}
             </View>
           )
         }}

@@ -57,10 +57,12 @@ class ChatList extends Component {
               console.log(unreadIndex, parseInt(index, 10), unreadIndex.indexOf(parseInt(index, 10)))
               const isUnreaded = (unreadIndex.indexOf(parseInt(index, 10)) !== -1)
               let date;
-              if (item.deal_last_at.toLocaleDateString()[1] === '/' || item.deal_last_at.toLocaleDateString()[2] === '/') {
-                date = item.deal_last_at.toLocaleDateString().slice(0, -5)
-              } else {
-                date = item.deal_last_at.toLocaleDateString().slice(5)
+              if (item.deal_last_at) {
+                if (item.deal_last_at.toLocaleDateString()[1] === '/' || item.deal_last_at.toLocaleDateString()[2] === '/') {
+                  date = item.deal_last_at.toLocaleDateString().slice(0, -5)
+                } else {
+                  date = item.deal_last_at.toLocaleDateString().slice(5)
+                }
               }
               let name = item.borrower_nick_name;
               if (this.props.authUid === item.borrower_uid) name = item.lender_nick_name;
@@ -76,7 +78,7 @@ class ChatList extends Component {
                       <Text note>{item.last_deal_message}</Text>
                     </Body>
                     <Right>
-                      <Text note>{item.deal_last_at.toTimeString().slice(0, 5)}</Text>
+                      <Text note>{item.deal_last_at && item.deal_last_at.toTimeString().slice(0, 5)}</Text>
                       <Text note>{date}</Text>
                     </Right>
                   </ListItem>

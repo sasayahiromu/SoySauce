@@ -24,6 +24,7 @@ class BulletinBoardScreen extends Component {
 
   componentDidMount() {
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    console.log('BulletionBoard')
     // Firestoreの「messages」コレクションを参照
     this.ref = firebase.firestore()
       .collection('chat_messages')

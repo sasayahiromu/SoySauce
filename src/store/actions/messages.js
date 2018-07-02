@@ -139,6 +139,7 @@ export const getIndividualMessages = (messageId) => {
             key: querySnapshot.docs[i].id
           });
         }
+        console.log(messages.length,'messageLength')
         dispatch(setIndividualMessages(messages, messageId));
       })
       .catch(err => {
@@ -473,6 +474,7 @@ export const getDeals = () => {
             })
             .catch(err => {
               console.log(err)
+              alert(err)
               alert('importDeals error');
             })
         }

@@ -7,6 +7,7 @@ import communityCorrespondingId from '../../utility/communityId'
 //userの他の情報をあとで適用
 
 export const tryAuth = (authData, authMode) => {
+  console.log('tryAuth')
   return dispatch => {
     dispatch(uiStartLoading());
     if (authMode === "login") {
@@ -18,6 +19,7 @@ export const tryAuth = (authData, authMode) => {
 };
 
 export const authSignup = authData => {
+  console.log('authSignup')
   return dispatch => {
     firebase.auth()
       .createUserAndRetrieveDataWithEmailAndPassword(authData.email, authData.password)
@@ -79,6 +81,7 @@ export const authSignup = authData => {
 };
 
 export const authSignin = authData => {
+  console.log('authSignin')
   return dispatch => {
     console.log(authData)
     firebase.auth()
@@ -101,6 +104,7 @@ export const authSignin = authData => {
 }
 
 export const registerUser = uid => {
+  console.log('registerUser')
   return dispatch => {
     firebase.firestore()
       .collection('users')
@@ -120,6 +124,7 @@ export const registerUser = uid => {
 }
 
 export const registerUid = uid => {
+  console.log('registerUid')
   console.log(uid)
   return {
     type: REGISTER_UID,
@@ -128,6 +133,7 @@ export const registerUid = uid => {
 };
 
 export const registerNickname = nickname => {
+  console.log('registerNickname')
   return {
     type: REGISTER_NICKNAME,
     nickname: nickname

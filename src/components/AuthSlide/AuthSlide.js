@@ -86,6 +86,7 @@ class AuthScreen extends Component {
   }
 
   componentDidMount() {
+    console.log('AuthSlide')
       this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
       if(user){
         console.log('hereeeeee',user)

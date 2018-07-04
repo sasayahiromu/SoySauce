@@ -2,17 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2d729b8-55bb-4895-8b5c-a8a379f7e100" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/ios/SoySauce.xcodeproj/xcshareddata/xcschemes/SoySauce.xcscheme" afterPath="$PROJECT_DIR$/ios/SoySauce.xcodeproj/xcshareddata/xcschemes/SoySauce.xcscheme" />
-      <change beforePath="$PROJECT_DIR$/src/components/AuthSlide/AuthSlide.js" afterPath="$PROJECT_DIR$/src/components/AuthSlide/AuthSlide.js" />
-      <change beforePath="$PROJECT_DIR$/src/components/BubbleList/BubbleList.js" afterPath="$PROJECT_DIR$/src/components/BubbleList/BubbleList.js" />
-      <change beforePath="$PROJECT_DIR$/src/components/IndividualBubbleList.js/IndividualBubbleList.js" afterPath="$PROJECT_DIR$/src/components/IndividualBubbleList.js/IndividualBubbleList.js" />
-      <change beforePath="$PROJECT_DIR$/src/components/IndivudualChatBubble/IndividualChatBubble.js" afterPath="$PROJECT_DIR$/src/components/IndivudualChatBubble/IndividualChatBubble.js" />
-      <change beforePath="$PROJECT_DIR$/src/components/MessageBubble/MessageBubble.js" afterPath="$PROJECT_DIR$/src/components/MessageBubble/MessageBubble.js" />
-      <change beforePath="$PROJECT_DIR$/src/screens/BulletinBoard/BulletinBoard.js" afterPath="$PROJECT_DIR$/src/screens/BulletinBoard/BulletinBoard.js" />
-      <change beforePath="$PROJECT_DIR$/src/screens/IndivudualChat/IndividualChat.js" afterPath="$PROJECT_DIR$/src/screens/IndivudualChat/IndividualChat.js" />
-      <change beforePath="$PROJECT_DIR$/src/screens/MainTabs/MainTabs.js" afterPath="$PROJECT_DIR$/src/screens/MainTabs/MainTabs.js" />
-      <change beforePath="$PROJECT_DIR$/src/store/actions/auth.js" afterPath="$PROJECT_DIR$/src/store/actions/auth.js" />
-      <change beforePath="$PROJECT_DIR$/src/store/actions/messages.js" afterPath="$PROJECT_DIR$/src/store/actions/messages.js" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/4.4/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/android/.gradle/4.4/fileHashes/fileHashes.bin" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/4.4/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/android/.gradle/4.4/fileHashes/fileHashes.lock" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/4.4/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/android/.gradle/4.4/javaCompile/javaCompile.lock" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/4.4/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/android/.gradle/4.4/taskHistory/taskHistory.bin" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/android/.gradle/4.4/taskHistory/taskHistory.lock" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />

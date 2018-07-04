@@ -383,6 +383,7 @@
 		240DDC3120C1A7E20028393E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "SoySauce/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		243C30C020C523DC0052ABAC /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		243C30EE20C524B30052ABAC /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		248DA7CF20ECA94F00FCDB51 /* SoySauce.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SoySauce.entitlements; path = SoySauce/SoySauce.entitlements; sourceTree = "<group>"; };
 		24FDA8F820BFC254003FD5EE /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* SoySauce-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SoySauce-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* SoySauce-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SoySauce-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -549,6 +550,7 @@
 		13B07FAE1A68108700A75B9A /* SoySauce */ = {
 			isa = PBXGroup;
 			children = (
+				248DA7CF20ECA94F00FCDB51 /* SoySauce.entitlements */,
 				240DDC3120C1A7E20028393E /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -835,8 +837,16 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = V5M834HY74;
+						DevelopmentTeam = 3YP5PZKU26;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1473,11 +1483,12 @@
 			baseConfigurationReference = 0D086E28E95ECBA047AAC047 /* Pods-SoySauce.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SoySauce/SoySauce.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = V5M834HY74;
+				DEVELOPMENT_TEAM = 3YP5PZKU26;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
@@ -1489,7 +1500,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Apart-SoySauce";
+				PRODUCT_BUNDLE_IDENTIFIER = karippe;
 				PRODUCT_NAME = SoySauce;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1501,10 +1512,11 @@
 			baseConfigurationReference = 4B832FB9988E87440D7097F4 /* Pods-SoySauce.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SoySauce/SoySauce.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V5M834HY74;
+				DEVELOPMENT_TEAM = 3YP5PZKU26;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
@@ -1516,7 +1528,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Apart-SoySauce";
+				PRODUCT_BUNDLE_IDENTIFIER = karippe;
 				PRODUCT_NAME = SoySauce;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";

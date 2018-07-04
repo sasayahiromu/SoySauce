@@ -61,7 +61,7 @@ class MainTabs extends Component {
   }
 
   componentWillUnmount() {
-    this.messageListener();
+    // this.messageListener();
     this.unsubscribe();
   }
 

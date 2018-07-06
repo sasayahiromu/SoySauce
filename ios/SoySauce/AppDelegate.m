@@ -16,7 +16,7 @@
 
 #import <Firebase.h>
 
-#import "RNFIRMessaging.h"
+
 
 @implementation AppDelegate
 
@@ -33,23 +33,10 @@
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   self.window.backgroundColor = [UIColor whiteColor];
   [[RCCManager sharedInstance] initBridgeWithBundleURL:jsCodeLocation launchOptions:launchOptions];
-  [FIRApp configure];
-  [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
+
   return YES;
 }
 
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
-{
-  [RNFIRMessaging willPresentNotification:notification withCompletionHandler:completionHandler];
-}
 
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler
-{
-  [RNFIRMessaging didReceiveNotificationResponse:response withCompletionHandler:completionHandler];
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler{
-  [RNFIRMessaging didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
-}
 
 @end

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { StyleSheet, FlatList, View } from "react-native";
 import { Button, Text } from 'native-base';
 import IndivudualChatBubble from '../IndivudualChatBubble/IndividualChatBubble'
+import timeToMonthDate from '../../utility/timeToMonthDate'
+
 
 
 class IndividualBubbleList extends Component {
@@ -54,14 +56,9 @@ class IndividualBubbleList extends Component {
               </Button>
             </View>)
           }
-          let date;
           let dateBox = null;
           if (item.sent_at) {
-            if (item.sent_at.toLocaleDateString()[1] === '/' || item.sent_at.toLocaleDateString()[2] === '/') {
-              date = item.sent_at.toLocaleDateString().slice(0, -5)
-            } else {
-              date = item.sent_at.toLocaleDateString().slice(5)
-            }
+            const date = timeToMonthDate(item.sent_at)
             if (index === 0 || this.props.allMessages[this.props.messageId][index].sent_at.toDateString()
               !== this.props.allMessages[this.props.messageId][index - 1].sent_at.toDateString()) {
               dateBox = (<View style={{

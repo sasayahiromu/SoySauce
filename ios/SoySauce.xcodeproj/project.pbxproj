@@ -25,9 +25,9 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		1876DA4352204C8592DEC788 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA855211139C4B17BECCD7FA /* FontAwesome.ttf */; };
-		240DDC5820C1A7E20028393E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 240DDC3120C1A7E20028393E /* GoogleService-Info.plist */; };
 		243C30ED20C523F50052ABAC /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 243C30EC20C523DC0052ABAC /* libRNVectorIcons.a */; };
 		243C30EF20C524B30052ABAC /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 243C30EE20C524B30052ABAC /* Ionicons.ttf */; };
+		24DB954C20EF393400791881 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24DB954B20EF393400791881 /* GoogleService-Info.plist */; };
 		24FDA92320BFC272003FD5EE /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24FDA92220BFC254003FD5EE /* libReactNativeNavigation.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -380,10 +380,10 @@
 		16EB840803E070CEAD496652 /* Pods-SoySauceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoySauceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoySauceTests/Pods-SoySauceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1850722C07D2411CAC807F7A /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		2306962B18764C018BF1481C /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		240DDC3120C1A7E20028393E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "SoySauce/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		243C30C020C523DC0052ABAC /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		243C30EE20C524B30052ABAC /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		248DA7CF20ECA94F00FCDB51 /* SoySauce.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SoySauce.entitlements; path = SoySauce/SoySauce.entitlements; sourceTree = "<group>"; };
+		24DB954B20EF393400791881 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "SoySauce/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		24FDA8F820BFC254003FD5EE /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* SoySauce-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SoySauce-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* SoySauce-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SoySauce-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -550,8 +550,8 @@
 		13B07FAE1A68108700A75B9A /* SoySauce */ = {
 			isa = PBXGroup;
 			children = (
+				24DB954B20EF393400791881 /* GoogleService-Info.plist */,
 				248DA7CF20ECA94F00FCDB51 /* SoySauce.entitlements */,
-				240DDC3120C1A7E20028393E /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -833,7 +833,7 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = V5M834HY74;
+						DevelopmentTeam = 3YP5PZKU26;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
@@ -1240,6 +1240,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				24DB954C20EF393400791881 /* GoogleService-Info.plist in Resources */,
 				AEB5E9409FB644E3A9FAF9EE /* Entypo.ttf in Resources */,
 				3F48C1A3F0C749A0B440A434 /* EvilIcons.ttf in Resources */,
 				B11B0F3A253E4623BFBCDB62 /* Feather.ttf in Resources */,
@@ -1252,7 +1253,6 @@
 				700553CAC6EC48FF8870B29A /* Octicons.ttf in Resources */,
 				39F1CF3E488F4BD186090F75 /* SimpleLineIcons.ttf in Resources */,
 				A3B0B5F6F0074C049801918A /* Zocial.ttf in Resources */,
-				240DDC5820C1A7E20028393E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1426,7 +1426,8 @@
 			baseConfigurationReference = 16EB840803E070CEAD496652 /* Pods-SoySauceTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = V5M834HY74;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3YP5PZKU26;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1456,8 +1457,9 @@
 			baseConfigurationReference = BEDEA69CC6514D71CA1CF804 /* Pods-SoySauceTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = V5M834HY74;
+				DEVELOPMENT_TEAM = 3YP5PZKU26;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
@@ -1502,7 +1504,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = karippe;
 				PRODUCT_NAME = SoySauce;
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1530,7 +1534,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = karippe;
 				PRODUCT_NAME = SoySauce;
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

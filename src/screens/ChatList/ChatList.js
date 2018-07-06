@@ -5,6 +5,7 @@ import { getDeals, getIndividualMessages } from '../../store/actions/index';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
 import checkUnreadIndex from '../../utility/unreadIndex'
+import timeToMonthDate from '../../utility/timeToMonthDate'
 
 
 class ChatList extends Component {
@@ -56,14 +57,7 @@ class ChatList extends Component {
             renderRow={(item, _, index) => {
               console.log(unreadIndex, parseInt(index, 10), unreadIndex.indexOf(parseInt(index, 10)))
               const isUnreaded = (unreadIndex.indexOf(parseInt(index, 10)) !== -1)
-              let date;
-              if (item.deal_last_at) {
-                if (item.deal_last_at.toLocaleDateString()[1] === '/' || item.deal_last_at.toLocaleDateString()[2] === '/') {
-                  date = item.deal_last_at.toLocaleDateString().slice(0, -5)
-                } else {
-                  date = item.deal_last_at.toLocaleDateString().slice(5)
-                }
-              }
+              const date = timeToMonthDate(item.deal_last_at)
               let name = item.borrower_nick_name;
               if (this.props.authUid === item.borrower_uid) name = item.lender_nick_name;
               return (

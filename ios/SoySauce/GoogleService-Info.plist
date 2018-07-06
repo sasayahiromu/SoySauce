@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>505701453151-9j300arjd7884068aa2816alnvhsbpv7.apps.googleusercontent.com</string>
+	<string>505701453151-v8u4adltvund0iqg3barusfeibib9n3v.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.505701453151-9j300arjd7884068aa2816alnvhsbpv7</string>
+	<string>com.googleusercontent.apps.505701453151-v8u4adltvund0iqg3barusfeibib9n3v</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAgUyKQGLRIZcgFrhoDyNFMuHmbaA5MV9Q</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>Apart-SoySauce</string>
+	<string>karippe</string>
 	<key>PROJECT_ID</key>
 	<string>soysauce-b5364</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:505701453151:ios:0ef3652fb60861b8</string>
+	<string>1:505701453151:ios:8559b2d4c7543f56</string>
 	<key>DATABASE_URL</key>
 	<string>https://soysauce-b5364.firebaseio.com</string>
 </dict>

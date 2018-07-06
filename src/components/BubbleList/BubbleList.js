@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, FlatList, View } from "react-native";
 import { Button, Text } from 'native-base';
 import MessageBubble from '../MessageBubble/MessageBubble'
+import timeToMonthDate from '../../utility/timeToMonthDate'
 
 const bubbleList = props => {
   return (
@@ -10,14 +11,9 @@ const bubbleList = props => {
       data={props.messages}
       renderItem={({ item, index }) => {
         console.log(index)
-        let date;
         let dateBox = null;
         if (item.sent_at) {
-          if (item.sent_at.toLocaleDateString()[1] === '/' || item.sent_at.toLocaleDateString()[2] === '/') {
-            date = item.sent_at.toLocaleDateString().slice(0, -5)
-          } else {
-            date = item.sent_at.toLocaleDateString().slice(5)
-          }
+          const date = timeToMonthDate(item.sent_at)
           if (index === 0 || props.messages[index].sent_at.toDateString() !== props.messages[index - 1].sent_at.toDateString()) {
             dateBox = (<View style={{
               flex: 1,

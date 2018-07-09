@@ -36,7 +36,7 @@ class IndividualChat extends Component {
     this.props.onLoadIndividualMessages(this.props.messageId);
   }
 
-  componentWillunmount() {
+  componentWillUnmount() {
     this.keyboardDidShowListener.remove();
     this.unsubscribe();
   }

@@ -8,9 +8,16 @@ import timeToMonthDate from '../../utility/timeToMonthDate'
 
 class IndividualBubbleList extends Component {
 
+  componentDidMount() {
+    this.props.onUpdateOpenIndividualMessageAt(this.props.messageId);
+  }
+
+  componentWillUnmount() {
+    this.props.onUpdateOpenIndividualMessageAt(this.props.messageId);
+  }
+
   render() {
     console.log('IndividualBubbleList', this.props.allMessages[this.props.messageId])
-    this.props.onUpdateOpenIndividualMessageAt(this.props.messageId);
     console.log(this.props.allMessages[this.props.messageId])
     return (
       <FlatList

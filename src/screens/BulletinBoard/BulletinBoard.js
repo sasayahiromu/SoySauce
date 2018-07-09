@@ -35,7 +35,7 @@ class BulletinBoardScreen extends Component {
     this.unsubscribe = this.ref.onSnapshot(this.props.onLoadMessages);
   }
 
-  componentWillunmount() {
+  componentWillUnmount() {
     this.keyboardDidShowListener.remove();
     // onCollectionUpdateの登録解除
     this.unsubscribe();

@@ -23,7 +23,7 @@ class ChatList extends Component {
   //   this.unsubscribe = this.ref.onSnapshot(this.props.onGetDeals);
   // }
 
-  // componentWillunmount() {
+  // componentWillUnmount() {
   //   // onCollectionUpdateの登録解除
   //   this.unsubscribe();
   // }

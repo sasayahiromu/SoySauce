@@ -17,6 +17,28 @@ class IndividualChat extends Component {
   state = {
     inputBarText: '',
     individualMessages: [],
+    props_individual: []
+  }
+
+  // componentWillReceiveProps(nextProps){
+  //   this.props.onUpdateOpenIndividualMessageAt(this.props.messageId);
+  // }
+  componentWillReceiveProps() {
+    console.log(this.state.props_individual, 'okml')
+    console.log(this.props.individualMessages[this.props.messageId], 'okml')
+    console.log(1, 'okml')
+    if (this.props.individualMessages) {
+      console.log(2, 'okml')
+      if (this.state.props_individual.length === 0) {
+        this.setState({ props_individual: this.props.individualMessages[this.props.messageId].slice() })
+        console.log(3, 'okml')
+        this.props.onUpdateOpenIndividualMessageAt(this.props.messageId);
+      } else if (this.state.props_individual.length !== this.props.individualMessages[this.props.messageId].length) {
+        this.setState({ props_individual: this.props.individualMessages[this.props.messageId].slice() })
+        console.log(4, 'okml')
+        this.props.onUpdateOpenIndividualMessageAt(this.props.messageId);
+      }
+    }
   }
 
   componentWillMount() {
@@ -26,6 +48,7 @@ class IndividualChat extends Component {
   }
 
   componentDidMount() {
+    this.props.onUpdateOpenIndividualMessageAt(this.props.messageId);
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
     console.log('IndividualChat')
     this.ref = firebase.firestore().collection('deals').doc(this.props.messageId);

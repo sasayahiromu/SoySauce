@@ -53,11 +53,12 @@ class MainTabs extends Component {
     //   // alert(message)
     // });
     // Firestoreの「messages」コレクションを参照
-    this.ref = firebase.firestore()
-      .collection('users')
-      .doc(this.props.authUid);
-    // refの更新時イベントにonCollectionUpdate登録
-    this.unsubscribe = this.ref.onSnapshot(this.props.onGetDeals);
+    // this.ref = firebase.firestore()
+    //   .collection('users')
+    //   .doc(this.props.authUid);
+    // // refの更新時イベントにonCollectionUpdate登録
+    // console.log(this.props.authUid, 'getDeals')
+    // this.unsubscribe = this.ref.onSnapshot(this.props.onGetDeals);
   }
 
   componentWillUnmount() {
@@ -89,13 +90,26 @@ class MainTabs extends Component {
   };
 
   render() {
+    console.log(!this.unsubscribe, 'trrr')
+    console.log(this.props.authUid, 'trrr')
+
+    if (!this.unsubscribe && this.props.authUid) {
+      this.ref = firebase.firestore()
+        .collection('users')
+        .doc(this.props.authUid);
+      // refの更新時イベントにonCollectionUpdate登録
+      console.log(this.props.authUid, 'getDeals')
+      this.unsubscribe = this.ref.onSnapshot(this.props.onGetDeals);
+    }
+    console.log(this.unsubscribe, 'trrr')
+
     console.log(1)
-    if(!this.state.loadedDeals){
+    if (!this.state.loadedDeals) {
       console.log(2)
-      if(!!this.props.authUid){
+      if (!!this.props.authUid) {
         console.log(3)
         this.props.onGetDeals();
-        this.setState({loadedDeals: true});
+        this.setState({ loadedDeals: true });
       }
     }
 

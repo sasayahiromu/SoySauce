@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import BulletinBoardScreen from '../BulletinBoard/BulletinBoard'
+import BulletinBoard2Screen from '../BulletinBoard2/BulletinBoard2'
 import Drawer from 'react-native-drawer'
 import SideDrawer from '../SideDrawer/SideDrawer'
 import ChatList from '../ChatList/ChatList'
@@ -144,8 +145,9 @@ class MainTabs extends Component {
             />}
           contentProps={scrollBarProps}
         >
-          <BulletinBoardScreen tabLabel='掲示板' navigator={this.props.navigator} />
-          <ChatList tabLabel='チャット' navigator={this.props.navigator} />
+          <BulletinBoardScreen tabLabel='貸したい' navigator={this.props.navigator}/>
+          <BulletinBoard2Screen tabLabel='借りたい' navigator={this.props.navigator}/>
+          <ChatList tabLabel='チャット一覧' navigator={this.props.navigator} />
         </ScrollableTabView>
       </Drawer>
     )

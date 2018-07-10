@@ -109,7 +109,7 @@ class BulletinBoardScreen extends Component {
         <View style={{ flex: 1, justifyContent: 'center' }}><ActivityIndicator /></View>
       )
     }
-    // this.props.onGetDeals()
+    console.log(1, 'poi')
     return (
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.outer}>
@@ -117,8 +117,10 @@ class BulletinBoardScreen extends Component {
             onContentSizeChange={(width, height) =>
               this.refs.scrollView.scrollToEnd({ animated: true })}>
             <BubbleList
-              authUid={this.props.authUid}
-              messages={this.props.messages}
+              authUid={this.props.authUid} 
+              messages={this.props.messages.filter(function (value) {
+                return value.board_number === 1;
+              })}
               startIndividualChat={this.startIndividualChat}
               deleteMessage={this.deleteMessageHandler}
             />

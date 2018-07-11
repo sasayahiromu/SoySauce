@@ -2,19 +2,20 @@ import { SET_MESSAGES, SET_INDIVIDUAL_MESSAGES, SET_DEALS } from './actionTypes'
 import firebase from 'react-native-firebase';
 
 
-export const addMessage = (message, type) => {
+export const addMessage = (message, type, boaedNum) => {
   return (dispatch, getState) => {
     console.log('addMessage')
     sender_uid = getState().auth.uid.slice(0);
     sender_nick_name = getState().auth.nickname.slice(0);
-    dispatch(tempAddMessage(message, sender_nick_name, sender_uid, type))
+    dispatch(tempAddMessage(message, sender_nick_name, sender_uid, type, boaedNum))
     const messageData = {
       deal_status: 0,
       message: message,
       sender_nick_name: sender_nick_name,
       sender_uid: sender_uid,
       type: type,
-      sent_at: firebase.firestore.FieldValue.serverTimestamp()
+      sent_at: firebase.firestore.FieldValue.serverTimestamp(),
+      board_number: boaedNum
     }
     firebase.firestore()
       .collection('chat_messages')
@@ -33,7 +34,7 @@ export const addMessage = (message, type) => {
 }
 
 //addを即時反映させるため
-export const tempAddMessage = (message, sender_nick_name, sender_uid, type) => {
+export const tempAddMessage = (message, sender_nick_name, sender_uid, type, boaedNum) => {
   return (dispatch, getState) => {
     console.log('tempAddMessage')
     const messages = getState().messages.messages.slice(0)
@@ -44,7 +45,8 @@ export const tempAddMessage = (message, sender_nick_name, sender_uid, type) => {
       sender_nick_name: sender_nick_name,
       sender_uid: sender_uid,
       type: type,
-      key: "temporary"
+      key: "temporary",
+      board_number: boaedNum
     }
     console.log(messages)
     messages.push(messageData)

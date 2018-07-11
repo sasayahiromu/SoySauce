@@ -44,7 +44,7 @@ class BulletinBoardScreen extends Component {
   addMessageHandler = () => {
     const message = this.state.inputBarText
     const type = this.multiSwitch.state.selectedPosition
-    this.props.onAddMessage(message, type);
+    this.props.onAddMessage(message, type, 2);
     this.setState({
       inputBarText: ''
     })
@@ -170,7 +170,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onGetDeals: () => dispatch(getDeals()),
     onLoadMessages: () => dispatch(getMessages()),
-    onAddMessage: (text, sender, type) => dispatch(addMessage(text, sender, type)),
+    onAddMessage: (text, type, boaedNum) => dispatch(addMessage(text, type, boaedNum)),
     onAddDeals: (
       borrowerNickname,
       borrowerUid,

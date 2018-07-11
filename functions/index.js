@@ -15,12 +15,4 @@ exports.sendChatNotification = functions.firestore.document('users/{userUid}')
     token = data.push_token;
     console.log('token: ',token)
      return admin.messaging().sendToDevice(token, payload);
-      // .then(function (response) {
-      //   console.log('Successfully sent message:', response);
-      //   return 'ok'
-      // })
-      // .catch(function (error) {
-      //   console.log('Error sending message:', error);
-      //   return 'error'
-      // });
   })

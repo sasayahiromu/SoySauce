@@ -49,9 +49,9 @@ class MessageBubble extends Component {
           alignItems: 'center'
         }}>
           {thumbnail}
-          {this.props.sentAt &&
+          {/* {this.props.sentAt &&
             <Text style={{ fontSize: 8 }}>{this.props.sentAt.toTimeString().slice(0, 5)}</Text>
-          }
+          } */}
         </View>
       )
       : (<View style={{
@@ -60,9 +60,9 @@ class MessageBubble extends Component {
         position: 'absolute',
         bottom: 0
       }}>
-        {this.props.sentAt &&
+        {/* {this.props.sentAt &&
           <Text style={{ fontSize: 8 }}>{this.props.sentAt.toTimeString().slice(0, 5)}</Text>
-        }
+        } */}
       </View>);
 
     var rightSpacer = null
@@ -185,15 +185,17 @@ class MessageBubble extends Component {
         <View style={{ flex: 1 }}>
           {leftSpacer}
         </View>
-
-        <TouchableOpacity style={{ flexDirection: 'column', flex: 7 }} onLongPress={() => this.showActionSheet()}>
-          {name}
-          <View style={bubbleStyles}>
-            <Text style={bubbleTextStyle}>
-              {this.props.text}
-            </Text>
-          </View>
-        </TouchableOpacity>
+          <TouchableOpacity style={{ flexDirection: 'column', flex: 7 }} onLongPress={() => this.showActionSheet()}>
+            {name}
+            <View style={bubbleStyles}>
+              <Text style={bubbleTextStyle}>
+                {this.props.text}
+              </Text>
+            </View>
+          </TouchableOpacity>
+          {/* {this.props.sentAt &&
+            <Text style={{ fontSize: 8 }}>{this.props.sentAt.toTimeString().slice(0, 5)}</Text>
+          } */}
         {rightSpacer}
         <ActionSheet
           ref={o => this.ActionSheet = o}

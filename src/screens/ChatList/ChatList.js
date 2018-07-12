@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Content, List, ListItem, Left, Body, Right, Text, Thumbnail } from 'native-base';
-import { TouchableOpacity, View, ActivityIndicator } from 'react-native'
+import { TouchableOpacity, View, ActivityIndicator, RefreshControl } from 'react-native'
 import { getDeals, getIndividualMessages } from '../../store/actions/index';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
@@ -9,6 +9,19 @@ import timeToMonthDate from '../../utility/timeToMonthDate'
 
 
 class ChatList extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      refreshing: false,
+    };
+  }
+
+  _onRefresh = () => {
+    this.setState({ refreshing: true });
+    this.props.onGetDeals()
+    this.setState({ refreshing: false });
+  }
 
 
   startIndividualChat = (messageId, initialMessage) => {
@@ -35,7 +48,13 @@ class ChatList extends Component {
     console.log(unreadIndex)
     return (
       <Container>
-        <Content>
+        <Content
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+            />
+          }>
           <List dataArray={this.props.deals}
             renderRow={(item, _, index) => {
               console.log(unreadIndex, parseInt(index, 10), unreadIndex.indexOf(parseInt(index, 10)))

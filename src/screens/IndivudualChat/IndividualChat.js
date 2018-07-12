@@ -118,7 +118,6 @@ class IndividualChat extends Component {
 
             ref="scrollView"
             onContentSizeChange={(width, height) => {
-              //一個だと画面外に消える
               this.refs.scrollView.scrollToEnd({ animated: true })
             }
             }>

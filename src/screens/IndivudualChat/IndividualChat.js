@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, SafeAreaView, Keyboard, ActivityIndicator } from 'react-native'
+import { View, StyleSheet, ScrollView, SafeAreaView, Keyboard, ActivityIndicator, RefreshControl } from 'react-native'
 import InputBar from "../../components/InputBar/InputBar";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import IndividualBubbleList from '../../components/IndividualBubbleList.js/IndividualBubbleList'
@@ -7,14 +7,26 @@ import { Platform } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { getIndividualMessages, addIndividualMessage, deleteIndividualMessage, updateOpenIndividualMessageAt } from '../../store/actions/index';
+import { getDeals, getIndividualMessages, addIndividualMessage, deleteIndividualMessage, updateOpenIndividualMessageAt } from '../../store/actions/index';
 import firebase from 'react-native-firebase';
 
 
 
 class IndividualChat extends Component {
 
+  fetchData = () => {
+    alert('je')
+    return null
+  }
+
+  _onRefresh = () => {
+    this.setState({ refreshing: true });
+    this.loadMessage()
+    this.setState({ refreshing: false });
+  }
+
   state = {
+    refreshing: false,
     inputBarText: '',
     individualMessages: [],
     props_individual: []
@@ -60,6 +72,7 @@ class IndividualChat extends Component {
   }
 
   componentWillUnmount() {
+    this.props.onGetDeals();
     this.keyboardDidShowListener.remove();
     this.unsubscribe();
   }
@@ -95,12 +108,18 @@ class IndividualChat extends Component {
     return (
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.outer}>
-          <ScrollView ref="scrollView"
+          <ScrollView
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh}
+              />
+            }
+
+            ref="scrollView"
             onContentSizeChange={(width, height) => {
               //一個だと画面外に消える
-              if (this.props.individualMessages[this.props.messageId].length !== 1) {
-                this.refs.scrollView.scrollToEnd({ animated: true })
-              }
+              this.refs.scrollView.scrollToEnd({ animated: true })
             }
             }>
             <IndividualBubbleList
@@ -158,7 +177,8 @@ const mapDispatchToProps = dispatch => {
     onLoadIndividualMessages: (messageId) => dispatch(getIndividualMessages(messageId)),
     onAddIndividualMessage: (message, messageId) => dispatch(addIndividualMessage(message, messageId)),
     ondeleteIndividualMessage: (messageId, individualMessageId) => dispatch(deleteIndividualMessage(messageId, individualMessageId)),
-    onUpdateOpenIndividualMessageAt: (messageId) => dispatch(updateOpenIndividualMessageAt(messageId))
+    onUpdateOpenIndividualMessageAt: (messageId) => dispatch(updateOpenIndividualMessageAt(messageId)),
+    onGetDeals: () => dispatch(getDeals())
   };
 };
 

@@ -25,6 +25,7 @@ export const addMessage = (message, type, boaedNum) => {
       .then(res => {
         console.log(res.id);
         dispatch(getMessages());
+        dispatch(getDeals());
       })
       .catch(err => {
         alert('Try again');
@@ -141,7 +142,7 @@ export const getIndividualMessages = (messageId) => {
             key: querySnapshot.docs[i].id
           });
         }
-        console.log(messages.length,'messageLength')
+        console.log(messages.length, 'messageLength')
         dispatch(setIndividualMessages(messages, messageId));
       })
       .catch(err => {
@@ -229,17 +230,34 @@ export const updateUserLaseMessageAt = (messageId) => {
   console.log('updateUserLaseMessageAt')
   return (dispatch, getState) => {
     const authUid = getState().auth.uid.slice(0);
-    let senderUid = '';
-    let lenderUid = '';
+    let borrower_uid = '';
+    let lender_uid = '';
 
     firebase.firestore()
       .collection('deals')
       .doc(messageId)
       .get()
       .then(documentSnapshot => {
-        senderUid = documentSnapshot._data.borrower_uid;
-        lenderUid = documentSnapshot._data.lender_uid;
-        uidArray = [senderUid, lenderUid];
+        borrower_uid = documentSnapshot._data.borrower_uid;
+        lender_uid = documentSnapshot._data.lender_uid;
+        uidArray = [borrower_uid, lender_uid];
+        if(borrower_uid === authUid){
+          firebase.firestore()
+          .collection('deals')
+          .doc(messageId)
+          .update({
+            borrower_last_read_at: firebase.firestore.FieldValue.serverTimestamp()
+          })
+        }
+        if(lender_uid === authUid){
+          firebase.firestore()
+          .collection('deals')
+          .doc(messageId)
+          .update({
+            lender_last_read_at: firebase.firestore.FieldValue.serverTimestamp()
+          })
+        }
+
         for (uidIndex in uidArray) {
           if (uidArray[uidIndex] !== authUid) {
             firebase.firestore()
@@ -275,8 +293,9 @@ export const updateDealMessageState = (message, messageId) => {
 }
 
 
+
 //addを即時反映させるため
-export const tempAddIndividualMessage= (message, sender_nick_name, sender_uid, messageId) => {
+export const tempAddIndividualMessage = (message, sender_nick_name, sender_uid, messageId) => {
   console.log('tempAddIndividualMessage')
   return (dispatch, getState) => {
     const messages = getState().messages.individualMessages
@@ -318,14 +337,14 @@ export const updateOpenIndividualMessageAt = (messageId) => {
           lastReadAt = lenderReadAt
         }
 
-        if (!!dealLastAt  && (!lastReadAt || dealLastAt.getTime() > lastReadAt.getTime())) {
+        if (!!dealLastAt && (!lastReadAt || dealLastAt.getTime() > lastReadAt.getTime())) {
 
           firebase.firestore()
-          .collection('users')
-          .doc(authUid)
-          .update({
-            last_read_at: firebase.firestore.FieldValue.serverTimestamp()
-          })
+            .collection('users')
+            .doc(authUid)
+            .update({
+              last_read_at: firebase.firestore.FieldValue.serverTimestamp()
+            })
 
 
           if (borrowerUid === authUid) {
@@ -441,50 +460,49 @@ export const getDeals = () => {
   console.log('getDeals')
   return (dispatch, getState) => {
     const auth_uid = getState().auth.uid.slice(0);
-    if(!!auth_uid)
-    {
-    firebase.firestore()
-      .collection('users')
-      .doc(auth_uid)
-      .get()
-      .then(documentSnapshot => {
-        let deals = []
-        console.log(documentSnapshot)
-        const dealsIds = documentSnapshot._data.deals;
-        let roopNum = 0
-        console.log(dealsIds)
-        for (key in dealsIds) {
-          firebase.firestore()
-            .collection('deals')
-            .doc(key)
-            .get()
-            .then(documentSnapshot => {
-              deals.push(
-                {
-                  ...documentSnapshot._data,
-                  messageId: documentSnapshot.id
+    if (!!auth_uid) {
+      firebase.firestore()
+        .collection('users')
+        .doc(auth_uid)
+        .get()
+        .then(documentSnapshot => {
+          let deals = []
+          console.log(documentSnapshot)
+          const dealsIds = documentSnapshot._data.deals;
+          let roopNum = 0
+          console.log(dealsIds)
+          for (key in dealsIds) {
+            firebase.firestore()
+              .collection('deals')
+              .doc(key)
+              .get()
+              .then(documentSnapshot => {
+                deals.push(
+                  {
+                    ...documentSnapshot._data,
+                    messageId: documentSnapshot.id
+                  }
+                )
+                roopNum += 1;
+                if (roopNum === Object.keys(dealsIds).length) {
+                  deals.sort(function (a, b) {
+                    // あとでlastupdateに変える
+                    return a.deal_last_at > b.deal_last_at ? -1 : 1;
+                  })
+                  dispatch(setDeals(deals));
                 }
-              )
-              roopNum += 1;
-              if (roopNum === Object.keys(dealsIds).length) {
-                deals.sort(function (a, b) {
-                  // あとでlastupdateに変える
-                  return a.deal_last_at > b.deal_last_at ? -1 : 1;
-                })
-                dispatch(setDeals(deals));
-              }
-            })
-            .catch(err => {
-              console.log(err)
-              alert(err)
-              alert('importDeals error');
-            })
-        }
-      })
-      .catch(err => {
-        console.log(err)
-        alert('getDeals error');
-      })
+              })
+              .catch(err => {
+                console.log(err)
+                alert(err)
+                alert('importDeals error');
+              })
+          }
+        })
+        .catch(err => {
+          console.log(err)
+          alert('getDeals error');
+        })
     }
   }
 

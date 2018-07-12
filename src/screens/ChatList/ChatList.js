@@ -10,23 +10,6 @@ import timeToMonthDate from '../../utility/timeToMonthDate'
 
 class ChatList extends Component {
 
-  // componentWillMount() {
-  //   this.props.onGetDeals();
-  // }
-
-  // componentDidMount() {
-  //   // Firestoreの「messages」コレクションを参照
-  //   this.ref = firebase.firestore()
-  //     .collection('users')
-  //     .doc(this.props.authUid);
-  //   // refの更新時イベントにonCollectionUpdate登録
-  //   this.unsubscribe = this.ref.onSnapshot(this.props.onGetDeals);
-  // }
-
-  // componentWillUnmount() {
-  //   // onCollectionUpdateの登録解除
-  //   this.unsubscribe();
-  // }
 
   startIndividualChat = (messageId, initialMessage) => {
     console.log('here')

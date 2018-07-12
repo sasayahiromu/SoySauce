@@ -118,7 +118,10 @@ class IndividualChat extends Component {
 
             ref="scrollView"
             onContentSizeChange={(width, height) => {
-              this.refs.scrollView.scrollToEnd({ animated: true })
+              //一個だと画面外に消える
+              if (this.props.individualMessages[this.props.messageId].length > 5) {
+                this.refs.scrollView.scrollToEnd({ animated: true })
+              }
             }
             }>
             <IndividualBubbleList

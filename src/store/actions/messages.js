@@ -241,21 +241,21 @@ export const updateUserLaseMessageAt = (messageId) => {
         borrower_uid = documentSnapshot._data.borrower_uid;
         lender_uid = documentSnapshot._data.lender_uid;
         uidArray = [borrower_uid, lender_uid];
-        if(borrower_uid === authUid){
+        if (borrower_uid === authUid) {
           firebase.firestore()
-          .collection('deals')
-          .doc(messageId)
-          .update({
-            borrower_last_read_at: firebase.firestore.FieldValue.serverTimestamp()
-          })
+            .collection('deals')
+            .doc(messageId)
+            .update({
+              borrower_last_read_at: firebase.firestore.FieldValue.serverTimestamp()
+            })
         }
-        if(lender_uid === authUid){
+        if (lender_uid === authUid) {
           firebase.firestore()
-          .collection('deals')
-          .doc(messageId)
-          .update({
-            lender_last_read_at: firebase.firestore.FieldValue.serverTimestamp()
-          })
+            .collection('deals')
+            .doc(messageId)
+            .update({
+              lender_last_read_at: firebase.firestore.FieldValue.serverTimestamp()
+            })
         }
 
         for (uidIndex in uidArray) {
@@ -466,25 +466,34 @@ export const getDeals = () => {
         .doc(auth_uid)
         .get()
         .then(documentSnapshot => {
+          console.log('appp1')
           let deals = []
           console.log(documentSnapshot)
           const dealsIds = documentSnapshot._data.deals;
           let roopNum = 0
           console.log(dealsIds)
+          console.log('appp2')
+
           for (key in dealsIds) {
+            console.log('appp3')
+
             firebase.firestore()
               .collection('deals')
               .doc(key)
               .get()
               .then(documentSnapshot => {
+                console.log('appp4')
+
                 deals.push(
                   {
                     ...documentSnapshot._data,
                     messageId: documentSnapshot.id
                   }
                 )
+                console.log('appp4',roopNum, Object.keys(dealsIds).length )
                 roopNum += 1;
                 if (roopNum === Object.keys(dealsIds).length) {
+                  console.log('appp5')
                   deals.sort(function (a, b) {
                     // あとでlastupdateに変える
                     return a.deal_last_at > b.deal_last_at ? -1 : 1;

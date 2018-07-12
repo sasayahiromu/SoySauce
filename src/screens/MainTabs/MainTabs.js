@@ -139,7 +139,7 @@ class MainTabs extends Component {
             <DefaultTabBar
               style={{ height: 40 }}
               tabStyle={{ paddingBottom: 0 }}
-              chatTabName='チャット'
+              chatTabName='チャット一覧'
               isThereUnread={isThereUnread}
               unreadStyle={{ backgroundColor: 'red' }}
             />}

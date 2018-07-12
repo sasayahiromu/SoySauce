@@ -49,9 +49,9 @@ class MessageBubble extends Component {
           alignItems: 'center'
         }}>
           {thumbnail}
-          {/* {this.props.sentAt &&
+          {this.props.sentAt &&
             <Text style={{ fontSize: 8 }}>{this.props.sentAt.toTimeString().slice(0, 5)}</Text>
-          } */}
+          }
         </View>
       )
       : (<View style={{
@@ -60,9 +60,9 @@ class MessageBubble extends Component {
         position: 'absolute',
         bottom: 0
       }}>
-        {/* {this.props.sentAt &&
+        {this.props.sentAt &&
           <Text style={{ fontSize: 8 }}>{this.props.sentAt.toTimeString().slice(0, 5)}</Text>
-        } */}
+        }
       </View>);
 
     var rightSpacer = null

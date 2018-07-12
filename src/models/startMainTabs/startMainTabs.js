@@ -12,13 +12,13 @@ Promise.all([
       screen: {
         screen: "soySauce.MainTabsScreen",
         // title: "メイン",
-        navigatorButtons: {
-          leftButtons: [{
-            icon: sources[0],
-            title: 'Menu',
-            id: "sideDrawerToggle"
-          }]
-        }
+        // navigatorButtons: {
+        //   leftButtons: [{
+        //     icon: sources[0],
+        //     title: 'Menu',
+        //     id: "sideDrawerToggle"
+        //   }]
+        // }
       },
     });
   })

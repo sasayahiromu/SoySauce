@@ -96,8 +96,13 @@ class IndividualChat extends Component {
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.outer}>
           <ScrollView ref="scrollView"
-            onContentSizeChange={(width, height) =>
-              this.refs.scrollView.scrollToEnd({ animated: true })}>
+            onContentSizeChange={(width, height) => {
+              //一個だと画面外に消える
+              if (this.props.individualMessages[this.props.messageId].length !== 1) {
+                this.refs.scrollView.scrollToEnd({ animated: true })
+              }
+            }
+            }>
             <IndividualBubbleList
               authUid={this.props.authUid}
               allMessages={this.props.individualMessages}

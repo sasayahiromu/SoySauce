@@ -1,14 +1,16 @@
 import {
   SET_MESSAGES,
   SET_INDIVIDUAL_MESSAGES,
-  SET_DEALS
+  SET_DEALS,
+  SEARCH_BAR_TEXT
 } from "../actions/actionTypes";
 
 const initialState = {
   messages: [],
   individualMessages: {},
   messagetriger: 0,
-  deals: []
+  deals: [],
+  searchBarText: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -34,7 +36,13 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       deals: action.deals
-    }
+    };
+
+    case SEARCH_BAR_TEXT:
+    return {
+      ...state,
+      searchBarText: action.text
+    };
 
     default: return state;
   }

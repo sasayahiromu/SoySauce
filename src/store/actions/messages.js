@@ -1,4 +1,4 @@
-import { SET_MESSAGES, SET_INDIVIDUAL_MESSAGES, SET_DEALS } from './actionTypes';
+import { SET_MESSAGES, SET_INDIVIDUAL_MESSAGES, SET_DEALS, SEARCH_BAR_TEXT } from './actionTypes';
 import firebase from 'react-native-firebase';
 
 
@@ -518,9 +518,17 @@ export const getDeals = () => {
 }
 
 export const setDeals = (deals) => {
-  console.log('setDeals')
+  console.log('setDeals');
   return {
     type: SET_DEALS,
     deals: deals
   };
+}
+
+export const searchBarText = (text) => {
+  console.log('searchBarText');
+  return {
+    type: SEARCH_BAR_TEXT,
+    text: text
+  }
 }

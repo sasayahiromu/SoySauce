@@ -103,6 +103,16 @@ class BulletinBoardScreen extends Component {
       )
     }
 
+  searchBarTextFilter = (value) => {
+    function converToKana(str) {
+      return str.replace(/[ぁ-ん]/g, function (s) {
+        return String.fromCharCode(s.charCodeAt(0) + 0x60);
+      });
+    }
+    reg = new RegExp(converToKana(this.props.searchBarText));
+    return value.board_number === 1 && (converToKana(value.message).match(reg) || converToKana(value.sender_nick_name).match(reg));
+  }
+
   render() {
     if (this.props.messages.length === 0) {
       return (
@@ -118,11 +128,9 @@ class BulletinBoardScreen extends Component {
             onContentSizeChange={(width, height) =>
               this.refs.scrollView.scrollToEnd({ animated: true })}>
             <BubbleList
-              authUid={this.props.authUid} 
+              authUid={this.props.authUid}
               // messages={this.props.messages}
-              messages={this.props.messages.filter(function (value) {
-                return value.board_number === 2;
-              })}
+              messages={this.props.messages.filter(this.searchBarTextFilter)}
               startIndividualChat={this.startIndividualChat}
               deleteMessage={this.deleteMessageHandler}
             />
@@ -194,7 +202,8 @@ const mapStateToProps = state => {
   return {
     messages: state.messages.messages,
     authUid: state.auth.uid,
-    authNickname: state.auth.nickname
+    authNickname: state.auth.nickname,
+    searchBarText: state.messages.searchBarText
   };
 };
 

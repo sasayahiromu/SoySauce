@@ -8,11 +8,14 @@ exports.sendChatNotification = functions.firestore.document('users/{userUid}')
     const data = change.after.data();
     const payload = {
       notification: {
-        title: 'You recieve a message',
+        title: context.timestamp + ' ' + context.eventId,
+        message: context.eventId
       }
     };
 
     token = data.push_token;
+    console.log('context', context)
     console.log('token: ',token)
+    console.log('1')
      return admin.messaging().sendToDevice(token, payload);
   })

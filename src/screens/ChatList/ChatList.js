@@ -36,6 +36,19 @@ class ChatList extends Component {
     });
   }
 
+  searchBarTextFilter = (value) => {
+    console.log(value, 'rrr')
+    function converToKana(str) {
+      return str.replace(/[ぁ-ん]/g, function (s) {
+        return String.fromCharCode(s.charCodeAt(0) + 0x60);
+      });
+    }
+    let name = value.borrower_nick_name;
+    if (this.props.authUid === value.borrower_uid) name = value.lender_nick_name;
+    reg = new RegExp(converToKana(this.props.searchBarText));
+    return converToKana(value.initial_message).match(reg) || converToKana(name).match(reg);
+  }
+
   render() {
     if (this.props.deals.length === 0) {
       return (
@@ -55,7 +68,7 @@ class ChatList extends Component {
               onRefresh={this._onRefresh}
             />
           }>
-          <List dataArray={this.props.deals}
+          <List dataArray={this.props.deals.filter(this.searchBarTextFilter)}
             renderRow={(item, _, index) => {
               console.log(unreadIndex, parseInt(index, 10), unreadIndex.indexOf(parseInt(index, 10)))
               const isUnreaded = (unreadIndex.indexOf(parseInt(index, 10)) !== -1)
@@ -101,6 +114,7 @@ const mapStateToProps = state => {
   return {
     deals: state.messages.deals,
     authUid: state.auth.uid,
+    searchBarText: state.messages.searchBarText
   };
 };
 

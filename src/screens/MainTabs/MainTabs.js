@@ -16,7 +16,11 @@ import { getDeals } from '../../store/actions/index';
 
 
 class MainTabs extends Component {
-
+  static navigatorStyle = {
+    navBarCustomView: 'example.CustomHeader',
+    navBarNoBorder: true,
+    navBarCustomViewInitialProps: {name: 'Hi Custom'}
+  };
   state = {
     drawerIsClosed: true,
     loadedDeals: false
@@ -49,17 +53,6 @@ class MainTabs extends Component {
           }
         });
     })
-    // this.messageListener = firebase.messaging().onMessage((message: RemoteMessage) => {
-    //   // alert('message')
-    //   // alert(message)
-    // });
-    // Firestoreの「messages」コレクションを参照
-    // this.ref = firebase.firestore()
-    //   .collection('users')
-    //   .doc(this.props.authUid);
-    // // refの更新時イベントにonCollectionUpdate登録
-    // console.log(this.props.authUid, 'getDeals')
-    // this.unsubscribe = this.ref.onSnapshot(this.props.onGetDeals);
   }
 
   componentWillUnmount() {

@@ -9,6 +9,7 @@ import RendBoardScreen from './src/screens/RendScreen/RendScreen'
 import startLogin from './src/models/startLogin/startLogin'
 import IndividualChatScreen from './src/screens/IndivudualChat/IndividualChat'
 import ChatListScreen from './src/screens/ChatList/ChatList'
+import customHeader from './src/components/customHeader/customHeader'
 
 import configureStore from './src/store/configureStore'
 
@@ -24,6 +25,7 @@ Navigation.registerComponent("soySauce.BorrowBoardScreen", () => BorrowBoardScre
 Navigation.registerComponent("soySauce.RendBoardScreen", () => RendBoardScreen, store, Provider);
 Navigation.registerComponent("soySauce.IndividualChatScreen", () => IndividualChatScreen, store, Provider);
 Navigation.registerComponent("soySauce.ChatListScreen", () => ChatListScreen, store, Provider);
+Navigation.registerComponent("example.CustomHeader", () => customHeader, store, Provider);
 
 
 export default () => startLogin()
